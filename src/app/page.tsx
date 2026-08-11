@@ -6,6 +6,7 @@ import { ArrowRight, Sparkles, Target, Wand2, Rocket, Star, Flame } from "lucide
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
 import { TwinkleCluster } from "@/components/marketing/TwinkleCluster";
+import { ShootingStars } from "@/components/marketing/ShootingStars";
 
 const PILLARS = [
   { icon: Target, title: "Strategy", copy: "Sharp positioning and a plan built around what actually moves your audience, not a template." },
@@ -36,15 +37,17 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative mx-auto max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pb-20 sm:pt-20">
         <div className="mx-auto max-w-3xl text-center">
-          {/* Big centered logo, ringed with twinkling stars */}
-          <div className="relative mx-auto mb-2 h-40 w-40 sm:h-48 sm:w-48">
-            <TwinkleCluster count={30} />
-            <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(199,201,209,0.16) 0%, transparent 70%)" }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.jpg"
-              alt="Nox & Co"
-              className="relative h-full w-full rounded-2xl object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]"
+          {/* Atmosphere: shooting stars over a slow, flowing river of dust */}
+          <div className="relative mx-auto mb-4 h-32 w-full max-w-md sm:h-40">
+            <TwinkleCluster count={46} />
+            <ShootingStars count={4} />
+            <div
+              className="absolute inset-x-6 top-1/2 h-16 -translate-y-1/2 rounded-full opacity-70 blur-2xl animate-flow"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, transparent, rgba(199,201,209,0.22), rgba(232,217,184,0.18), rgba(199,201,209,0.22), transparent)",
+                backgroundSize: "200% 100%",
+              }}
             />
           </div>
 

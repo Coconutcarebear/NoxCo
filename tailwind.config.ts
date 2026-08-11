@@ -58,6 +58,17 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        shoot: {
+          "0%":   { opacity: "0", transform: "translate(0,0) rotate(-32deg) scaleX(0.3)" },
+          "6%":   { opacity: "1", transform: "translate(20px,13px) rotate(-32deg) scaleX(1)" },
+          "22%":  { opacity: "1", transform: "translate(230px,148px) rotate(-32deg) scaleX(1)" },
+          "30%":  { opacity: "0", transform: "translate(260px,168px) rotate(-32deg) scaleX(1)" },
+          "100%": { opacity: "0", transform: "translate(260px,168px) rotate(-32deg) scaleX(1)" },
+        },
+        flow: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
       },
       animation: {
         twinkle: "twinkle 3.5s ease-in-out infinite",
@@ -66,6 +77,8 @@ const config: Config = {
         wave: "wave 18s linear infinite",
         rise: "rise 0.4s ease-out both",
         shimmer: "shimmer 3s linear infinite",
+        shoot: "shoot linear infinite",
+        flow: "flow 12s ease-in-out infinite",
       },
     },
   },

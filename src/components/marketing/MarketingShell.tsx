@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useRef } from "react";
 import { Stars } from "@/components/decor";
+import { ShootingStars } from "./ShootingStars";
 import { MarketingHeader } from "./MarketingHeader";
 import { MarketingFooter } from "./MarketingFooter";
 
@@ -42,15 +43,16 @@ export function MarketingShell({ children }: { children: ReactNode }) {
         className="pointer-events-none fixed inset-0 -z-20"
         style={{
           background:
-            "radial-gradient(1100px 700px at 82% -6%, rgba(199,201,209,0.08), transparent 60%)," +
-            "radial-gradient(900px 600px at 6% 8%, rgba(138,140,150,0.08), transparent 55%)," +
-            "radial-gradient(1000px 800px at 50% 120%, rgba(201,161,90,0.06), transparent 60%)," +
+            "radial-gradient(900px 600px at 85% -4%, rgba(232,217,184,0.10), transparent 60%)," +
+            "radial-gradient(1100px 700px at 10% 6%, rgba(199,201,209,0.09), transparent 58%)," +
+            "radial-gradient(1000px 800px at 50% 120%, rgba(201,161,90,0.07), transparent 60%)," +
             "linear-gradient(180deg, #000000 0%, #0a0a0c 38%, #111114 68%, #000000 100%)",
         }}
       />
       {/* cursor-tracking ambient glow */}
       <div ref={glowRef} className="pointer-events-none fixed inset-0 -z-10 transition-opacity" />
       <Stars count={46} />
+      <ShootingStars count={5} className="fixed" />
       <MarketingHeader />
       {children}
       <MarketingFooter />
