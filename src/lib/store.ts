@@ -93,7 +93,7 @@ function buildViews(
   const out: EngagementView[] = [];
   for (const e of engagements) {
     const creator = cById.get(e.creator_id);
-    if (!creator) continue; // orphaned engagement (creator deleted) — skip
+    if (!creator) continue; // orphaned engagement (creator deleted), skip
     const cam = e.campaign_id ? camById.get(e.campaign_id) ?? null : null;
     out.push({
       ...e,
@@ -630,7 +630,7 @@ export const useStore = create<StoreState>((set, get) => ({
       ...partial,
     };
     // A campaign-less engagement has no company via a campaign, so stamp the active
-    // client directly — otherwise client-scoping would hide it (e.g. adding from Stargazing).
+    // client directly, otherwise client-scoping would hide it (e.g. adding from Stargazing).
     if (!base.campaign_id && !base.company_id) base.company_id = get().activeCompanyId ?? null;
     const payload = { creator_id: partial.creator_id, ...pickEngagement(base) };
     const { data, error } = await supabase.from("engagements").insert(payload).select().single();

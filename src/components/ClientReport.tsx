@@ -157,7 +157,7 @@ export function ClientReport({ onClose }: { onClose: () => void }) {
   const { rows, tot, rangeLabel } = useMemo(() => computeClientReport(viewLikes, posts, roiSettings, days), [viewLikes, posts, roiSettings, days]);
 
   async function createShareLink() {
-    if (!shareCompanyId) { setShareUrl("Pick a client in the top bar first — share links are per client."); return; }
+    if (!shareCompanyId) { setShareUrl("Pick a client in the top bar first, share links are per client."); return; }
     setSharing(true); setShareUrl(null);
     // Reuse an existing active link for this client + range so the URL stays stable ("locked").
     const { data: existing } = await supabase
@@ -194,7 +194,7 @@ export function ClientReport({ onClose }: { onClose: () => void }) {
       {shareUrl && (
         <div className="cr-sharebar">
           {shareUrl.startsWith("http") ? (
-            <><Icons.Check size={14} /> <span>Link copied — anyone with it can view this report (no login):</span> <a href={shareUrl} target="_blank" rel="noreferrer">{shareUrl}</a></>
+            <><Icons.Check size={14} /> <span>Link copied, anyone with it can view this report (no login):</span> <a href={shareUrl} target="_blank" rel="noreferrer">{shareUrl}</a></>
           ) : (<span>{shareUrl}</span>)}
         </div>
       )}

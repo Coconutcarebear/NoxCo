@@ -4,8 +4,8 @@ import { AppShell } from "@/components/AppShell";
 import { AuthGate } from "@/components/AuthGate";
 
 export const metadata: Metadata = {
-  title: "Nox & Co — No more star-crossed campaigns.",
-  description: "Nox & Co gives brands gravity — strategy, creative, campaigns, creators, and culture, in one orbit.",
+  title: "Nox & Co, No more star-crossed campaigns.",
+  description: "Nox & Co gives brands gravity, strategy, creative, campaigns, creators, and culture, in one orbit.",
   icons: { icon: "/favicon.svg" },
 };
 

@@ -19,35 +19,35 @@ const TAG_SUGGESTIONS = ["Product", "Food", "Family", "Walking Tour", "Seasonal"
 
 const AVOID_DEFAULT = "Overly promotional or scripted delivery\nMentioning other competitors\nMisrepresenting event programming or lineup\nStaging interactions that didn't naturally occur\nPolitical messaging or sensitive commentary";
 const REPORTING_DEFAULT = "Please share story insights within 48 hours of posting. Additional post-performance metrics (reach, impressions, engagement, saves, shares, etc.) within 7–30 days are always appreciated.";
-const REVISIONS_DEFAULT = "We include up to 2 rounds of feedback. Our notes stay focused on caption edits, CTA clarity, and brand/cultural accuracy — we're not here to change your creative direction. Full reshoots aren't expected unless content significantly misses the brief.";
+const REVISIONS_DEFAULT = "We include up to 2 rounds of feedback. Our notes stay focused on caption edits, CTA clarity, and brand/cultural accuracy, we're not here to change your creative direction. Full reshoots aren't expected unless content significantly misses the brief.";
 const NOTE_TEXT = "This brief is intended to guide creative direction and content execution. Final deliverables, payment terms, and creator obligations will be outlined and confirmed in a separate creator agreement.";
-const USAGE_DEFAULT = "Brand may use content for:\n• Organic social\n• Paid social advertising (within 30 days from posting)\n• Website, email, and digital placements (within 30 days from posting)\n\nWhitelisting / Paid Amplification: Yes (within 30 days from posting) — Instagram, TikTok, YouTube.\nBrand will not alter creator voice or likeness.\n\nContent will not be used for TV, OOH, or print (unless agreed in writing), or resale / third-party licensing.";
+const USAGE_DEFAULT = "Brand may use content for:\n• Organic social\n• Paid social advertising (within 30 days from posting)\n• Website, email, and digital placements (within 30 days from posting)\n\nWhitelisting / Paid Amplification: Yes (within 30 days from posting), Instagram, TikTok, YouTube.\nBrand will not alter creator voice or likeness.\n\nContent will not be used for TV, OOH, or print (unless agreed in writing), or resale / third-party licensing.";
 
 const DELIVERABLE_TEMPLATES: { name: string; main: string; story: string }[] = [
   { name: "Day in the Life",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nTake us through a day with the brand woven in naturally — your routine, your favorite parts, and how the product/service fits in.\n\nYou might capture:\n• Everyday moments the brand shows up in\n• Hidden gems you always recommend\n• A natural, unscripted mention of the brand\n• The feeling of an authentic day\n\nWe're not looking for polish — we're looking for what your day genuinely feels like.",
-    story: "One frame within 24 hours of your main post.\n\nSuggested overlays:\n• A day with [brand] ☀️\n• Come spend the day with me\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nTake us through a day with the brand woven in naturally, your routine, your favorite parts, and how the product/service fits in.\n\nYou might capture:\n• Everyday moments the brand shows up in\n• Hidden gems you always recommend\n• A natural, unscripted mention of the brand\n• The feeling of an authentic day\n\nWe're not looking for polish, we're looking for what your day genuinely feels like.",
+    story: "One frame within 24 hours of your main post.\n\nSuggested overlays:\n• A day with [brand] ☀️\n• Come spend the day with me\n\nCTA: Learn more, link in bio" },
   { name: "Product/Food Crawl",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nTake us on a crawl through your favorites — the picks you always come back to, and a natural stop with the brand along the way.\n\nYou might capture:\n• Signature picks and where to get them\n• Your honest first reactions\n• A stop with the brand to round out the day",
-    story: "One frame within 24 hours.\n\nSuggested overlays:\n• Trying my way through [brand] 🍜\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nTake us on a crawl through your favorites, the picks you always come back to, and a natural stop with the brand along the way.\n\nYou might capture:\n• Signature picks and where to get them\n• Your honest first reactions\n• A stop with the brand to round out the day",
+    story: "One frame within 24 hours.\n\nSuggested overlays:\n• Trying my way through [brand] 🍜\n\nCTA: Learn more, link in bio" },
   { name: "Walking Tour",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nWalk us through the neighborhood or space the way you'd show a friend — the stops worth knowing, with the brand folded in as a natural part of the route.",
-    story: "One frame within 24 hours.\n\nSuggested overlay:\n• A little walk through [location] 🚶\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nWalk us through the neighborhood or space the way you'd show a friend, the stops worth knowing, with the brand folded in as a natural part of the route.",
+    story: "One frame within 24 hours.\n\nSuggested overlay:\n• A little walk through [location] 🚶\n\nCTA: Learn more, link in bio" },
   { name: "Event Coverage",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nCapture the feeling of the event — the arrival, the energy, the highlights, and a genuine sense of what it was like to be there.",
-    story: "2–3 frames during the event + 1 recap frame within 24 hours.\n\nSuggested overlays:\n• Tonight at [brand] ✨\n\nCTA: More events — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nCapture the feeling of the event, the arrival, the energy, the highlights, and a genuine sense of what it was like to be there.",
+    story: "2–3 frames during the event + 1 recap frame within 24 hours.\n\nSuggested overlays:\n• Tonight at [brand] ✨\n\nCTA: More events, link in bio" },
   { name: "Launch / Reveal",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nTake us through the launch in your own voice — what stopped you, what surprised you, and why it's worth checking out. Personal and curious, not a scripted ad.",
-    story: "One frame within 24 hours.\n\nSuggested overlay:\n• Check this out 🎉\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nTake us through the launch in your own voice, what stopped you, what surprised you, and why it's worth checking out. Personal and curious, not a scripted ad.",
+    story: "One frame within 24 hours.\n\nSuggested overlay:\n• Check this out 🎉\n\nCTA: Learn more, link in bio" },
   { name: "Family Day",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nShow a family-friendly day — easy stops, things to do with kids, and the brand fitting naturally into the afternoon.",
-    story: "One frame within 24 hours.\n\nSuggested overlay:\n• A family day with [brand] 👨‍👩‍👧\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nShow a family-friendly day, easy stops, things to do with kids, and the brand fitting naturally into the afternoon.",
+    story: "One frame within 24 hours.\n\nSuggested overlay:\n• A family day with [brand] 👨‍👩‍👧\n\nCTA: Learn more, link in bio" },
   { name: "After Dark",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nCapture the evening energy — the lights, the mood — with the brand and the day's story woven in.",
-    story: "One frame within 24 hours.\n\nSuggested overlay:\n• [Brand] after dark 🌙\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nCapture the evening energy the lights, the mood with the brand and the day's story woven in.",
+    story: "One frame within 24 hours.\n\nSuggested overlay:\n• [Brand] after dark 🌙\n\nCTA: Learn more, link in bio" },
   { name: "Creator Choice",
-    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nThis one's yours — tell the story you think fits the brand best, in your own format and voice, with the brand woven in naturally.",
-    story: "One frame within 24 hours.\n\nSuggested overlay:\n• My kind of day\n\nCTA: Learn more — link in bio" },
+    main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nThis one's yours, tell the story you think fits the brand best, in your own format and voice, with the brand woven in naturally.",
+    story: "One frame within 24 hours.\n\nSuggested overlay:\n• My kind of day\n\nCTA: Learn more, link in bio" },
 ];
 
 /* ---------------- types ---------------- */
@@ -405,7 +405,7 @@ function BriefSheet({ b, timeline }: { b: Brief; timeline: Step[] }) {
               {b.tags.map((t) => <span key={t} className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: "#EEE7F3", color: "#6A5E7C" }}>#{t.replace(/\s+/g, "")}</span>)}
             </div>
           )}
-          <p className="mt-3 text-xs" style={{ color: P.faint }}>Required disclosure: #ad or #sponsored (FTC requirement — non-negotiable).</p>
+          <p className="mt-3 text-xs" style={{ color: P.faint }}>Required disclosure: #ad or #sponsored (FTC requirement, non-negotiable).</p>
         </Sec>
 
         <Sec n="V" title="Timeline">
@@ -427,7 +427,7 @@ function BriefSheet({ b, timeline }: { b: Brief; timeline: Step[] }) {
         <Sec n="X" title="Revisions"><Prose t={b.revisionsText} /></Sec>
 
         <div className="mt-7 rounded-2xl px-5 py-4 text-xs" style={{ background: "#F1ECF3", color: "#6B6079", fontStyle: "italic" }}>
-          <span style={{ color: P.brass, fontStyle: "normal", fontWeight: 700 }}>✦ A Note on This Brief — </span>{NOTE_TEXT}
+          <span style={{ color: P.brass, fontStyle: "normal", fontWeight: 700 }}>✦ A Note on This Brief, </span>{NOTE_TEXT}
         </div>
         <div className="mt-6 text-center text-[10px] uppercase" style={{ letterSpacing: "0.28em", color: P.faint }}>
           {b.link ? b.link.replace(/^https?:\/\//, "") : "noxandco.com"}
@@ -501,7 +501,7 @@ function Chip({ children }: { children: React.ReactNode }) {
   return <span className="rounded-full px-3 py-1" style={{ background: "#EFE9DA", color: "#6E6455" }}>{children}</span>;
 }
 function Prose({ t, list }: { t: string; list?: boolean }) {
-  if (!t?.trim()) return <span style={{ color: "#BDB6C6" }}>—</span>;
+  if (!t?.trim()) return <span style={{ color: "#BDB6C6" }}>-</span>;
   const lines = t.split("\n").filter((l) => l.trim() !== "");
   if (list) return <ul className="space-y-1.5">{lines.map((l, i) => <li key={i} className="flex gap-2"><span style={{ color: P.brass }}>✦</span><span>{l.replace(/^[•\-\s]+/, "")}</span></li>)}</ul>;
   return <>{lines.map((l, i) => {
@@ -529,7 +529,7 @@ function plainText(b: Brief, steps: Step[]): string {
   else L.push("THE CONCEPT", b.concept, `Filming: ${b.filming}`, `Location: ${b.location}`, `Format: ${b.format}`, "");
   L.push("WHAT WE'RE ASKING FOR", "Main deliverable:", b.mainDeliverable, "", "Story deliverable:", b.storyDeliverable, "");
   L.push("TAGS & HASHTAGS", `Instagram ${b.igHandle}`, `TikTok ${b.ttHandle}`, `YouTube ${b.ytHandle}`, `Required ${b.requiredHashtag}`, b.tags.map((t) => "#" + t.replace(/\s+/g, "")).join(" "), "");
-  L.push("TIMELINE", ...steps.map((s) => `${s.label} — ${s.date ? niceDate(s.date) : s.offset === 0 ? "day of" : "+" + s.offset + " days"}`), "");
+  L.push("TIMELINE", ...steps.map((s) => `${s.label}, ${s.date ? niceDate(s.date) : s.offset === 0 ? "day of" : "+" + s.offset + " days"}`), "");
   L.push("TONE & LOOK", b.tone, "");
   L.push("A FEW THINGS TO AVOID", b.avoid, "");
   L.push("USAGE RIGHTS", b.usage, "");

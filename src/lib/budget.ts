@@ -103,7 +103,7 @@ export function alertLevel(utilization: number): AlertLevel {
 
 export const ALERT_COPY: Record<AlertLevel, { title: string; line: string; hue: string }> = {
   under: {
-    title: "Shining bright — under budget",
+    title: "Shining bright, under budget",
     line: "Plenty of open sky ahead. You're well within budget.",
     hue: "#9FE0CE",
   },
@@ -114,7 +114,7 @@ export const ALERT_COPY: Record<AlertLevel, { title: string; line: string; hue: 
   },
   over: {
     title: "Projected over budget",
-    line: "Overcast — committed spend has crossed the budget. Trim or reallocate.",
+    line: "Overcast, committed spend has crossed the budget. Trim or reallocate.",
     hue: "#FFC9DE",
   },
 };

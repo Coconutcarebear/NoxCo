@@ -44,7 +44,7 @@ export function MarketingFooter() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Nox &amp; Co. All rights reserved.</span>
-          <span>Strategy, creative, and culture — one orbit.</span>
+          <span>Strategy, creative, and culture, one orbit.</span>
         </div>
       </div>
     </footer>

@@ -106,7 +106,7 @@ export default function HarborPage() {
       <Card className="p-5">
         <h2 className="mb-3 font-display text-lg text-ink">Night log</h2>
         {activity.length === 0 ? (
-          <p className="text-sm text-ink-soft">{ready ? "Quiet skies — no activity yet." : "Loading the journal…"}</p>
+          <p className="text-sm text-ink-soft">{ready ? "Quiet skies, no activity yet." : "Loading the journal…"}</p>
         ) : (
           <ol className="space-y-2">
             {activity.slice(0, 8).map((a) => (
@@ -146,7 +146,7 @@ function AttentionList({ title, hint, items, onOpen, icon }: { title: string; hi
               <button onClick={() => onOpen(c.id)} className="flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-sm hover:bg-sky">
                 <span className="min-w-0">
                   <span className="block truncate font-semibold text-ink">{c.name}</span>
-                  <span className="block truncate text-xs text-ink-faint">{c.campaign ?? "—"}</span>
+                  <span className="block truncate text-xs text-ink-faint">{c.campaign ?? "-"}</span>
                 </span>
                 <Badge hue={STAGE_HUE[c.stage]}>{c.stage}</Badge>
               </button>

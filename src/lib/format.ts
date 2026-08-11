@@ -30,16 +30,16 @@ export function pct(n: number | null | undefined, digits = 0): string {
 }
 
 export function fmtDate(d: string | null | undefined): string {
-  if (!d) return "—";
+  if (!d) return "-";
   const date = new Date(d);
-  if (isNaN(date.getTime())) return "—";
+  if (isNaN(date.getTime())) return "-";
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
 export function fmtDateTime(d: string | null | undefined): string {
-  if (!d) return "—";
+  if (!d) return "-";
   const date = new Date(d);
-  if (isNaN(date.getTime())) return "—";
+  if (isNaN(date.getTime())) return "-";
   return date.toLocaleString("en-US", {
     month: "short", day: "numeric", year: "numeric",
     hour: "numeric", minute: "2-digit",

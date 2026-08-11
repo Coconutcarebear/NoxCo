@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useStore } from "@/lib/store";
+import { TwinkleCluster } from "@/components/marketing/TwinkleCluster";
 
 export function AuthGate({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -34,8 +35,11 @@ function Splash() {
   return (
     <div className="grid min-h-screen place-items-center" style={{ background: "radial-gradient(900px 600px at 50% 20%, rgba(199,201,209,0.10), transparent 60%), linear-gradient(180deg,#000000 0%,#0a0a0c 55%,#000000 100%)" }}>
       <div className="flex flex-col items-center gap-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.jpg" alt="Nox & Co" className="h-14 w-14 animate-bob rounded-xl" />
+        <div className="relative h-28 w-28">
+          <TwinkleCluster count={20} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.jpg" alt="Nox & Co" className="relative h-full w-full animate-bob rounded-2xl object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]" />
+        </div>
         <span className="text-sm text-ink-soft">Entering orbit…</span>
       </div>
     </div>
@@ -65,8 +69,11 @@ function LoginScreen() {
     <div className="grid min-h-screen place-items-center px-4" style={{ background: "radial-gradient(900px 600px at 50% 10%, rgba(199,201,209,0.10), transparent 60%), linear-gradient(180deg,#000000 0%,#0a0a0c 55%,#000000 100%)" }}>
       <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-white/5 p-7 shadow-float backdrop-blur-md">
         <div className="mb-5 flex flex-col items-center gap-2 text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.jpg" alt="Nox & Co" className="h-14 w-14 rounded-xl" />
+          <div className="relative h-24 w-24">
+            <TwinkleCluster count={16} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.jpg" alt="Nox & Co" className="relative h-full w-full rounded-2xl object-cover shadow-[0_16px_50px_-18px_rgba(0,0,0,0.8)]" />
+          </div>
           <div>
             <h1 className="font-display text-2xl text-dusty">Nox & Co</h1>
             <p className="text-xs text-ink-faint">Sign in to your creator universe</p>

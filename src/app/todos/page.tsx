@@ -202,7 +202,7 @@ export default function OrdersPage() {
 
               <ul className="divide-y divide-sky/50 px-2">
                 {visible.length === 0 ? (
-                  <li className="px-2 py-3 text-center text-xs text-ink-faint">{items.length === 0 ? "Nothing here yet." : "All done — nice."}</li>
+                  <li className="px-2 py-3 text-center text-xs text-ink-faint">{items.length === 0 ? "Nothing here yet." : "All done, nice."}</li>
                 ) : (
                   visible.map((t) => {
                     const overdue = !t.done && !!t.due_date && t.due_date < today();
@@ -287,19 +287,19 @@ export default function OrdersPage() {
             <Field label="Due date"><Input type="date" value={form.due_date} onChange={(e) => setForm({ ...form, due_date: e.target.value })} /></Field>
             <Field label="Assignee">
               <Select value={form.assignee_id} onChange={(e) => setForm({ ...form, assignee_id: e.target.value })}>
-                <option value="">— Anyone —</option>
+                <option value="">Anyone</option>
                 {users.map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}
               </Select>
             </Field>
             <Field label="Eclipse">
               <Select value={form.campaign_id} onChange={(e) => setForm({ ...form, campaign_id: e.target.value })}>
-                <option value="">— None —</option>
+                <option value="">None</option>
                 {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </Select>
             </Field>
             <Field label="Creator">
               <Select value={form.creator_id} onChange={(e) => setForm({ ...form, creator_id: e.target.value })}>
-                <option value="">— None —</option>
+                <option value="">None</option>
                 {creators.filter((c) => !c.archived).map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </Select>
             </Field>

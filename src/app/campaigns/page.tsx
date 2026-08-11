@@ -121,7 +121,7 @@ export default function BouquetsPage() {
 
       {minimized.length > 0 && (
         <div className="mb-5 flex flex-wrap items-end gap-x-7 gap-y-4 rounded-3xl border border-sky/50 bg-white/5 px-5 py-5">
-          <span className="w-full text-xs uppercase tracking-wide text-ink-faint">Minimized — tap a star to bring it back</span>
+          <span className="w-full text-xs uppercase tracking-wide text-ink-faint">Minimized, tap a star to bring it back</span>
           {campaigns.filter((c) => minimized.includes(c.id)).map((cam, i) => (
             <button key={cam.id} type="button" onClick={() => restore(cam.id)} title={`Restore ${cam.name}`} className="group flex w-16 flex-col items-center gap-1">
               <span className="animate-bob" style={{ animationDelay: `${(i % 6) * 0.35}s`, color: cam.color }}>
@@ -223,7 +223,7 @@ export default function BouquetsPage() {
           <div className="col-span-2"><Field label="Name"><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Summer Walking Tours" /></Field></div>
           <Field label="Company">
             <Select value={form.company_id} onChange={(e) => setForm({ ...form, company_id: e.target.value })}>
-              <option value="">— None —</option>
+              <option value="">None</option>
               {companies.map((co) => <option key={co.id} value={co.id}>{co.name}</option>)}
             </Select>
           </Field>

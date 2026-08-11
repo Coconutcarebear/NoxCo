@@ -70,7 +70,7 @@ export default function DockyardPage() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-3 py-2.5 text-ink-soft">{c.campaign ?? "—"}</td>
+                    <td className="px-3 py-2.5 text-ink-soft">{c.campaign ?? "-"}</td>
                     <td className="px-3 py-2.5"><Badge hue={HUE[c.contract_status]}>{c.contract_status}</Badge></td>
                     <td className="px-3 py-2.5 text-ink-soft">{fmtDate(c.contract_sent_date)}</td>
                     <td className="px-3 py-2.5 text-ink-soft">{fmtDate(c.contract_signed_date)}</td>

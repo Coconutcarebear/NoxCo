@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, Instagram, Clock, ArrowRight } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ export default function ContactPage() {
     if (!name.trim() || !email.trim() || !message.trim()) return;
     const subject = encodeURIComponent(`New inquiry from ${name}${company ? ` (${company})` : ""}`);
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nCompany: ${company || "—"}\n\n${message}`
+      `Name: ${name}\nEmail: ${email}\nCompany: ${company || "-"}\n\n${message}`
     );
     window.location.href = `mailto:hello@noxandco.com?subject=${subject}&body=${body}`;
     setSent(true);
@@ -23,18 +24,17 @@ export default function ContactPage() {
 
   return (
     <MarketingShell>
-      <section className="mx-auto max-w-4xl px-5 pb-10 pt-16 text-center sm:px-8 sm:pb-14 sm:pt-24">
+      <Reveal className="mx-auto max-w-4xl px-5 pb-10 pt-16 text-center sm:px-8 sm:pb-14 sm:pt-24">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-lavender">Contact</p>
         <h1 className="mt-4 font-display text-4xl leading-[1.1] text-white sm:text-5xl">
           Let&apos;s chart your next campaign.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-          Tell us a little about your brand and what you&apos;re planning —
-          we typically reply within one business day.
+          Tell us a little about your brand and what you&apos;re planning, we typically reply within one business day.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 sm:pb-28">
+      <Reveal delay={120} className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 sm:pb-28">
         <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
           {/* form */}
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8">
@@ -108,8 +108,7 @@ export default function ContactPage() {
                   Send message <ArrowRight size={15} />
                 </button>
                 <p className="text-center text-[11px] text-white/35">
-                  This opens your email client with the message pre-filled —
-                  we don&apos;t store anything you type here.
+                  This opens your email client with the message pre-filled, we don&apos;t store anything you type here.
                 </p>
               </div>
             )}
@@ -144,7 +143,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
     </MarketingShell>
   );
 }

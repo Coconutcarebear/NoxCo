@@ -53,9 +53,9 @@ export default function CrewPage() {
       <Card className="mb-4 p-4 text-sm leading-relaxed text-ink-soft">
         <p className="mb-2 font-semibold text-ink">How roles work</p>
         <ul className="space-y-1">
-          <li><strong className="text-ink">Owner</strong> — manages everyone &amp; settings</li>
-          <li><strong className="text-ink">Editor</strong> — creates &amp; edits content</li>
-          <li><strong className="text-ink">Viewer</strong> — read-only</li>
+          <li><strong className="text-ink">Owner</strong>, manages everyone &amp; settings</li>
+          <li><strong className="text-ink">Editor</strong>, creates &amp; edits content</li>
+          <li><strong className="text-ink">Viewer</strong>, read-only</li>
         </ul>
         <p className="mt-3 text-ink-faint">
           New logins are created in Supabase (Authentication → Users). Set someone&apos;s email here to the same address and their account links automatically on first sign-in.
@@ -118,7 +118,7 @@ export default function CrewPage() {
                       </td>
                       <td className="px-4 py-2.5 text-right">
                         {isSelf ? (
-                          <span className="text-xs text-ink-faint">—</span>
+                          <span className="text-xs text-ink-faint">-</span>
                         ) : confirmId === u.id ? (
                           <span className="inline-flex items-center gap-2">
                             <Button variant="danger" onClick={() => { deleteUser(u.id); setConfirmId(null); }}>Remove</Button>

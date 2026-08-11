@@ -77,7 +77,7 @@ export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return <select {...props} className={clsx(inputCx, "appearance-none cursor-pointer", props.className)} />;
 }
 
-// A progress bar — value rising toward the budget line.
+// A progress bar, value rising toward the budget line.
 export function BloomBar({ value, hue = "#C7C9D1", height = 10 }: { value: number; hue?: string; height?: number }) {
   const pct = Math.max(0, Math.min(100, value * 100));
   return (

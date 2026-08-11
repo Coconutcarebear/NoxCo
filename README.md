@@ -1,6 +1,6 @@
 # ✨ Nox & Co — Creator Operations
 
-*"No more star-crossed campaigns."* 
+*"No more star-crossed campaigns."*
 
 A public marketing site **plus** a full influencer CRM + campaign manager, built as one
 **Next.js + Supabase** app you can deploy to a live URL. The root of the site (`/`, `/about`,

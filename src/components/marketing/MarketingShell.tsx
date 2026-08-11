@@ -7,7 +7,7 @@ import { MarketingFooter } from "./MarketingFooter";
 
 // Shared black-and-silver backdrop + chrome for every public marketing page.
 // Includes a soft cursor-tracking glow so the sky feels alive as you move
-// through it — subtle, moody, not gimmicky.
+// through it, subtle, moody, not gimmicky.
 export function MarketingShell({ children }: { children: ReactNode }) {
   const glowRef = useRef<HTMLDivElement>(null);
 

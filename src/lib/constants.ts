@@ -1,7 +1,7 @@
 import type { Stage } from "./types";
 // Default fallback budget used when a campaign has no budget set. Adjust to your own plan.
 export const FY26_BUDGET = 50000;
-// No more star-crossed campaigns — pipeline stages as a creator's night-sky journey.
+// No more star-crossed campaigns, pipeline stages as a creator's night-sky journey.
 export const STAGES: Stage[] = [
   "Sighted",
   "Signal Sent",
@@ -80,7 +80,7 @@ export interface NavGroup {
   items: NavItem[];
 }
 
-// Grouped, collapsible nav — no more star-crossed campaigns, night-sky sections.
+// Grouped, collapsible nav, no more star-crossed campaigns, night-sky sections.
 export const NAV_GROUPS: NavGroup[] = [
   {
     label: "Home", icon: "Sparkles",
@@ -142,8 +142,7 @@ export type TodoCategory = {
   hint: string;
 };
 
-// Workflow stages for the Orders (to-do) board. Edit / reorder freely —
-// the page renders one section per entry, in this order.
+// Workflow stages for the Orders (to-do) board. Edit / reorder freely, // the page renders one section per entry, in this order.
 export const TODO_CATEGORIES: TodoCategory[] = [
   { key: "Outreach",   label: "Outreach",   hue: "#B7C8EA", icon: "Send",          hint: "First contact & follow-ups" },
   { key: "Briefing",   label: "Briefing",   hue: "#A9D2F4", icon: "FileText",      hint: "Briefs sent & concepts approved" },
@@ -188,12 +187,12 @@ export const EMOJI_AVATARS = [
   "🐰", "🐼", "🦔", "🦭", "🌊", "🔮", "🍒", "🌻", "🐡", "👾",
 ];
 
-// Rough share of a creator's followers who view a given story — used to
+// Rough share of a creator's followers who view a given story, used to
 // pre-estimate organic story views from follower count. Override per entry.
 export const STORY_REACH_DEFAULT = 0.1;
 
 // Creator tags (stored comma-separated in the creator's `categories` field).
-// This is the starting palette — new tags added in the app join the pool
+// This is the starting palette, new tags added in the app join the pool
 // automatically once they're assigned to a creator.
 export const DEFAULT_TAGS = [
   "Foodie", "Fashion", "Day in My Life", "Vlog", "Informational", "Museums",
@@ -232,7 +231,7 @@ export const INVOICE_STATUSES = [
 export const STATUS_TAGS = [
   "Interested", "Awaiting Response", "Declined", "Ghosted", "Signed",
 ] as const;
-// H2 forecast (creators booked + planned spend) — sample defaults, edit to your own plan.
+// H2 forecast (creators booked + planned spend), sample defaults, edit to your own plan.
 export const H2_FORECAST = [
   { month: "July", creators: 0, spend: 0 },
   { month: "August", creators: 0, spend: 0 },

@@ -26,7 +26,7 @@ export default function TreasuryPage() {
 
   const active = views.filter((v) => !v.is_organic);
   const list = useMemo(() => (filter ? active.filter((c) => c.invoice_status === filter) : active), [active, filter]);
-  const campName = (id: string | null) => campaigns.find((c) => c.id === id)?.name ?? "—";
+  const campName = (id: string | null) => campaigns.find((c) => c.id === id)?.name ?? "-";
 
   const paid = active.filter((c) => c.invoice_status === "Paid");
   const outstanding = active.filter((c) => ["Received", "Submitted To Billing", "Processing"].includes(c.invoice_status));
@@ -109,7 +109,7 @@ export default function TreasuryPage() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-3 py-2.5 text-ink-soft">{c.campaign ?? "—"}</td>
+                    <td className="px-3 py-2.5 text-ink-soft">{c.campaign ?? "-"}</td>
                     <td className="px-3 py-2.5"><Badge hue={HUE[c.invoice_status]}>{c.invoice_status}</Badge></td>
                     <td className="px-3 py-2.5 text-ink-soft">{fmtDate(c.invoice_received_date)}</td>
                     <td className="px-3 py-2.5 text-ink-soft">{fmtDate(c.payment_date)}</td>
@@ -122,7 +122,7 @@ export default function TreasuryPage() {
         </Card>
       )}
 
-      {/* Internal boosts — your own socials (managed in the Almanac) */}
+      {/* Internal boosts, your own socials (managed in the Almanac) */}
       <div className="mt-6">
         <div className="mb-2 flex items-center justify-between">
           <h2 className="font-display text-lg text-ink">Internal boosts</h2>
@@ -150,7 +150,7 @@ export default function TreasuryPage() {
                       <td className="px-3 py-2.5 text-ink-soft">{b.platform}</td>
                       <td className="px-3 py-2.5 text-ink-soft">{campName(b.campaign_id)}</td>
                       <td className="px-3 py-2.5 text-ink-soft">
-                        {b.boost_start ? `${fmtDate(b.boost_start)}${b.boost_end ? " → " + fmtDate(b.boost_end) : ""}` : "—"}
+                        {b.boost_start ? `${fmtDate(b.boost_start)}${b.boost_end ? " → " + fmtDate(b.boost_end) : ""}` : "-"}
                       </td>
                       <td className="px-3 py-2.5 text-right font-semibold text-ink">{money(Number(b.amount || 0))}</td>
                     </tr>

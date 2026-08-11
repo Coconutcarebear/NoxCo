@@ -199,7 +199,7 @@ export function CreatorSlideOver({
             <span className="text-ink-soft">Engagement <b className="text-ink">{pct(creator.engagement_rate, 1)}</b></span>
             <span className="text-ink-soft">This journey <b className="text-ink">{money(totalSpendOf(view))}</b></span>
           </div>
-          <div className="mt-1 text-xs text-ink-faint">on {view.campaign ?? "—"} · {creator.platform}</div>
+          <div className="mt-1 text-xs text-ink-faint">on {view.campaign ?? "-"} · {creator.platform}</div>
         </div>
       </div>
 
@@ -220,7 +220,7 @@ export function CreatorSlideOver({
 
       {!canEdit && (
         <div className="mb-3 rounded-2xl bg-sky/40 px-3 py-2 text-xs text-ink-soft">
-          <Icons.Eye size={13} className="mr-1 inline" /> Read-only — you have Viewer access.
+          <Icons.Eye size={13} className="mr-1 inline" /> Read-only, you have Viewer access.
         </div>
       )}
       <fieldset disabled={!canEdit} className="min-w-0 border-0 p-0 disabled:opacity-100">
@@ -228,7 +228,7 @@ export function CreatorSlideOver({
       {tab === "Star" && (
         <div className="grid grid-cols-2 gap-3">
           <div className="col-span-2 rounded-2xl bg-seafoam-soft/60 px-3 py-2 text-xs text-ink-soft">
-            This is the shared profile — edits here apply to {creator.name} on every journey.
+            This is the shared profile, edits here apply to {creator.name} on every journey.
           </div>
           <div className="col-span-2">
             <Field label="Profile picture">
@@ -306,7 +306,7 @@ export function CreatorSlideOver({
             >
               {draft.is_organic ? <Icons.Leaf size={14} /> : <Icons.Circle size={14} />} Organic (unpaid)
             </button>
-            <span className="text-[11px] text-ink-faint">{draft.is_organic ? "No contract, invoice, or payment tracked for this journey." : "Paid — contract & payment tracked in The Vault / Stardust."}</span>
+            <span className="text-[11px] text-ink-faint">{draft.is_organic ? "No contract, invoice, or payment tracked for this journey." : "Paid, contract & payment tracked in The Vault / Stardust."}</span>
           </div>
           <div>
             <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-ink-soft">Growth stage</span>
@@ -331,13 +331,13 @@ export function CreatorSlideOver({
           <div className="grid grid-cols-2 gap-3">
             <Field label="Eclipse">
               <Select value={draft.campaign_id ?? ""} onChange={(e) => commitImmediate({ campaign_id: e.target.value || null })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </Select>
             </Field>
             <Field label="Status tag">
               <Select value={draft.status_tag ?? ""} onChange={(e) => commitImmediate({ status_tag: (e.target.value || null) as EngagementView["status_tag"] })}>
-                <option value="">—</option>
+                <option value="">-</option>
                 {STATUS_TAGS.map((t) => <option key={t}>{t}</option>)}
               </Select>
             </Field>
@@ -351,7 +351,7 @@ export function CreatorSlideOver({
           <Field label="Deliverables"><Textarea value={draft.deliverables ?? ""} onChange={(e) => set({ deliverables: e.target.value })} onBlur={() => commitField("deliverables")} /></Field>
           <Field label="Negotiation notes"><Textarea value={draft.negotiation_notes ?? ""} onChange={(e) => set({ negotiation_notes: e.target.value })} onBlur={() => commitField("negotiation_notes")} /></Field>
 
-          {/* Schedule — mirrors onto the Almanac (same engagement dates) */}
+          {/* Schedule, mirrors onto the Almanac (same engagement dates) */}
           <div className="rounded-3xl bg-white/5 p-3">
             <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">
               <Icons.CalendarClock size={14} /> Schedule
@@ -393,7 +393,7 @@ export function CreatorSlideOver({
               <div className="flex-1">
                 <Field label="Add to another eclipse">
                   <Select value={attachTo} onChange={(e) => setAttachTo(e.target.value)}>
-                    <option value="">— Choose eclipse —</option>
+                    <option value="">Choose eclipse</option>
                     {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </Select>
                 </Field>
@@ -412,7 +412,7 @@ export function CreatorSlideOver({
         <div className="space-y-4">
           {draft.is_organic && (
             <div className="flex items-center gap-2 rounded-2xl bg-seafoam-soft/50 px-3 py-2 text-xs text-seafoam-deep">
-              <Icons.Leaf size={13} /> This journey is organic — contract, invoice &amp; payment aren&apos;t tracked here.
+              <Icons.Leaf size={13} /> This journey is organic, contract, invoice &amp; payment aren&apos;t tracked here.
             </div>
           )}
           <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/5 p-3">
@@ -488,7 +488,7 @@ export function CreatorSlideOver({
             </div>
             <div className="rounded-2xl bg-white/5 p-3 text-center">
               <div className={"font-display text-lg " + (analytics.totalRoi == null ? "text-ink-faint" : analytics.totalRoi >= 0 ? "text-seafoam-deep" : "text-bubblegum")}>
-                {analytics.totalRoi == null ? "—" : (analytics.totalRoi >= 0 ? "+" : "") + (analytics.totalRoi * 100).toFixed(0) + "%"}
+                {analytics.totalRoi == null ? "-" : (analytics.totalRoi >= 0 ? "+" : "") + (analytics.totalRoi * 100).toFixed(0) + "%"}
               </div>
               <div className="text-[11px] text-ink-soft">Blended ROI</div>
             </div>
@@ -525,7 +525,7 @@ export function CreatorSlideOver({
                       <td className="px-2 py-2 text-right text-ink">{money(r.spend)}</td>
                       <td className="px-2 py-2 text-right text-ink">{money(r.emv)}</td>
                       <td className="px-2 py-2 text-right">
-                        {r.roi == null ? <span className="text-ink-faint">—</span> : <span className={"font-semibold " + (r.roi >= 0 ? "text-seafoam-deep" : "text-bubblegum")}>{(r.roi >= 0 ? "+" : "") + (r.roi * 100).toFixed(0)}%</span>}
+                        {r.roi == null ? <span className="text-ink-faint">-</span> : <span className={"font-semibold " + (r.roi >= 0 ? "text-seafoam-deep" : "text-bubblegum")}>{(r.roi >= 0 ? "+" : "") + (r.roi * 100).toFixed(0)}%</span>}
                       </td>
                       <td className="px-2 py-2 text-right">
                         {r.id !== view.id && onSwitch ? (
@@ -546,7 +546,7 @@ export function CreatorSlideOver({
       {tab === "Log" && (
         <div className="space-y-3">
           {creatorActivity.length === 0 ? (
-            <p className="rounded-3xl bg-white/5 p-6 text-center text-sm text-ink-soft">No log entries yet — changes you make will show up here.</p>
+            <p className="rounded-3xl bg-white/5 p-6 text-center text-sm text-ink-soft">No log entries yet, changes you make will show up here.</p>
           ) : (
             <ol className="relative space-y-3 border-l-2 border-dusty-soft pl-5">
               {creatorActivity.map((a) => (
@@ -576,12 +576,12 @@ function DraftTools({ view }: { view: EngagementView }) {
 
   const outreach = () =>
     setText(
-      `Hi ${view.name.split(" ")[0]},\n\nI'm ${myName} with ${org}. I love your ${view.categories ?? "content"} on ${view.platform} — your voice would be a beautiful fit for our ${view.campaign ?? "upcoming"} campaign.\n\nWe'd love to explore a paid partnership${view.deliverables ? ` (${view.deliverables})` : ""}. Would you be open to a quick chat about timing and rates?\n\nWarmly,\n${myName} · ${org}`
+      `Hi ${view.name.split(" ")[0]},\n\nI'm ${myName} with ${org}. I love your ${view.categories ?? "content"} on ${view.platform}, your voice would be a beautiful fit for our ${view.campaign ?? "upcoming"} campaign.\n\nWe'd love to explore a paid partnership${view.deliverables ? ` (${view.deliverables})` : ""}. Would you be open to a quick chat about timing and rates?\n\nWarmly,\n${myName} · ${org}`
     );
 
   const followUp = () =>
     setText(
-      `Hi ${view.name.split(" ")[0]},\n\nJust floating this back to the top of your inbox — still really hoping to bring you aboard for ${org}'s ${view.campaign ?? "next"} campaign. No rush at all; happy to work around your schedule.\n\nWould love to hear your thoughts whenever you have a moment!\n\nWarmly,\n${myName}`
+      `Hi ${view.name.split(" ")[0]},\n\nJust floating this back to the top of your inbox, still really hoping to bring you aboard for ${org}'s ${view.campaign ?? "next"} campaign. No rush at all; happy to work around your schedule.\n\nWould love to hear your thoughts whenever you have a moment!\n\nWarmly,\n${myName}`
     );
 
   const summarize = () => {

@@ -82,7 +82,7 @@ export default function AlmanacPage() {
   const internalTotal = internalBoosts.reduce((s, b) => s + Number(b.amount || 0), 0);
   const todayKey = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
 
-  // "This month at a glance" — recomputed for whatever month is in view.
+  // "This month at a glance", recomputed for whatever month is in view.
   const monthPrefix = `${cur.y}-${pad(cur.m + 1)}`;
   const inMonth = (d?: string | null) => !!d && d.startsWith(monthPrefix);
   const overlapMonth = (s?: string | null, e?: string | null) => !!s && !!e && s <= `${monthPrefix}-31` && e >= `${monthPrefix}-01`;
@@ -171,7 +171,7 @@ export default function AlmanacPage() {
           <MonthStat emoji="🎬" label="Shoots" value={String(summary.shoots)} />
           <MonthStat emoji="★" label="Posts" value={String(summary.posts)} />
           <MonthStat emoji="✨" label="EMV" value={money(summary.emv)} />
-          <MonthStat emoji="📈" label="ROI" value={summary.roi == null ? "—" : (summary.roi >= 0 ? "+" : "") + (summary.roi * 100).toFixed(0) + "%"} />
+          <MonthStat emoji="📈" label="ROI" value={summary.roi == null ? "-" : (summary.roi >= 0 ? "+" : "") + (summary.roi * 100).toFixed(0) + "%"} />
           <MonthStat emoji="⚡" label="Creator boosts" value={String(summary.cboosts)} />
           <MonthStat emoji="📣" label="Internal spend" value={money(summary.ibSpend)} />
           <MonthStat emoji="🚀" label="Launching" value={String(summary.launching)} />
@@ -220,7 +220,7 @@ export default function AlmanacPage() {
 
       {/* ---- Schedule editor ---- */}
       <Modal open={showSchedule} onClose={() => setShowSchedule(false)} title="Set shoot dates">
-        <p className="mb-3 text-xs text-ink-soft">Post &amp; boost dates now live in the Logbook — set them when you log a post.</p>
+        <p className="mb-3 text-xs text-ink-soft">Post &amp; boost dates now live in the Logbook, set them when you log a post.</p>
         <p className="mb-3 text-sm text-ink-soft">Set when each creator&apos;s video goes up and their boosting window. Changes save automatically.</p>
         <div className="max-h-[58vh] space-y-3 overflow-auto pr-1">
           {active.length === 0 ? (
@@ -248,7 +248,7 @@ export default function AlmanacPage() {
       </Modal>
 
       {/* ---- Internal boosts ---- */}
-      <Modal open={showInternal} onClose={() => setShowInternal(false)} title="Internal boosts — your own socials">
+      <Modal open={showInternal} onClose={() => setShowInternal(false)} title="Internal boosts, your own socials">
         <div className="space-y-4">
           <div className="rounded-xl bg-sky/30 p-3 text-sm text-ink-soft">
             Boosting your own Instagram/TikTok posts. Total so far: <b className="text-ink">{money(internalTotal)}</b>
@@ -269,7 +269,7 @@ export default function AlmanacPage() {
               </Field>
               <Field label="Eclipse (optional)">
                 <Sel value={ib.campaign_id} onChange={(e) => setIb({ ...ib, campaign_id: e.target.value })}>
-                  <option value="">— None —</option>
+                  <option value="">None</option>
                   {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </Sel>
               </Field>
@@ -299,7 +299,7 @@ export default function AlmanacPage() {
                     </div>
                     <div className="truncate text-xs text-ink-soft">
                       {money(Number(b.amount || 0))}
-                      {b.campaign_id ? ` · ${campNameById(b.campaign_id) ?? "—"}` : ""}
+                      {b.campaign_id ? ` · ${campNameById(b.campaign_id) ?? "-"}` : ""}
                       {b.boost_start ? ` · ${b.boost_start}${b.boost_end ? " → " + b.boost_end : ""}` : ""}
                     </div>
                   </div>

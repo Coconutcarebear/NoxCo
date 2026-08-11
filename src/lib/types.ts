@@ -63,7 +63,7 @@ export interface User {
   active: boolean;
 }
 
-// A creator PROFILE — durable, person-level facts only.
+// A creator PROFILE, durable, person-level facts only.
 export interface Creator {
   id: string;
   created_at: string;
@@ -102,7 +102,7 @@ export interface Campaign {
   notes: string | null;
 }
 
-// One creator's engagement on one campaign — the per-journey record.
+// One creator's engagement on one campaign, the per-journey record.
 export interface Engagement {
   id: string;
   created_at: string;
@@ -129,7 +129,7 @@ export interface Engagement {
   invoice_received_date: string | null;
   submitted_to_billing_date: string | null;
   payment_date: string | null;
-  is_organic: boolean; // this event is unpaid — no contract / invoice / W-9 needed
+  is_organic: boolean; // this event is unpaid, no contract / invoice / W-9 needed
   // scheduling (Almanac)
   shoot_date: string | null;
   post_date: string | null;
@@ -219,7 +219,7 @@ export interface Activity {
   kind: string;
 }
 
-// Internal boosts — the agency boosting its OWN socials, separate from creator spend.
+// Internal boosts, the agency boosting its OWN socials, separate from creator spend.
 export interface InternalBoost {
   id: string;
   created_at: string;

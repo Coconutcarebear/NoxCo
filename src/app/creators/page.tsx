@@ -171,7 +171,7 @@ function AtlasInner() {
                         </div>
                       </td>
                       <td className="px-3 py-2.5 text-ink-soft">{c.platform}</td>
-                      <td className="px-3 py-2.5 text-ink-soft">{c.campaign ?? "—"}</td>
+                      <td className="px-3 py-2.5 text-ink-soft">{c.campaign ?? "-"}</td>
                       <td className="px-3 py-2.5"><Badge hue={STAGE_HUE[c.stage]}>{c.stage}</Badge></td>
                       <td className="px-3 py-2.5 text-right text-ink-soft">{num(c.followers)}</td>
                       <td className="px-3 py-2.5 text-right text-ink">{money(c.creator_fee)}</td>
@@ -179,7 +179,7 @@ function AtlasInner() {
                       <td className="px-3 py-2.5 text-right font-semibold text-ink">{money(totalSpendOf(c))}</td>
                       <td className="px-3 py-2.5 text-right">{(() => {
                         const r = roiByEng.get(c.id);
-                        if (!r || r.cost <= 0) return <span className="text-ink-faint">—</span>;
+                        if (!r || r.cost <= 0) return <span className="text-ink-faint">-</span>;
                         const roi = (r.emv - r.cost) / r.cost;
                         return <span className={"font-semibold " + (roi >= 0 ? "text-seafoam-deep" : "text-bubblegum")}>{(roi >= 0 ? "+" : "") + (roi * 100).toFixed(0)}%</span>;
                       })()}</td>

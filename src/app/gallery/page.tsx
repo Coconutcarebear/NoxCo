@@ -57,7 +57,7 @@ export default function StarGalleryPage() {
                     <Badge hue={STAGE_HUE[c.stage]}>{c.stage}</Badge>
                   </div>
                   <div className="text-xs text-ink-faint">{c.handle}</div>
-                  <div className="mt-2 text-sm text-ink-soft">{c.deliverables ?? "—"}</div>
+                  <div className="mt-2 text-sm text-ink-soft">{c.deliverables ?? "-"}</div>
                   <div className="mt-3 flex items-center justify-between border-t border-sky/70 pt-2 text-xs text-ink-soft">
                     <span><b className="text-ink">{num(c.followers)}</b> followers</span>
                     <span><b className="text-ink">{pct(c.engagement_rate, 1)}</b> eng.</span>

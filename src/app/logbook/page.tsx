@@ -54,7 +54,7 @@ const qEmvOf = (p: Post, r: RoiSettings) => emvOf(p, r) * (1 + sentRaw(p) * (r.s
 const qRoiOf = (p: Post, r: RoiSettings) => { const c = costOf(p); return c > 0 ? (qEmvOf(p, r) - c) / c : null; };
 
 function Roi({ value }: { value: number | null }) {
-  if (value === null) return <span className="text-ink-faint">—</span>;
+  if (value === null) return <span className="text-ink-faint">-</span>;
   const pos = value >= 0;
   return <span className={pos ? "font-semibold text-seafoam-deep" : "font-semibold text-bubblegum"}>{(pos ? "+" : "") + (value * 100).toFixed(0)}%</span>;
 }
@@ -135,7 +135,7 @@ export default function LogbookPage() {
     setPlatRates((cur) => ({ ...cur, [plat]: { k: cur[plat]?.k ?? "", e: cur[plat]?.e ?? "", ...patch } }));
 
   const viewById = useMemo(() => new Map(views.map((v) => [v.id, v])), [views]);
-  const creatorNameOf = (id: string | null) => viewById.get(id ?? "")?.name ?? "—";
+  const creatorNameOf = (id: string | null) => viewById.get(id ?? "")?.name ?? "-";
   const followersOf = (id: string | null) => viewById.get(id ?? "")?.followers ?? null;
   const campaignOf = (id: string | null) => viewById.get(id ?? "")?.campaign ?? "Unassigned";
   const sortedViews = useMemo(
@@ -165,7 +165,7 @@ export default function LogbookPage() {
   const byCreator = useMemo(() => {
     const m = new Map<string, { campaign: string; creator: string; posts: number; cost: number; emv: number; sent: number }>();
     posts.forEach((p) => {
-      const key = campaignOf(p.engagement_id) + "|||" + (p.engagement_id || "—");
+      const key = campaignOf(p.engagement_id) + "|||" + (p.engagement_id || "-");
       const o = m.get(key) || { campaign: campaignOf(p.engagement_id), creator: creatorNameOf(p.engagement_id), posts: 0, cost: 0, emv: 0, sent: 0 };
       o.posts++; o.cost += costOf(p); o.emv += qEmvOf(p, rates); o.sent += sentScore(p, followersOf(p.engagement_id));
       m.set(key, o);
@@ -177,7 +177,7 @@ export default function LogbookPage() {
   function openEdit(p: Post) { setForm(toForm(p)); setOpen(true); }
 
   // Selecting a creator/eclipse fills the post's dates from that engagement's
-  // schedule — but only into fields that are still empty, so edits aren't clobbered.
+  // schedule, but only into fields that are still empty, so edits aren't clobbered.
   function pickEngagement(id: string) {
     const v = viewById.get(id);
     setForm((f) => ({
@@ -313,7 +313,7 @@ export default function LogbookPage() {
         <KpiCard label="Posts logged" value={String(posts.length)} icon="FileText" hue="#DCE6FB" />
         <KpiCard label="Spend" value={money(totals.cost)} hint="fees + boosting" icon="Coins" hue="#FEF3C7" />
         <KpiCard label="Adjusted EMV" value={money(totals.emv)} hint="sentiment-blended" icon="Sparkles" hue="#E4D6F7" />
-        <KpiCard label="Blended ROI" value={totals.roi === null ? "—" : ((totals.roi >= 0 ? "+" : "") + (totals.roi * 100).toFixed(0) + "%")} hint="adj. EMV vs spend" icon="TrendingUp" hue="#C9F0E6" />
+        <KpiCard label="Blended ROI" value={totals.roi === null ? "-" : ((totals.roi >= 0 ? "+" : "") + (totals.roi * 100).toFixed(0) + "%")} hint="adj. EMV vs spend" icon="TrendingUp" hue="#C9F0E6" />
         <KpiCard label="Net sentiment" value={fmtSent(totals.sentiment)} hint="weighted by tier" icon="Smile" hue="#F6DCEB" />
       </div>
 
@@ -433,7 +433,7 @@ export default function LogbookPage() {
                       </div>
                     </td>
                     <td className="px-3 py-2.5 text-ink-soft">{campaignOf(p.engagement_id)}</td>
-                    <td className="px-3 py-2.5 text-ink-soft">{p.post_date ?? "—"}</td>
+                    <td className="px-3 py-2.5 text-ink-soft">{p.post_date ?? "-"}</td>
                     <td className="px-3 py-2.5 text-right text-ink">{num(Number(p.views || 0))}</td>
                     <td className="px-3 py-2.5 text-right text-ink">{num(engOf(p))}</td>
                     <td className="px-3 py-2.5 text-right text-ink">{money(costOf(p))}</td>
@@ -535,8 +535,8 @@ export default function LogbookPage() {
             <div className="sm:col-span-2">
               <Field label="Creator on eclipse">
                 <Sel value={form.engagement_id} onChange={(e) => pickEngagement(e.target.value)}>
-                  <option value="">— Choose —</option>
-                  {sortedViews.map((v) => <option key={v.id} value={v.id}>{v.name} — {v.campaign ?? "no eclipse"}</option>)}
+                  <option value="">Choose</option>
+                  {sortedViews.map((v) => <option key={v.id} value={v.id}>{v.name}, {v.campaign ?? "no eclipse"}</option>)}
                 </Sel>
               </Field>
             </div>
@@ -552,7 +552,7 @@ export default function LogbookPage() {
             </>)}
           </div>
 
-          <Field label="Video thumbnail" hint="Screenshot of the video — shows as a clickable preview in the table.">
+          <Field label="Video thumbnail" hint="Screenshot of the video, shows as a clickable preview in the table.">
             <ImageUpload
               value={form.thumbnail || null}
               onChange={(url) => setForm({ ...form, thumbnail: url ?? "" })}
@@ -588,7 +588,7 @@ export default function LogbookPage() {
                 <button type="button" onClick={pullScheduleDates} className="font-semibold text-dusty-deep hover:underline">Use schedule dates</button>
               </p>
             ) : (
-              <p className="-mt-2 text-xs text-ink-faint">No schedule dates set on this creator yet — add them on the creator&apos;s Journey tab to reuse them here.</p>
+              <p className="-mt-2 text-xs text-ink-faint">No schedule dates set on this creator yet, add them on the creator&apos;s Journey tab to reuse them here.</p>
             )
           )}
 
@@ -664,7 +664,7 @@ export default function LogbookPage() {
               <div className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Comment sentiment</div>
               <div className="text-xs text-ink-soft">Weighted: {tierLabel(formFollowers)}</div>
             </div>
-            <p className="mb-2 text-xs text-ink-soft">One read per post — pick the highest positive and the strongest negative present. Base +{formBase} comes from whether it got comments.</p>
+            <p className="mb-2 text-xs text-ink-soft">One read per post, pick the highest positive and the strongest negative present. Base +{formBase} comes from whether it got comments.</p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Positive read">
                 <Sel value={form.sent_positive} onChange={(e) => setForm({ ...form, sent_positive: e.target.value })}>

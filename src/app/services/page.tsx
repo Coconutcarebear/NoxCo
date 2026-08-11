@@ -3,12 +3,13 @@ import {
   ArrowRight, Compass, Disc, Lock, Sparkles, Images, Telescope, CloudMoon,
 } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
+import { Reveal } from "@/components/marketing/Reveal";
 
 const SERVICES = [
   {
     icon: Compass,
     title: "Creator Sourcing & Vetting",
-    copy: "We scout and screen creators against your category, audience, and budget — so every name on the list is already a fit, not a gamble.",
+    copy: "We scout and screen creators against your category, audience, and budget, so every name on the list is already a fit, not a gamble.",
   },
   {
     icon: Disc,
@@ -28,7 +29,7 @@ const SERVICES = [
   {
     icon: Images,
     title: "Content Review & Approval",
-    copy: "Drafts route through one shared queue for approval before anything goes live — no more chasing screenshots over email.",
+    copy: "Drafts route through one shared queue for approval before anything goes live, no more chasing screenshots over email.",
   },
   {
     icon: Telescope,
@@ -61,14 +62,14 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-6 sm:px-8 sm:py-10">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => (
-            <div key={s.title} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:bg-white/[0.08]">
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.title} delay={i * 80} className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:-translate-y-1 hover:bg-white/[0.08]">
               <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-dusty to-lavender text-navy-deep">
                 <s.icon size={20} />
               </div>
               <h3 className="mt-4 font-display text-lg text-white">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/60">{s.copy}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -81,17 +82,17 @@ export default function ServicesPage() {
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-4">
             {PROCESS.map((p, i) => (
-              <div key={p.step} className="relative">
+              <Reveal key={p.step} delay={i * 90} className="relative">
                 <div className="font-display text-3xl text-white/25">0{i + 1}</div>
                 <h3 className="mt-2 font-display text-lg text-white">{p.step}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-white/55">{p.copy}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+      <Reveal className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-gradient-to-br from-[#141416] to-[#000000] px-6 py-12 text-center sm:px-16 sm:py-16">
           <CloudMoon size={28} className="text-lavender" />
           <h2 className="font-display text-3xl text-white sm:text-4xl">Not sure where to start?</h2>
@@ -106,7 +107,7 @@ export default function ServicesPage() {
             Talk to us <ArrowRight size={15} />
           </Link>
         </div>
-      </section>
+      </Reveal>
     </MarketingShell>
   );
 }

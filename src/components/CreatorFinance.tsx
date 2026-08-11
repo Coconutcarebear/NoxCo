@@ -46,7 +46,7 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
   const rowFor = (k: string) => compliance.find((c) => c.key === k);
   const doneOf = (k: string) => !!rowFor(k)?.done;
   const readyToPay = READY_TO_PAY_KEYS.every((k) => doneOf(k));
-  const campName = (id: string | null) => campaigns.find((c) => c.id === id)?.name ?? "—";
+  const campName = (id: string | null) => campaigns.find((c) => c.id === id)?.name ?? "-";
 
   const expTotal = expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
   const reimbTotal = expenses.filter((e) => e.reimbursable).reduce((s, e) => s + Number(e.amount || 0), 0);
@@ -149,7 +149,7 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
                     {DOCUMENT_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                   <select value={d.campaign_id ?? ""} onChange={(e) => updateDocument(d.id, { campaign_id: e.target.value || null })} className="rounded-lg border border-sky/70 bg-white/5 px-2 py-1 text-xs text-ink outline-none focus:border-dusty-deep">
-                    <option value="">— No eclipse —</option>
+                    <option value="">No eclipse</option>
                     {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </select>
                 </div>
@@ -337,7 +337,7 @@ function ExpenseModal({ open, onClose, campaigns, onSave }: { open: boolean; onC
           <Field label="Date"><Input type="date" value={f.spent_on ?? ""} onChange={(e) => setF({ ...f, spent_on: e.target.value || null })} /></Field>
           <Field label="Eclipse">
             <Sel value={f.campaign_id ?? ""} onChange={(e) => setF({ ...f, campaign_id: e.target.value || null })}>
-              <option value="">— None —</option>
+              <option value="">None</option>
               {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </Sel>
           </Field>
@@ -382,7 +382,7 @@ function PaymentModal({ open, onClose, campaigns, onSave }: { open: boolean; onC
           </Field>
           <Field label="Eclipse">
             <Sel value={f.campaign_id ?? ""} onChange={(e) => setF({ ...f, campaign_id: e.target.value || null })}>
-              <option value="">— None —</option>
+              <option value="">None</option>
               {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </Sel>
           </Field>

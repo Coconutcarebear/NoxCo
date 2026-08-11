@@ -146,7 +146,7 @@ export default function ReportPage() {
 
       {/* CALENDAR */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <Section title="Calendar — next 7 days" icon="CalendarDays">
+        <Section title="Calendar, next 7 days" icon="CalendarDays">
           <CalLine label="Shoots today" items={R.cal.shootsToday.map((v) => v.name)} />
           <CalLine label="Upcoming shoots" items={R.cal.upcomingShoots.map((v) => `${v.name} · ${fmtDate(v.shoot_date!)}`)} />
           <CalLine label="Posting today" items={R.cal.today.map((v) => v.name)} />
@@ -177,7 +177,7 @@ export default function ReportPage() {
           <Perf label="Eng. rate" value={pct(erOf(R.perf), 1)} />
           <Perf label="EMV" value={compactMoney(R.perf.emv)} />
           <Perf label="Spend" value={compactMoney(R.perf.spend)} />
-          <Perf label="ROI" value={roiOf(R.perf) === null ? "—" : `${Math.round(roiOf(R.perf)! * 100)}%`} />
+          <Perf label="ROI" value={roiOf(R.perf) === null ? "-" : `${Math.round(roiOf(R.perf)! * 100)}%`} />
         </div>
 
         <div className="mb-2 flex flex-wrap items-center gap-1.5">
@@ -212,8 +212,8 @@ export default function ReportPage() {
                     <td className="px-3 py-2 text-right text-ink-soft">{pct(erOf(r.m), 1)}</td>
                     <td className="px-3 py-2 text-right text-ink-soft">{compactMoney(r.m.emv)}</td>
                     <td className="px-3 py-2 text-right text-ink-soft">{compactMoney(r.m.spend)}</td>
-                    <td className="px-3 py-2 text-right text-ink-soft">{roiOf(r.m) === null ? "—" : `${Math.round(roiOf(r.m)! * 100)}%`}</td>
-                    <td className="px-3 py-2 text-right text-ink-soft">{cpmOf(r.m) === null ? "—" : money(cpmOf(r.m)!)}</td>
+                    <td className="px-3 py-2 text-right text-ink-soft">{roiOf(r.m) === null ? "-" : `${Math.round(roiOf(r.m)! * 100)}%`}</td>
+                    <td className="px-3 py-2 text-right text-ink-soft">{cpmOf(r.m) === null ? "-" : money(cpmOf(r.m)!)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -238,7 +238,7 @@ export default function ReportPage() {
                   <Kv k="Active campaigns" v={String(c.activeCampaigns)} />
                   <Kv k="Creators" v={String(c.creators)} />
                   <Kv k="Spent" v={money(c.spent)} />
-                  <Kv k="Remaining" v={c.budget > 0 ? money(c.remaining) : "—"} />
+                  <Kv k="Remaining" v={c.budget > 0 ? money(c.remaining) : "-"} />
                 </div>
                 {c.budget > 0 && (
                   <div className="mt-3 h-2 overflow-hidden rounded-full bg-sky/60">
@@ -425,13 +425,13 @@ function breakdownRows(dim: string, views: EngagementView[], posts: Post[], camp
     if (dim === "Platform") {
       const entries = (p.platforms && p.platforms.length) ? p.platforms : [{ platform: p.platform, url: p.url ?? "", views: p.views, likes: p.likes, comments: p.comments, shares: p.shares, saves: p.saves }];
       entries.forEach((e, i) => {
-        const key = e.platform || "—";
+        const key = e.platform || "-";
         if (!groups.has(key)) groups.set(key, zero());
         addEntry(groups.get(key)!, e, p, rates, i === 0);
       });
       return;
     }
-    let key = "—";
+    let key = "-";
     if (dim === "Campaign") key = v.campaign ?? "Unassigned";
     else if (dim === "Creator") key = v.name;
     else if (dim === "Client") key = companies.find((c) => c.id === v.company_id)?.name ?? "Unassigned";
@@ -485,7 +485,7 @@ function CalLine({ label, items, muted }: { label: string; items: string[]; mute
   return (
     <div className="border-t border-sky/50 py-2 first:border-t-0">
       <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-faint">{label} · {items.length}</div>
-      {items.length === 0 ? <p className="text-xs text-ink-faint">—</p> : (
+      {items.length === 0 ? <p className="text-xs text-ink-faint">-</p> : (
         <div className="flex flex-wrap gap-1.5">
           {items.slice(0, 8).map((t, i) => <span key={i} className={`rounded-full px-2 py-0.5 text-xs ${muted ? "bg-ink-faint/10 text-ink-soft" : "bg-sky/50 text-dusty-deep"}`}>{t}</span>)}
           {items.length > 8 && <span className="text-xs text-ink-faint">+{items.length - 8}</span>}
