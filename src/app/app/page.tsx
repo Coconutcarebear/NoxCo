@@ -138,7 +138,7 @@ function AttentionList({ title, hint, items, onOpen, icon }: { title: string; hi
       </div>
       <div className="mb-2 text-xs text-ink-faint">{hint}</div>
       {items.length === 0 ? (
-        <p className="rounded-2xl bg-white/60 py-6 text-center text-sm text-ink-soft">All clear here ✨</p>
+        <p className="rounded-2xl bg-white/5 py-6 text-center text-sm text-ink-soft">All clear here ✨</p>
       ) : (
         <ul className="space-y-1.5">
           {items.slice(0, 6).map((c) => (

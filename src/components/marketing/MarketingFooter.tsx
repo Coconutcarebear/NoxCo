@@ -9,9 +9,9 @@ export function MarketingFooter() {
           <div>
             <Link href="/" className="flex items-center gap-2.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.svg" alt="Nox & Co" className="h-9 w-9" />
+              <img src="/logo.jpg" alt="Nox & Co" className="h-9 w-9 rounded-md" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/wordmark.svg" alt="Nox & Co" className="h-5" />
+              <img src="/wordmark.jpg" alt="Nox & Co" className="h-5" />
             </Link>
             <p className="mt-3 max-w-xs font-display text-sm italic text-white/50">
               No more star-crossed campaigns.
@@ -44,7 +44,7 @@ export function MarketingFooter() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Nox &amp; Co. All rights reserved.</span>
-          <span>Creator operations, under the stars.</span>
+          <span>Strategy, creative, and culture — one orbit.</span>
         </div>
       </div>
     </footer>

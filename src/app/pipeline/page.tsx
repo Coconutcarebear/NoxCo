@@ -46,7 +46,7 @@ export default function BloomBoardPage() {
               onDragOver={(e) => { e.preventDefault(); setOverStage(stage); }}
               onDragLeave={() => setOverStage((s) => (s === stage ? null : s))}
               onDrop={() => onDrop(stage)}
-              className={`flex w-72 shrink-0 flex-col rounded-3xl border transition ${isWreck ? "border-dashed border-slate-300 bg-slate-500/[0.06]" : "border-white/70 bg-white/55"} ${isOver ? "border-dusty ring-2 ring-dusty-soft" : ""}`}
+              className={`flex w-72 shrink-0 flex-col rounded-3xl border transition ${isWreck ? "border-dashed border-slate-300 bg-slate-500/[0.06]" : "border-white/10 bg-white/5"} ${isOver ? "border-dusty ring-2 ring-dusty-soft" : ""}`}
             >
               <div className="flex items-center gap-2 px-3 py-3">
                 {isWreck ? <Icons.CloudRain size={14} className="text-slate-400" /> : <span className="h-3 w-3 rounded-full" style={{ backgroundColor: STAGE_HUE[stage] }} />}
@@ -68,7 +68,7 @@ export default function BloomBoardPage() {
                       onDragStart={() => setDragId(c.id)}
                       onDragEnd={() => { setDragId(null); setOverStage(null); }}
                       onClick={() => setOpenId(c.id)}
-                      className={`constellation cursor-pointer rounded-2xl border border-white bg-white p-3 shadow-pill transition hover:shadow-cozy ${dragId === c.id ? "opacity-50" : ""}`}
+                      className={`constellation cursor-pointer rounded-2xl border border-white bg-cream p-3 shadow-pill transition hover:shadow-cozy ${dragId === c.id ? "opacity-50" : ""}`}
                     >
                       <div className="flex items-center gap-2">
                         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-lavender text-xs font-bold text-navy-deep">{initials(c.name)}</span>

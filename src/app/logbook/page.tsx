@@ -405,9 +405,9 @@ export default function LogbookPage() {
                             >
                               {thumb ? <img src={thumb} alt="" className="h-full w-full object-cover" /> : <Icons.Video size={16} className="text-ink-soft" />}
                               <span className="absolute inset-0 grid place-items-center bg-navy/10 opacity-0 transition group-hover:opacity-100">
-                                <span className="grid h-6 w-6 place-items-center rounded-full bg-white/90"><Icons.Play size={13} className="ml-0.5 text-navy-deep" /></span>
+                                <span className="grid h-6 w-6 place-items-center rounded-full bg-white/5"><Icons.Play size={13} className="ml-0.5 text-ink" /></span>
                               </span>
-                              <span className="absolute bottom-0.5 right-0.5 grid h-4 w-4 place-items-center rounded-full bg-white/85"><Icons.Play size={9} className="ml-px text-navy-deep" /></span>
+                              <span className="absolute bottom-0.5 right-0.5 grid h-4 w-4 place-items-center rounded-full bg-white/5"><Icons.Play size={9} className="ml-px text-ink" /></span>
                             </button>
                           );
                         })()}
@@ -569,7 +569,7 @@ export default function LogbookPage() {
                 key={k}
                 type="button"
                 onClick={() => setForm({ ...form, kind: k })}
-                className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold transition ${form.kind === k ? "bg-dusty-deep text-white" : "bg-white/70 text-ink-soft hover:text-dusty-deep"}`}
+                className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold transition ${form.kind === k ? "bg-dusty-deep text-white" : "bg-white/5 text-ink-soft hover:text-dusty-deep"}`}
               >
                 {label}
               </button>
@@ -609,7 +609,7 @@ export default function LogbookPage() {
               >
                 ≈ Estimate from followers ({Math.round(STORY_REACH_DEFAULT * 100)}% reach)
               </button>
-              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-white/60 pt-2 text-sm">
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-white/10 pt-2 text-sm">
                 <span className="text-ink-soft">{storyCount} {storyCount === 1 ? "story" : "stories"} × {num(perStory)} = <b className="text-ink">{num(storyViews)}</b> est. views</span>
                 <span className="text-ink-soft">Est. value (EMV): <b className="text-seafoam-deep">{money(storyEmv)}</b></span>
                 <span className="text-xs text-ink-faint">organic · no cost</span>
@@ -632,7 +632,7 @@ export default function LogbookPage() {
             </div>
             <div className="space-y-3">
               {form.platforms.map((row, i) => (
-                <div key={i} className="rounded-xl bg-white/70 p-3">
+                <div key={i} className="rounded-xl bg-white/5 p-3">
                   <div className="mb-2 flex items-center gap-2">
                     <div className="w-32 shrink-0">
                       <Sel value={row.platform} onChange={(e) => setRow(i, { platform: e.target.value })}>
@@ -750,7 +750,7 @@ function Sel({ value, onChange, children }: {
     <select
       value={value}
       onChange={onChange}
-      className="w-full rounded-xl border border-sky/70 bg-white/80 px-3 py-2 text-sm text-ink outline-none focus:border-dusty-deep"
+      className="w-full rounded-xl border border-sky/70 bg-white/5 px-3 py-2 text-sm text-ink outline-none focus:border-dusty-deep"
     >
       {children}
     </select>

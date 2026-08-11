@@ -204,7 +204,7 @@ export function CreatorSlideOver({
       </div>
 
       {/* tabs */}
-      <div className="mb-4 flex gap-1 rounded-full bg-white/70 p-1">
+      <div className="mb-4 flex gap-1 rounded-full bg-white/5 p-1">
         {TABS.map((t) => (
           <button
             key={t}
@@ -261,25 +261,25 @@ export function CreatorSlideOver({
           </Field></div>
           <div className="col-span-2"><Field label="Bio"><Textarea value={draft.bio ?? ""} onChange={(e) => set({ bio: e.target.value })} onBlur={() => commitField("bio")} /></Field></div>
 
-          <div className="col-span-2 flex flex-wrap items-center gap-2 rounded-3xl bg-white/70 p-3">
+          <div className="col-span-2 flex flex-wrap items-center gap-2 rounded-3xl bg-white/5 p-3">
             <span className="mr-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">Payment forms</span>
             <button
               type="button"
               onClick={() => commitImmediate({ w9_on_file: !draft.w9_on_file }, `W-9 ${draft.w9_on_file ? "cleared" : "on file"} · ${creator.name}`)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${draft.w9_on_file ? "bg-seafoam-soft text-seafoam-deep" : "bg-white text-ink-soft ring-1 ring-sky/70 hover:text-dusty-deep"}`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${draft.w9_on_file ? "bg-seafoam-soft text-seafoam-deep" : "bg-cream text-ink-soft ring-1 ring-sky/70 hover:text-dusty-deep"}`}
             >
               {draft.w9_on_file ? <Icons.CheckCircle2 size={14} /> : <Icons.Circle size={14} />} W-9 on file
             </button>
             <button
               type="button"
               onClick={() => commitImmediate({ ach_on_file: !draft.ach_on_file }, `ACH ${draft.ach_on_file ? "cleared" : "on file"} · ${creator.name}`)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${draft.ach_on_file ? "bg-seafoam-soft text-seafoam-deep" : "bg-white text-ink-soft ring-1 ring-sky/70 hover:text-dusty-deep"}`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${draft.ach_on_file ? "bg-seafoam-soft text-seafoam-deep" : "bg-cream text-ink-soft ring-1 ring-sky/70 hover:text-dusty-deep"}`}
             >
               {draft.ach_on_file ? <Icons.CheckCircle2 size={14} /> : <Icons.Circle size={14} />} ACH on file
             </button>
           </div>
 
-          <div className="col-span-2 mt-1 grid grid-cols-2 gap-3 rounded-3xl bg-white/70 p-3">
+          <div className="col-span-2 mt-1 grid grid-cols-2 gap-3 rounded-3xl bg-white/5 p-3">
             <Field label="Followers"><Input value={draft.followers ?? ""} onChange={(e) => set({ followers: n(e.target.value) })} onBlur={() => commitField("followers")} /></Field>
             <Field label="Engagement %" hint="e.g. 5.4">
               <Input
@@ -298,11 +298,11 @@ export function CreatorSlideOver({
 
       {tab === "Journey" && (
         <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2 rounded-3xl bg-white/70 p-3">
+          <div className="flex flex-wrap items-center gap-2 rounded-3xl bg-white/5 p-3">
             <button
               type="button"
               onClick={() => commitImmediate({ is_organic: !draft.is_organic }, `This journey marked ${draft.is_organic ? "paid" : "organic"} · ${creator.name}`)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${draft.is_organic ? "bg-seafoam-soft text-seafoam-deep" : "bg-white text-ink-soft ring-1 ring-sky/70 hover:text-dusty-deep"}`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${draft.is_organic ? "bg-seafoam-soft text-seafoam-deep" : "bg-cream text-ink-soft ring-1 ring-sky/70 hover:text-dusty-deep"}`}
             >
               {draft.is_organic ? <Icons.Leaf size={14} /> : <Icons.Circle size={14} />} Organic (unpaid)
             </button>
@@ -318,7 +318,7 @@ export function CreatorSlideOver({
                   className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
                     draft.stage === st ? "text-navy-deep ring-2 ring-navy/30" : "text-ink-soft hover:text-ink"
                   }`}
-                  style={{ backgroundColor: draft.stage === st ? STAGE_HUE[st] : "#ffffff" }}
+                  style={{ backgroundColor: draft.stage === st ? STAGE_HUE[st] : "#1c1c21" }}
                   title={STAGE_MEANING[st]}
                 >
                   {st}
@@ -352,7 +352,7 @@ export function CreatorSlideOver({
           <Field label="Negotiation notes"><Textarea value={draft.negotiation_notes ?? ""} onChange={(e) => set({ negotiation_notes: e.target.value })} onBlur={() => commitField("negotiation_notes")} /></Field>
 
           {/* Schedule — mirrors onto the Almanac (same engagement dates) */}
-          <div className="rounded-3xl bg-white/70 p-3">
+          <div className="rounded-3xl bg-white/5 p-3">
             <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">
               <Icons.CalendarClock size={14} /> Schedule
               <span className="ml-auto rounded-full bg-seafoam-soft px-2 py-0.5 text-[10px] font-medium normal-case tracking-normal text-seafoam-deep">shows on Almanac</span>
@@ -367,7 +367,7 @@ export function CreatorSlideOver({
           </div>
 
           {/* Other journeys + attach to another eclipse */}
-          <div className="rounded-3xl bg-white/70 p-3">
+          <div className="rounded-3xl bg-white/5 p-3">
             <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">
               <Icons.Sprout size={14} /> {creator.name.split(" ")[0]}&apos;s other journeys
             </div>
@@ -415,7 +415,7 @@ export function CreatorSlideOver({
               <Icons.Leaf size={13} /> This journey is organic — contract, invoice &amp; payment aren&apos;t tracked here.
             </div>
           )}
-          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/70 p-3">
+          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/5 p-3">
             <Field label="Standard rate (profile)"><Input value={draft.standard_rate ?? ""} onChange={(e) => set({ standard_rate: n(e.target.value) })} onBlur={() => commitField("standard_rate")} /></Field>
             <Field label="Negotiated rate"><Input value={draft.negotiated_rate ?? ""} onChange={(e) => set({ negotiated_rate: n(e.target.value) })} onBlur={() => commitField("negotiated_rate")} /></Field>
             <Field label="Usage rights fee"><Input value={draft.usage_rights_fee ?? ""} onChange={(e) => set({ usage_rights_fee: n(e.target.value) })} onBlur={() => commitField("usage_rights_fee")} /></Field>
@@ -427,7 +427,7 @@ export function CreatorSlideOver({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/70 p-3">
+          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/5 p-3">
             <Field label="Creator fee (campaign)"><Input value={draft.creator_fee ?? ""} onChange={(e) => set({ creator_fee: n(e.target.value) })} onBlur={() => commitField("creator_fee", `Updated ${creator.name} fee`)} /></Field>
             <Field label="Boost spend"><Input value={draft.boost_spend ?? ""} onChange={(e) => set({ boost_spend: n(e.target.value) })} onBlur={() => commitField("boost_spend", `Updated ${creator.name} boost`)} /></Field>
             <div className="col-span-2 flex items-center justify-between rounded-2xl bg-dusty-soft/50 px-3 py-2">
@@ -444,7 +444,7 @@ export function CreatorSlideOver({
           </div>
 
           {/* The Vault */}
-          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/70 p-3">
+          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/5 p-3">
             <div className="col-span-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">The Vault · contract</div>
             <Field label="Contract status">
               <Select value={draft.contract_status} onChange={(e) => commitImmediate({ contract_status: e.target.value as EngagementView["contract_status"] }, `Contract ${e.target.value.toLowerCase()} · ${creator.name}`)}>
@@ -457,7 +457,7 @@ export function CreatorSlideOver({
           </div>
 
           {/* Treasury */}
-          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/70 p-3">
+          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-white/5 p-3">
             <div className="col-span-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">Treasury · invoice</div>
             <Field label="Invoice status">
               <Select value={draft.invoice_status} onChange={(e) => commitImmediate({ invoice_status: e.target.value as EngagementView["invoice_status"] }, `Invoice ${e.target.value.toLowerCase()} · ${creator.name}`)}>
@@ -478,15 +478,15 @@ export function CreatorSlideOver({
             Every journey {creator.name} has grown through, side by side. EMV &amp; ROI are sentiment-adjusted from logged posts.
           </div>
           <div className="grid grid-cols-3 gap-2">
-            <div className="rounded-2xl bg-white/70 p-3 text-center">
-              <div className="font-display text-lg text-navy-deep">{analytics.totalPosts}</div>
+            <div className="rounded-2xl bg-white/5 p-3 text-center">
+              <div className="font-display text-lg text-ink">{analytics.totalPosts}</div>
               <div className="text-[11px] text-ink-soft">Posts</div>
             </div>
-            <div className="rounded-2xl bg-white/70 p-3 text-center">
-              <div className="font-display text-lg text-navy-deep">{money(analytics.totalEmv)}</div>
+            <div className="rounded-2xl bg-white/5 p-3 text-center">
+              <div className="font-display text-lg text-ink">{money(analytics.totalEmv)}</div>
               <div className="text-[11px] text-ink-soft">Total EMV</div>
             </div>
-            <div className="rounded-2xl bg-white/70 p-3 text-center">
+            <div className="rounded-2xl bg-white/5 p-3 text-center">
               <div className={"font-display text-lg " + (analytics.totalRoi == null ? "text-ink-faint" : analytics.totalRoi >= 0 ? "text-seafoam-deep" : "text-bubblegum")}>
                 {analytics.totalRoi == null ? "—" : (analytics.totalRoi >= 0 ? "+" : "") + (analytics.totalRoi * 100).toFixed(0) + "%"}
               </div>
@@ -495,7 +495,7 @@ export function CreatorSlideOver({
           </div>
 
           {analytics.rows.length === 0 ? (
-            <p className="rounded-3xl bg-white/70 p-6 text-center text-sm text-ink-soft">No journeys logged yet. Add posts in the Logbook to see {creator.name}’s performance here.</p>
+            <p className="rounded-3xl bg-white/5 p-6 text-center text-sm text-ink-soft">No journeys logged yet. Add posts in the Logbook to see {creator.name}’s performance here.</p>
           ) : (
             <div className="overflow-x-auto rounded-2xl border border-sky/60">
               <table className="w-full min-w-[480px] text-sm">
@@ -546,7 +546,7 @@ export function CreatorSlideOver({
       {tab === "Log" && (
         <div className="space-y-3">
           {creatorActivity.length === 0 ? (
-            <p className="rounded-3xl bg-white/70 p-6 text-center text-sm text-ink-soft">No log entries yet — changes you make will show up here.</p>
+            <p className="rounded-3xl bg-white/5 p-6 text-center text-sm text-ink-soft">No log entries yet — changes you make will show up here.</p>
           ) : (
             <ol className="relative space-y-3 border-l-2 border-dusty-soft pl-5">
               {creatorActivity.map((a) => (
@@ -611,7 +611,7 @@ function DraftTools({ view }: { view: EngagementView }) {
       </div>
       {text && (
         <div className="mt-3">
-          <Textarea value={text} onChange={(e) => setText(e.target.value)} className="min-h-[140px] bg-white" />
+          <Textarea value={text} onChange={(e) => setText(e.target.value)} className="min-h-[140px] bg-cream" />
           <div className="mt-2 flex justify-end">
             <Button variant="primary" onClick={copy}>
               <Icons.Clipboard size={14} /> {copied ? "Copied!" : "Copy"}

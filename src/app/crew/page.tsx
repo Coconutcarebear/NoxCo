@@ -89,7 +89,7 @@ export default function CrewPage() {
                             <input
                               defaultValue={u.name}
                               onBlur={(e) => { const v = e.target.value.trim(); if (v && v !== u.name) updateUser(u.id, { name: v }); }}
-                              className="w-full max-w-[180px] rounded-md border border-transparent bg-transparent px-1 py-0.5 font-semibold text-ink outline-none hover:border-sky/70 focus:border-dusty-soft focus:bg-white"
+                              className="w-full max-w-[180px] rounded-md border border-transparent bg-transparent px-1 py-0.5 font-semibold text-ink outline-none hover:border-sky/70 focus:border-dusty-soft focus:bg-cream"
                             />
                             <div className="truncate px-1 text-xs text-ink-faint">{u.email || "no email"} {isSelf && "· you"}</div>
                           </div>

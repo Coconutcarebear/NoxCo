@@ -41,15 +41,15 @@ export default function StarGalleryPage() {
           {published.map((c) => {
             const PIcon = (Icons as Record<string, any>)[PLATFORM_ICON[c.platform]] ?? Icons.Globe;
             return (
-              <button key={c.id} onClick={() => setOpenId(c.id)} className="constellation overflow-hidden rounded-4xl border border-white bg-white text-left shadow-cozy transition hover:shadow-float">
-                <div className="relative flex h-32 items-center justify-center" style={{ background: `linear-gradient(135deg, ${STAGE_HUE[c.stage]}, #ffffff)` }}>
+              <button key={c.id} onClick={() => setOpenId(c.id)} className="constellation overflow-hidden rounded-4xl border border-white bg-cream text-left shadow-cozy transition hover:shadow-float">
+                <div className="relative flex h-32 items-center justify-center" style={{ background: `linear-gradient(135deg, ${STAGE_HUE[c.stage]}, #111114)` }}>
                   {c.profile_image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={c.profile_image} alt="" className="h-full w-full object-cover" />
                   ) : (
-                    <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/70 text-lg font-bold text-navy-deep">{initials(c.name)}</span>
+                    <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-lg font-bold text-ink">{initials(c.name)}</span>
                   )}
-                  <span className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-navy-deep"><PIcon size={15} /></span>
+                  <span className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/5 text-ink"><PIcon size={15} /></span>
                 </div>
                 <div className="p-4">
                   <div className="flex items-center justify-between">

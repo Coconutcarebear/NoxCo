@@ -73,7 +73,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         {/* Sidebar */}
         <aside
           className={clsx(
-            "fixed inset-y-0 left-0 z-40 w-64 transform border-r border-white/60 bg-white/70 backdrop-blur-md transition-transform lg:translate-x-0",
+            "fixed inset-y-0 left-0 z-40 w-64 transform border-r border-white/10 bg-white/5 backdrop-blur-md transition-transform lg:translate-x-0",
             open ? "translate-x-0" : "-translate-x-full"
           )}
         >
@@ -85,7 +85,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             >
               <span className="flex h-10 w-10 items-center justify-center animate-bob">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.svg" alt="Nox & Co" className="h-10 w-10" />
+                <img src="/logo.jpg" alt="Nox & Co" className="h-10 w-10 rounded-md" />
               </span>
 
               <span>
@@ -160,9 +160,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 
         {/* Main area */}
         <div className="flex min-w-0 flex-1 flex-col lg:pl-64">
-          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/60 bg-cloud/80 px-4 py-3 backdrop-blur-md lg:px-8">
+          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-cloud/80 px-4 py-3 backdrop-blur-md lg:px-8">
             <button
-              className="rounded-full p-2 text-ink-soft hover:bg-white lg:hidden"
+              className="rounded-full p-2 text-ink-soft hover:bg-cream lg:hidden"
               onClick={() => setOpen(true)}
               aria-label="Open menu"
             >
@@ -178,7 +178,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <button
                   onClick={() => undo()}
                   title={`Undo: ${undoStack[undoStack.length - 1].label}`}
-                  className="hidden items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-dusty-deep shadow-pill transition hover:brightness-105 sm:inline-flex"
+                  className="hidden items-center gap-1.5 rounded-full bg-cream px-3 py-1.5 text-xs font-semibold text-dusty-deep shadow-pill transition hover:brightness-105 sm:inline-flex"
                 >
                   <Icons.Undo2 size={14} /> Undo
                 </button>
@@ -189,12 +189,12 @@ export function AppShell({ children }: { children: ReactNode }) {
                 disabled={loading}
                 title="Refresh data"
                 aria-label="Refresh data"
-                className="grid h-9 w-9 place-items-center rounded-full bg-white text-dusty-deep shadow-pill transition hover:brightness-105 disabled:opacity-60"
+                className="grid h-9 w-9 place-items-center rounded-full bg-cream text-dusty-deep shadow-pill transition hover:brightness-105 disabled:opacity-60"
               >
                 <Icons.RefreshCw size={16} className={clsx(loading && "animate-spin")} />
               </button>
 
-              <span className="hidden items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-ink-soft shadow-pill sm:inline-flex">
+              <span className="hidden items-center gap-1.5 rounded-full bg-cream px-3 py-1.5 text-xs font-semibold text-ink-soft shadow-pill sm:inline-flex">
                 <Icons.Sun size={14} className="text-butter" />
                 Clear skies
               </span>
@@ -248,11 +248,11 @@ function GlobalSearch() {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Search the night sky…"
-        className="w-full rounded-full border border-white bg-white/90 py-2 pl-9 pr-3 text-sm text-ink shadow-pill outline-none placeholder:text-ink-faint focus:border-dusty-soft"
+        className="w-full rounded-full border border-white bg-white/5 py-2 pl-9 pr-3 text-sm text-ink shadow-pill outline-none placeholder:text-ink-faint focus:border-dusty-soft"
       />
 
       {results.length > 0 && (
-        <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl border border-white bg-white shadow-float">
+        <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl border border-white bg-cream shadow-float">
           {results.map((c) => (
             <Link
               key={c.id}

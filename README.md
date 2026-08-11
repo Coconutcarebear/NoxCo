@@ -1,4 +1,4 @@
-# ✨ Nox & Co — Creator Operations 
+# ✨ Nox & Co — Creator Operations
 
 *"No more star-crossed campaigns."*
 

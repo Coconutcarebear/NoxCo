@@ -80,7 +80,7 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
   return (
     <div className="space-y-5">
       {/* Progress widget */}
-      <div className={"rounded-2xl border p-4 " + (readyToPay ? "border-seafoam-deep/50 bg-seafoam/20" : "border-sky/60 bg-white/60")}>
+      <div className={"rounded-2xl border p-4 " + (readyToPay ? "border-seafoam-deep/50 bg-seafoam/20" : "border-sky/60 bg-white/5")}>
         <div className="mb-3 flex items-center justify-between">
           <div className="font-display text-base text-ink">{readyToPay ? "Ready to pay" : "Getting set up"}</div>
           <Badge hue={readyToPay ? "#9FE0CE" : "#FDE68A"}>{readyToPay ? "All clear" : "In progress"}</Badge>
@@ -125,11 +125,11 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
           {uploading > 0 ? `Uploading ${uploading}…` : "Drag & drop files here · PDF, DOCX, ZIP, PNG, JPG"}
         </div>
         {documents.length === 0 ? (
-          <p className="rounded-xl bg-white/60 p-3 text-center text-xs text-ink-soft">No documents yet.</p>
+          <p className="rounded-xl bg-white/5 p-3 text-center text-xs text-ink-soft">No documents yet.</p>
         ) : (
           <ul className="space-y-1.5">
             {documents.map((d) => (
-              <li key={d.id} className="rounded-xl border border-sky/60 bg-white/70 p-2.5 text-sm">
+              <li key={d.id} className="rounded-xl border border-sky/60 bg-white/5 p-2.5 text-sm">
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
@@ -145,10 +145,10 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
                   </div>
                 </div>
                 <div className="mt-1.5 flex flex-wrap items-center gap-2">
-                  <select value={d.category} onChange={(e) => updateDocument(d.id, { category: e.target.value })} className="rounded-lg border border-sky/70 bg-white/80 px-2 py-1 text-xs text-ink outline-none focus:border-dusty-deep">
+                  <select value={d.category} onChange={(e) => updateDocument(d.id, { category: e.target.value })} className="rounded-lg border border-sky/70 bg-white/5 px-2 py-1 text-xs text-ink outline-none focus:border-dusty-deep">
                     {DOCUMENT_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
-                  <select value={d.campaign_id ?? ""} onChange={(e) => updateDocument(d.id, { campaign_id: e.target.value || null })} className="rounded-lg border border-sky/70 bg-white/80 px-2 py-1 text-xs text-ink outline-none focus:border-dusty-deep">
+                  <select value={d.campaign_id ?? ""} onChange={(e) => updateDocument(d.id, { campaign_id: e.target.value || null })} className="rounded-lg border border-sky/70 bg-white/5 px-2 py-1 text-xs text-ink outline-none focus:border-dusty-deep">
                     <option value="">— No eclipse —</option>
                     {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </select>
@@ -170,11 +170,11 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
           <Pill>Reimbursable {money(reimbTotal)}</Pill>
         </div>
         {expenses.length === 0 ? (
-          <p className="rounded-xl bg-white/60 p-3 text-center text-xs text-ink-soft">No expenses yet.</p>
+          <p className="rounded-xl bg-white/5 p-3 text-center text-xs text-ink-soft">No expenses yet.</p>
         ) : (
           <ul className="space-y-1.5">
             {expenses.map((e) => (
-              <li key={e.id} className="rounded-xl border border-sky/60 bg-white/70 p-2.5 text-sm">
+              <li key={e.id} className="rounded-xl border border-sky/60 bg-white/5 p-2.5 text-sm">
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0">
                     <div className="font-semibold text-ink">{e.category} · {money(Number(e.amount || 0))}</div>
@@ -214,11 +214,11 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
           <Pill>Outstanding {money(outstandingTotal)}</Pill>
         </div>
         {payments.length === 0 ? (
-          <p className="rounded-xl bg-white/60 p-3 text-center text-xs text-ink-soft">No payments yet.</p>
+          <p className="rounded-xl bg-white/5 p-3 text-center text-xs text-ink-soft">No payments yet.</p>
         ) : (
           <ul className="space-y-1.5">
             {payments.map((p) => (
-              <li key={p.id} className="flex items-center justify-between gap-2 rounded-xl border border-sky/60 bg-white/70 p-2.5 text-sm">
+              <li key={p.id} className="flex items-center justify-between gap-2 rounded-xl border border-sky/60 bg-white/5 p-2.5 text-sm">
                 <div className="min-w-0">
                   <div className="font-semibold text-ink">{p.invoice_number ? `#${p.invoice_number} · ` : ""}{money(Number(p.amount || 0))}</div>
                   <div className="truncate text-xs text-ink-faint">{campName(p.campaign_id)}{p.method ? ` · ${p.method}` : ""}{p.paid_date ? ` · ${p.paid_date}` : ""}</div>
@@ -241,7 +241,7 @@ export function CreatorFinance({ creatorId, creatorName }: { creatorId: string; 
 
 function Sel({ value, onChange, children }: { value: string; onChange: (e: ChangeEvent<HTMLSelectElement>) => void; children: ReactNode }) {
   return (
-    <select value={value} onChange={onChange} className="w-full rounded-xl border border-sky/70 bg-white/80 px-3 py-2 text-sm text-ink outline-none focus:border-dusty-deep">
+    <select value={value} onChange={onChange} className="w-full rounded-xl border border-sky/70 bg-white/5 px-3 py-2 text-sm text-ink outline-none focus:border-dusty-deep">
       {children}
     </select>
   );
@@ -276,7 +276,7 @@ function ComplianceRow({
   const removeDoc = async () => { if (row?.doc_path) { await deleteSecureDoc(row.doc_path); await onSave(creatorId, item.key, { doc_path: null }); } };
 
   return (
-    <div className="rounded-xl border border-sky/60 bg-white/70 p-2.5">
+    <div className="rounded-xl border border-sky/60 bg-white/5 p-2.5">
       <div className="flex items-center gap-2.5">
         <button type="button" onClick={toggle} aria-label={item.label}
           className={"grid h-6 w-6 shrink-0 place-items-center rounded-full transition " + (done ? "bg-seafoam-deep text-white" : "border border-sky text-transparent hover:border-dusty-deep")}>
@@ -310,7 +310,7 @@ function ComplianceRow({
           onChange={(e) => setNotes(e.target.value)}
           onBlur={() => { if ((row?.notes ?? "") !== notes) onSave(creatorId, item.key, { notes: notes || null }); }}
           placeholder="Notes"
-          className="w-full rounded-lg border border-sky/70 bg-white/80 px-2.5 py-1.5 text-xs text-ink outline-none focus:border-dusty-deep"
+          className="w-full rounded-lg border border-sky/70 bg-white/5 px-2.5 py-1.5 text-xs text-ink outline-none focus:border-dusty-deep"
         />
       </div>
     </div>

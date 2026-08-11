@@ -194,7 +194,7 @@ export default function AlmanacPage() {
                 type="button"
                 key={i}
                 onClick={() => setDayKey(cell.key)}
-                className={"min-h-[104px] rounded-xl border bg-white/70 p-1.5 text-left transition hover:bg-white hover:border-dusty-deep/60 " + (isToday ? "border-dusty-deep ring-1 ring-dusty-deep/40" : "border-sky/60")}
+                className={"min-h-[104px] rounded-xl border bg-white/5 p-1.5 text-left transition hover:bg-cream hover:border-dusty-deep/60 " + (isToday ? "border-dusty-deep ring-1 ring-dusty-deep/40" : "border-sky/60")}
               >
                 <div className={"mb-1 text-[11px] font-semibold " + (isToday ? "text-dusty-deep" : "text-ink-soft")}>{cell.d}</div>
                 <div className="space-y-1">
@@ -227,7 +227,7 @@ export default function AlmanacPage() {
             <div className="rounded-xl bg-sky/20 p-4 text-center text-sm text-ink-soft">No creators yet.</div>
           ) : (
             active.map((c) => (
-              <div key={c.id} className="rounded-xl border border-sky/60 bg-white/70 p-3">
+              <div key={c.id} className="rounded-xl border border-sky/60 bg-white/5 p-3">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: campColor(c.campaign) }} />
                   <span className="text-sm font-semibold text-ink">{c.name}</span>
@@ -254,7 +254,7 @@ export default function AlmanacPage() {
             Boosting your own Instagram/TikTok posts. Total so far: <b className="text-ink">{money(internalTotal)}</b>
           </div>
 
-          <div className="rounded-xl border border-sky/60 bg-white/70 p-3">
+          <div className="rounded-xl border border-sky/60 bg-white/5 p-3">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Label">
                 <Input placeholder="e.g. Lunar New Year reel" value={ib.label} onChange={(e) => setIb({ ...ib, label: e.target.value })} />
@@ -292,7 +292,7 @@ export default function AlmanacPage() {
               <div className="rounded-xl bg-sky/20 p-4 text-center text-sm text-ink-soft">No internal boosts logged yet.</div>
             ) : (
               internalBoosts.map((b) => (
-                <div key={b.id} className="flex items-center justify-between rounded-xl border border-sky/60 bg-white/70 px-3 py-2">
+                <div key={b.id} className="flex items-center justify-between rounded-xl border border-sky/60 bg-white/5 px-3 py-2">
                   <div className="min-w-0">
                     <div className="truncate text-sm font-semibold text-ink">
                       {b.label} <span className="text-xs font-normal text-ink-faint">· {b.platform}</span>
@@ -322,7 +322,7 @@ export default function AlmanacPage() {
           return (
             <ul className="space-y-2">
               {items.map((it, k) => (
-                <li key={k} className="rounded-xl border border-sky/60 bg-white/70 px-3 py-2 text-sm text-ink" style={{ borderLeft: `4px solid ${it.color}` }}>
+                <li key={k} className="rounded-xl border border-sky/60 bg-white/5 px-3 py-2 text-sm text-ink" style={{ borderLeft: `4px solid ${it.color}` }}>
                   {it.label}
                 </li>
               ))}
@@ -348,7 +348,7 @@ function Sel({ value, onChange, children }: {
     <select
       value={value}
       onChange={onChange}
-      className="w-full rounded-xl border border-sky/70 bg-white/80 px-3 py-2 text-sm text-ink outline-none focus:border-dusty-deep"
+      className="w-full rounded-xl border border-sky/70 bg-white/5 px-3 py-2 text-sm text-ink outline-none focus:border-dusty-deep"
     >
       {children}
     </select>
@@ -357,7 +357,7 @@ function Sel({ value, onChange, children }: {
 
 function MonthStat({ emoji, label, value }: { emoji: string; label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-white/70 px-3 py-2.5 text-center">
+    <div className="rounded-2xl bg-white/5 px-3 py-2.5 text-center">
       <div className="text-lg leading-none">{emoji}</div>
       <div className="mt-1 font-display text-lg text-ink">{value}</div>
       <div className="text-[11px] text-ink-faint">{label}</div>

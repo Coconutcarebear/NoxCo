@@ -28,12 +28,12 @@ export function TagPicker({
   const remove = (t: string) => onChange(value.filter((x) => x !== t));
 
   return (
-    <div className="rounded-xl border border-sky/70 bg-white/60 p-2">
+    <div className="rounded-xl border border-sky/70 bg-white/5 p-2">
       <div className="flex flex-wrap items-center gap-1.5">
         {value.map((t) => (
           <span key={t} className="inline-flex items-center gap-1 rounded-full bg-lavender/50 px-2.5 py-1 text-xs font-semibold text-navy-deep">
             {t}
-            <button type="button" onClick={() => remove(t)} aria-label={`Remove ${t}`} className="text-navy-deep/60 hover:text-bubblegum">
+            <button type="button" onClick={() => remove(t)} aria-label={`Remove ${t}`} className="text-navy-deep/80 hover:text-bubblegum">
               <Icons.X size={12} />
             </button>
           </span>
@@ -57,7 +57,7 @@ export function TagPicker({
             </button>
           )}
           {avail.slice(0, 14).map((t) => (
-            <button key={t} type="button" onClick={() => add(t)} className="rounded-full bg-white/80 px-2.5 py-1 text-xs font-medium text-ink-soft transition hover:bg-white hover:text-dusty-deep">
+            <button key={t} type="button" onClick={() => add(t)} className="rounded-full bg-white/5 px-2.5 py-1 text-xs font-medium text-ink-soft transition hover:bg-cream hover:text-dusty-deep">
               {t}
             </button>
           ))}

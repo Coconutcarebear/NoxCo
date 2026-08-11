@@ -32,11 +32,11 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
 function Splash() {
   return (
-    <div className="grid min-h-screen place-items-center" style={{ background: "linear-gradient(180deg,#ffd9ec 0%,#fdeaf4 60%,#fff9fc 100%)" }}>
-      <div className="flex flex-col items-center gap-3 text-navy-deep">
+    <div className="grid min-h-screen place-items-center" style={{ background: "radial-gradient(900px 600px at 50% 20%, rgba(199,201,209,0.10), transparent 60%), linear-gradient(180deg,#000000 0%,#0a0a0c 55%,#000000 100%)" }}>
+      <div className="flex flex-col items-center gap-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.svg" alt="Nox & Co" className="h-12 w-12 animate-bob" />
-        <span className="text-sm text-ink-soft">Casting the spell…</span>
+        <img src="/logo.jpg" alt="Nox & Co" className="h-14 w-14 animate-bob rounded-xl" />
+        <span className="text-sm text-ink-soft">Entering orbit…</span>
       </div>
     </div>
   );
@@ -62,11 +62,11 @@ function LoginScreen() {
   }
 
   return (
-    <div className="grid min-h-screen place-items-center px-4" style={{ background: "linear-gradient(180deg,#ffcfe7 0%,#fde3f0 55%,#fef8fb 100%)" }}>
-      <div className="w-full max-w-sm rounded-3xl border border-white/70 bg-white/80 p-7 shadow-float backdrop-blur-md">
+    <div className="grid min-h-screen place-items-center px-4" style={{ background: "radial-gradient(900px 600px at 50% 10%, rgba(199,201,209,0.10), transparent 60%), linear-gradient(180deg,#000000 0%,#0a0a0c 55%,#000000 100%)" }}>
+      <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-white/5 p-7 shadow-float backdrop-blur-md">
         <div className="mb-5 flex flex-col items-center gap-2 text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Nox & Co" className="h-12 w-12" />
+          <img src="/logo.jpg" alt="Nox & Co" className="h-14 w-14 rounded-xl" />
           <div>
             <h1 className="font-display text-2xl text-dusty">Nox & Co</h1>
             <p className="text-xs text-ink-faint">Sign in to your creator universe</p>
@@ -82,7 +82,7 @@ function LoginScreen() {
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && submit()}
               autoFocus
-              className="w-full rounded-xl border border-sky/70 bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-dusty-soft"
+              className="w-full rounded-xl border border-sky/70 bg-cream px-3 py-2.5 text-sm text-ink outline-none focus:border-dusty-soft"
               placeholder="you@noxandco.com"
             />
           </label>
@@ -93,7 +93,7 @@ function LoginScreen() {
               value={pw}
               onChange={(e) => setPw(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full rounded-xl border border-sky/70 bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-dusty-soft"
+              className="w-full rounded-xl border border-sky/70 bg-cream px-3 py-2.5 text-sm text-ink outline-none focus:border-dusty-soft"
               placeholder="••••••••"
             />
           </label>
@@ -103,7 +103,7 @@ function LoginScreen() {
           <button
             onClick={submit}
             disabled={busy || !email.trim() || !pw}
-            className="w-full rounded-xl bg-dusty-deep py-2.5 text-sm font-semibold text-white transition hover:brightness-105 disabled:opacity-50"
+            className="w-full rounded-xl bg-dusty-deep py-2.5 text-sm font-semibold text-navy-deep transition hover:brightness-105 disabled:opacity-50"
           >
             {busy ? "Signing in…" : "Sign in"}
           </button>

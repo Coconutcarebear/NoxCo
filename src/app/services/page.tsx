@@ -50,7 +50,7 @@ export default function ServicesPage() {
       <section className="mx-auto max-w-4xl px-5 pb-14 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-24">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-lavender">Services</p>
         <h1 className="mt-4 font-display text-4xl leading-[1.1] text-white sm:text-5xl">
-          Full-service influencer campaigns.
+          Full-service brand marketing.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
           From the first creator search to the final report, Nox &amp; Co
@@ -92,7 +92,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
-        <div className="flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-gradient-to-br from-[#262268] to-[#1b1a4a] px-6 py-12 text-center sm:px-16 sm:py-16">
+        <div className="flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-gradient-to-br from-[#141416] to-[#000000] px-6 py-12 text-center sm:px-16 sm:py-16">
           <CloudMoon size={28} className="text-lavender" />
           <h2 className="font-display text-3xl text-white sm:text-4xl">Not sure where to start?</h2>
           <p className="mx-auto max-w-md text-sm text-white/60 sm:text-base">

@@ -50,10 +50,10 @@ export default function BloomForecastPage() {
             <Slider label="Boost adjustment" value={boostShift} min={-30} max={50} step={5} suffix="%" onChange={setBoostShift} hint={`${boostShift >= 0 ? "+" : ""}${money(kpis.boostSpend * (boostShift / 100))} vs current boost`} />
           </div>
 
-          <div className="flex flex-col justify-center gap-4 p-6" style={{ background: `linear-gradient(140deg, ${copy.hue}40, #ffffff)` }}>
+          <div className="flex flex-col justify-center gap-4 p-6" style={{ background: `linear-gradient(140deg, ${copy.hue}33, #111114)` }}>
             <div>
               <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Projected year-end</div>
-              <div className="font-display text-4xl text-navy-deep">{money(projected)}</div>
+              <div className="font-display text-4xl text-ink">{money(projected)}</div>
             </div>
             <BloomBar value={Math.min(util, 1.2)} hue={copy.hue} height={16} />
             <div className="flex items-center justify-between text-sm">
@@ -62,8 +62,8 @@ export default function BloomForecastPage() {
                 {remaining < 0 ? `${money(-remaining)} over` : `${money(remaining)} clear`}
               </span>
             </div>
-            <div className="flex items-start gap-2 rounded-2xl bg-white/70 p-3 text-sm">
-              <Icons.Sprout size={18} className="mt-0.5 shrink-0 text-navy-deep" />
+            <div className="flex items-start gap-2 rounded-2xl bg-white/5 p-3 text-sm">
+              <Icons.Sparkles size={18} className="mt-0.5 shrink-0 text-dusty" />
               <div>
                 <div className="font-display text-ink">{copy.title}</div>
                 <div className="text-ink-soft">{copy.line}</div>
@@ -106,7 +106,7 @@ function Slider({ label, value, min, max, step, suffix, onChange, hint }: { labe
     <div>
       <div className="mb-1 flex items-center justify-between">
         <span className="text-sm font-semibold text-ink">{label}</span>
-        <span className="rounded-full bg-sky px-2.5 py-0.5 text-sm font-bold text-navy-deep">{value}{suffix}</span>
+        <span className="rounded-full bg-sky px-2.5 py-0.5 text-sm font-bold text-ink">{value}{suffix}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} className="w-full accent-dusty-deep" />
       {hint && <div className="mt-1 text-xs text-ink-faint">{hint}</div>}
@@ -114,11 +114,11 @@ function Slider({ label, value, min, max, step, suffix, onChange, hint }: { labe
   );
 }
 
-function MiniStat({ label, value, accent = "#EAF4FF" }: { label: string; value: string; accent?: string }) {
+function MiniStat({ label, value, accent = "#C7C9D1" }: { label: string; value: string; accent?: string }) {
   return (
     <Card className="p-4">
       <div className="text-xs font-semibold uppercase tracking-wide text-ink-soft">{label}</div>
-      <div className="mt-1 font-display text-xl text-navy-deep">{value}</div>
+      <div className="mt-1 font-display text-xl text-ink">{value}</div>
       <div className="mt-2 h-1.5 w-full rounded-full" style={{ background: accent }} />
     </Card>
   );

@@ -92,7 +92,7 @@ export default function ReportPage() {
 
       {/* INSIGHTS */}
       {R.insights.length > 0 && (
-        <div className="rounded-3xl p-5 shadow-cozy" style={{ background: "linear-gradient(120deg,#efe9ff,#e7f2ff)" }}>
+        <div className="rounded-3xl p-5 shadow-cozy" style={{ background: "linear-gradient(120deg,#1c1c21,#141419)" }}>
           <div className="mb-2 flex items-center gap-2 text-dusty-deep"><Icons.Sparkles size={16} /><h2 className="font-display text-lg">Insights</h2></div>
           <ul className="space-y-1.5">
             {R.insights.map((t, i) => (
@@ -117,7 +117,7 @@ export default function ReportPage() {
         {R.pacing.length > 0 && (
           <div className="mt-4 space-y-2">
             {R.pacing.map((p) => (
-              <div key={p.id} className="flex items-center gap-3 rounded-2xl bg-white/70 px-3 py-2">
+              <div key={p.id} className="flex items-center gap-3 rounded-2xl bg-white/5 px-3 py-2">
                 <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: p.color }} />
                 <span className="min-w-0 flex-1 truncate text-sm font-semibold text-ink">{p.name}</span>
                 <span className="text-xs text-ink-faint">{p.window}</span>
@@ -132,7 +132,7 @@ export default function ReportPage() {
       <Section title="Creator activity" icon="Users">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {STAGES.map((s) => (
-            <div key={s} className="flex items-center gap-2 rounded-2xl bg-white/70 px-3 py-2">
+            <div key={s} className="flex items-center gap-2 rounded-2xl bg-white/5 px-3 py-2">
               <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: STAGE_HUE[s] }} />
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-semibold text-ink">{s}</span>
@@ -183,7 +183,7 @@ export default function ReportPage() {
         <div className="mb-2 flex flex-wrap items-center gap-1.5">
           <span className="mr-1 text-xs font-semibold uppercase tracking-wide text-ink-faint">Break down by</span>
           {BREAKDOWNS.map((b) => (
-            <button key={b} onClick={() => setBreakdown(b)} className={`rounded-full px-3 py-1 text-xs font-semibold transition ${breakdown === b ? "bg-dusty-deep text-white" : "bg-white/70 text-ink-soft hover:text-dusty-deep"}`}>{b}</button>
+            <button key={b} onClick={() => setBreakdown(b)} className={`rounded-full px-3 py-1 text-xs font-semibold transition ${breakdown === b ? "bg-dusty-deep text-white" : "bg-white/5 text-ink-soft hover:text-dusty-deep"}`}>{b}</button>
           ))}
         </div>
         {rows.length === 0 ? (
@@ -227,7 +227,7 @@ export default function ReportPage() {
         <Section title="Client summary" icon="Building2">
           <div className="grid gap-3 md:grid-cols-2">
             {R.clients.map((c) => (
-              <div key={c.id} className="rounded-2xl bg-white/70 p-4">
+              <div key={c.id} className="rounded-2xl bg-white/5 p-4">
                 <div className="flex items-center gap-2">
                   <span className="h-3 w-3 rounded-full" style={{ background: c.color }} />
                   <span className="font-display text-base text-ink">{c.name}</span>
@@ -259,7 +259,7 @@ export default function ReportPage() {
         ) : (
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {R.followUp.map((h) => (
-              <button key={h.v.id} onClick={() => setOpenId(h.v.id)} className="rounded-2xl bg-white/70 p-3 text-left transition hover:bg-sky/50">
+              <button key={h.v.id} onClick={() => setOpenId(h.v.id)} className="rounded-2xl bg-white/5 p-3 text-left transition hover:bg-sky/50">
                 <div className="flex items-center justify-between gap-2">
                   <span className="flex min-w-0 items-center gap-1.5 truncate font-semibold text-ink">
                     {h.v.is_organic && <Icons.Leaf size={13} className="shrink-0 text-seafoam-deep" />}
@@ -464,7 +464,7 @@ function Attn({ label, value, tone, icon }: { label: string; value: number; tone
 }
 function Mini({ label, value, tone }: { label: string; value: number; tone?: "bad" }) {
   return (
-    <div className="rounded-2xl bg-white/70 px-3 py-2.5">
+    <div className="rounded-2xl bg-white/5 px-3 py-2.5">
       <div className={`font-display text-xl ${tone === "bad" && value > 0 ? "text-bubblegum" : "text-ink"}`}>{value}</div>
       <div className="text-[11px] text-ink-faint">{label}</div>
     </div>
@@ -472,7 +472,7 @@ function Mini({ label, value, tone }: { label: string; value: number; tone?: "ba
 }
 function Perf({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-white/70 px-3 py-2.5">
+    <div className="rounded-2xl bg-white/5 px-3 py-2.5">
       <div className="font-display text-lg text-ink">{value}</div>
       <div className="text-[11px] uppercase tracking-wide text-ink-faint">{label}</div>
     </div>

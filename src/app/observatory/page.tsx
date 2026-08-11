@@ -89,7 +89,7 @@ export default function ObservatoryPage() {
         <h2 className="mb-3 font-display text-lg text-ink">Brightest stars</h2>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {topStars.map((c) => (
-            <button key={c.id} onClick={() => setOpenId(c.id)} className="flex items-center gap-3 rounded-2xl bg-white/70 p-3 text-left transition hover:bg-sky/50">
+            <button key={c.id} onClick={() => setOpenId(c.id)} className="flex items-center gap-3 rounded-2xl bg-white/5 p-3 text-left transition hover:bg-sky/50">
               <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-lavender text-xs font-bold text-navy-deep">
                 {c.profile_image ? <img src={c.profile_image} alt="" className="h-full w-full object-cover" /> : initials(c.name)}
               </span>
@@ -97,7 +97,7 @@ export default function ObservatoryPage() {
                 <span className="block truncate font-semibold text-ink">{c.name}</span>
                 <span className="block text-xs text-ink-faint">{pct(c.engagement_rate, 1)} eng &middot; {num(c.followers)}</span>
               </span>
-              <span className="font-display text-sm text-navy-deep">{compactMoney(totalSpendOf(c))}</span>
+              <span className="font-display text-sm text-ink">{compactMoney(totalSpendOf(c))}</span>
             </button>
           ))}
         </div>

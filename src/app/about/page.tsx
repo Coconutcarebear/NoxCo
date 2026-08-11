@@ -18,7 +18,7 @@ export default function AboutPage() {
           Campaigns shouldn&apos;t depend on luck.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-          Nox &amp; Co started with a simple frustration: too many influencer
+          Nox &amp; Co started with a simple frustration: too many brand
           campaigns fall apart in the gaps — a contract that never gets
           signed, a creator who goes quiet, a report that never arrives. We
           built a way to run campaigns where nothing gets lost in the dark.
@@ -30,7 +30,7 @@ export default function AboutPage() {
           <div className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm">
             <h2 className="font-display text-2xl text-white">Our story</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
-              We spent years running influencer campaigns on spreadsheets,
+              We spent years running brand campaigns on spreadsheets,
               inboxes, and good intentions — watching brands lose track of
               creators mid-negotiation and miss content windows they&apos;d
               paid for. Nox &amp; Co is the agency we wished existed: one team,

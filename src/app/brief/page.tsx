@@ -205,11 +205,11 @@ export default function BriefPage() {
 
       {/* PREVIOUS BRIEFS */}
       {lib.length > 0 && (
-        <div className="mb-4 rounded-3xl bg-white/70 p-4 print:hidden">
+        <div className="mb-4 rounded-3xl bg-white/5 p-4 print:hidden">
           <div className="mb-2 flex items-center gap-2 text-ink"><Icons.Library size={16} className="text-dusty-deep" /><h3 className="font-display text-base">Previous briefs</h3><span className="text-xs text-ink-faint">{lib.length}</span></div>
           <div className="flex gap-2 overflow-x-auto pb-1">
             {lib.map((s) => (
-              <div key={s.id} className="w-52 shrink-0 rounded-2xl border border-sky/70 bg-white p-3">
+              <div key={s.id} className="w-52 shrink-0 rounded-2xl border border-sky/70 bg-cream p-3">
                 <div className="truncate text-sm font-semibold text-ink">{s.brief.title || "Untitled brief"}</div>
                 <div className="mt-0.5 text-[11px] text-ink-faint">{s.brief.mode === "event" ? "Event" : "Concept"} · {new Date(s.savedAt).toLocaleDateString()}</div>
                 <div className="mt-2 flex gap-1">
@@ -229,7 +229,7 @@ export default function BriefPage() {
           <FC>
             <div className="mb-3 inline-flex rounded-full bg-sky/40 p-1 text-sm font-semibold">
               {(["concept", "event"] as const).map((m) => (
-                <button key={m} onClick={() => set({ mode: m })} className={`rounded-full px-4 py-1.5 capitalize transition ${b.mode === m ? "bg-white text-dusty-deep shadow-pill" : "text-ink-soft"}`}>{m}</button>
+                <button key={m} onClick={() => set({ mode: m })} className={`rounded-full px-4 py-1.5 capitalize transition ${b.mode === m ? "bg-cream text-dusty-deep shadow-pill" : "text-ink-soft"}`}>{m}</button>
               ))}
             </div>
             <div className="grid gap-3">
@@ -306,7 +306,7 @@ export default function BriefPage() {
                   {b.moodboard.map((src, i) => (
                     <div key={i} className="group relative aspect-square overflow-hidden rounded-xl">
                       <img src={src} alt="" className="h-full w-full object-cover" />
-                      <button onClick={() => set({ moodboard: b.moodboard.filter((_, j) => j !== i) })} className="absolute right-1 top-1 hidden rounded-full bg-white/90 p-0.5 text-bubblegum group-hover:block"><Icons.X size={13} /></button>
+                      <button onClick={() => set({ moodboard: b.moodboard.filter((_, j) => j !== i) })} className="absolute right-1 top-1 hidden rounded-full bg-white/5 p-0.5 text-bubblegum group-hover:block"><Icons.X size={13} /></button>
                     </div>
                   ))}
                 </div>
@@ -464,7 +464,7 @@ function Timeline({ steps }: { steps: Step[] }) {
 /* ================= small pieces ================= */
 function FC({ title, hint, children }: { title?: string; hint?: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-3xl bg-white/70 p-4">
+    <div className="rounded-3xl bg-white/5 p-4">
       {title && <div className="mb-2 flex items-baseline justify-between"><h3 className="font-display text-base text-ink">{title}</h3>{hint && <span className="text-[11px] text-ink-faint">{hint}</span>}</div>}
       {children}
     </div>
@@ -476,7 +476,7 @@ function Chooser({ label, value, onChange }: { label: string; value: number; onC
       <span className="mb-1 block text-xs font-semibold text-ink-soft">{label}</span>
       <div className="inline-flex rounded-full bg-sky/40 p-1">
         {[1, 2, 3].map((n) => (
-          <button key={n} onClick={() => onChange(n)} className={`h-8 w-8 rounded-full text-sm font-bold transition ${value === n ? "bg-white text-dusty-deep shadow-pill" : "text-ink-soft"}`}>{n}</button>
+          <button key={n} onClick={() => onChange(n)} className={`h-8 w-8 rounded-full text-sm font-bold transition ${value === n ? "bg-cream text-dusty-deep shadow-pill" : "text-ink-soft"}`}>{n}</button>
         ))}
       </div>
     </div>

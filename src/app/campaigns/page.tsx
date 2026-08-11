@@ -120,7 +120,7 @@ export default function BouquetsPage() {
       />
 
       {minimized.length > 0 && (
-        <div className="mb-5 flex flex-wrap items-end gap-x-7 gap-y-4 rounded-3xl border border-sky/50 bg-white/40 px-5 py-5">
+        <div className="mb-5 flex flex-wrap items-end gap-x-7 gap-y-4 rounded-3xl border border-sky/50 bg-white/5 px-5 py-5">
           <span className="w-full text-xs uppercase tracking-wide text-ink-faint">Minimized — tap a star to bring it back</span>
           {campaigns.filter((c) => minimized.includes(c.id)).map((cam, i) => (
             <button key={cam.id} type="button" onClick={() => restore(cam.id)} title={`Restore ${cam.name}`} className="group flex w-16 flex-col items-center gap-1">
@@ -147,7 +147,7 @@ export default function BouquetsPage() {
             const isOpen = expanded === cam.id;
             return (
               <Card key={cam.id} className="overflow-hidden p-0">
-                <div className="p-5" style={{ background: `linear-gradient(120deg, ${cam.color}44, #ffffff)` }}>
+                <div className="p-5" style={{ background: `linear-gradient(120deg, ${cam.color}33, #111114)` }}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="h-3.5 w-3.5 rounded-full" style={{ backgroundColor: cam.color }} />
@@ -155,10 +155,10 @@ export default function BouquetsPage() {
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Pill>{crew.length} {crew.length === 1 ? "star" : "stars"}</Pill>
-                      <button onClick={() => minimize(cam.id)} aria-label="Minimize to a star" title="Minimize to a star" className="grid h-7 w-7 place-items-center rounded-full text-ink-soft transition hover:bg-white/70 hover:text-dusty-deep">
+                      <button onClick={() => minimize(cam.id)} aria-label="Minimize to a star" title="Minimize to a star" className="grid h-7 w-7 place-items-center rounded-full text-ink-soft transition hover:bg-white/5 hover:text-dusty-deep">
                         <Icons.Star size={14} />
                       </button>
-                      {canEdit && <button onClick={() => openEdit(cam)} aria-label="Edit eclipse" title="Edit eclipse" className="grid h-7 w-7 place-items-center rounded-full text-ink-soft transition hover:bg-white/70 hover:text-dusty-deep">
+                      {canEdit && <button onClick={() => openEdit(cam)} aria-label="Edit eclipse" title="Edit eclipse" className="grid h-7 w-7 place-items-center rounded-full text-ink-soft transition hover:bg-white/5 hover:text-dusty-deep">
                         <Icons.Pencil size={14} />
                       </button>}
                     </div>
@@ -271,8 +271,8 @@ export default function BouquetsPage() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-white/70 py-2">
-      <div className="font-display text-base text-navy-deep">{value}</div>
+    <div className="rounded-2xl bg-white/5 py-2">
+      <div className="font-display text-base text-ink">{value}</div>
       <div className="text-[11px] text-ink-soft">{label}</div>
     </div>
   );

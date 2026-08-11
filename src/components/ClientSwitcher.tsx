@@ -26,7 +26,7 @@ export function ClientSwitcher() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-ink shadow-pill transition hover:brightness-105"
+        className="flex items-center gap-2 rounded-full bg-cream px-3 py-1.5 text-sm font-semibold text-ink shadow-pill transition hover:brightness-105"
         title="Switch client"
       >
         <span className="h-2.5 w-2.5 rounded-full" style={{ background: active?.color || "#8FA8D8" }} />
@@ -35,7 +35,7 @@ export function ClientSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-40 mt-2 w-60 overflow-hidden rounded-2xl border border-white bg-white py-1 shadow-float">
+        <div className="absolute right-0 top-full z-40 mt-2 w-60 overflow-hidden rounded-2xl border border-white bg-cream py-1 shadow-float">
           <button
             onClick={() => { setActiveCompany(null); setOpen(false); }}
             className={`flex w-full items-center gap-2.5 px-4 py-2 text-left text-sm transition hover:bg-sky/50 ${!activeCompanyId ? "font-semibold text-dusty-deep" : "text-ink"}`}

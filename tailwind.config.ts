@@ -5,21 +5,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary — Nox & Co night sky
-        navy: { DEFAULT: "#262268", deep: "#141243", soft: "#425180" },
-        dusty: { DEFAULT: "#3765D8", deep: "#28459E", soft: "#A99CE7" },
-        seafoam: { DEFAULT: "#023459", deep: "#012840", soft: "#5A90AD" },
-        // Accents — style-guide palette
-        lavender: { DEFAULT: "#A99CE7", soft: "#DCD6F5" },
-        peach: { DEFAULT: "#8C1F66", soft: "#D9A8C4" },
-        butter: { DEFAULT: "#C9C2F0", soft: "#EAE6FA" },
-        bubblegum: { DEFAULT: "#5C003F", soft: "#A35C86" },
-        // Backgrounds — pale night-tinted whites (cards stay light for contrast)
-        cloud: "#FAFAFF",
-        cream: "#F5F3FC",
-        sky: "#EEF0FA",
-        // Ink
-        ink: { DEFAULT: "#141243", soft: "#4A4A72", faint: "#8A8AAB" },
+        // Primary — black & silver, moody and mysterious
+        navy: { DEFAULT: "#0D0D10", deep: "#000000", soft: "#3A3B42" },
+        dusty: { DEFAULT: "#C7C9D1", deep: "#9A9CA6", soft: "#E8E9EE" },
+        seafoam: { DEFAULT: "#4B4D57", deep: "#2A2B31", soft: "#8A8C96" },
+        // Accents — cool silver + a warm brass/gold flicker (marble veining)
+        lavender: { DEFAULT: "#E5E6EA", soft: "#F5F5F7" },
+        peach: { DEFAULT: "#C9A15A", soft: "#E8D9B8" },
+        butter: { DEFAULT: "#D8CBA0", soft: "#F0E8D2" },
+        bubblegum: { DEFAULT: "#8A6A3A", soft: "#C9A15A" },
+        // Backgrounds — near-black surfaces (cards are dark frosted glass)
+        cloud: "#0A0A0C",
+        cream: "#111114",
+        sky: "#1C1C21",
+        // Ink — light text on dark
+        ink: { DEFAULT: "#F2F2F4", soft: "#A8A9B3", faint: "#6C6D76" },
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
@@ -29,9 +29,9 @@ const config: Config = {
         "4xl": "2rem",
       },
       boxShadow: {
-        cozy: "0 8px 30px -12px rgba(60, 74, 120, 0.25)",
-        float: "0 12px 40px -16px rgba(60, 74, 120, 0.35)",
-        pill: "0 2px 0 0 rgba(60,74,120,0.10)",
+        cozy: "0 8px 30px -12px rgba(0, 0, 0, 0.6)",
+        float: "0 12px 40px -16px rgba(0, 0, 0, 0.7)",
+        pill: "0 2px 0 0 rgba(0,0,0,0.25)",
       },
       keyframes: {
         twinkle: {
@@ -54,6 +54,10 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         twinkle: "twinkle 3.5s ease-in-out infinite",
@@ -61,6 +65,7 @@ const config: Config = {
         drift: "drift 14s ease-in-out infinite alternate",
         wave: "wave 18s linear infinite",
         rise: "rise 0.4s ease-out both",
+        shimmer: "shimmer 3s linear infinite",
       },
     },
   },

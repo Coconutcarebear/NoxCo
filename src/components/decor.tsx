@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-const INK = "#141243";
+const INK = "#F2F2F4";
 
 // ── The Nox & Co starburst mascot (matches the logo mark) ──────────────────
 export function StarFlower({ size = 28, className = "" }: { size?: number; className?: string }) {
@@ -10,21 +10,21 @@ export function StarFlower({ size = 28, className = "" }: { size?: number; class
     <svg width={size} height={size} viewBox="0 0 400 400" className={className} aria-hidden>
       <defs>
         <radialGradient id="noxMascotBg" cx="50%" cy="42%" r="70%">
-          <stop offset="0%" stopColor="#26234f" />
-          <stop offset="55%" stopColor="#181653" />
-          <stop offset="100%" stopColor="#0a0930" />
+          <stop offset="0%" stopColor="#1c1c21" />
+          <stop offset="55%" stopColor="#0d0d10" />
+          <stop offset="100%" stopColor="#000000" />
         </radialGradient>
         <linearGradient id="noxMascotStar" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="45%" stopColor="#a99ce7" />
-          <stop offset="100%" stopColor="#3765d8" />
+          <stop offset="45%" stopColor="#e5e6ea" />
+          <stop offset="100%" stopColor="#9a9ca6" />
         </linearGradient>
         <radialGradient id="noxMascotGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#a99ce7" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#a99ce7" stopOpacity="0" />
+          <stop offset="0%" stopColor="#c7c9d1" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#c7c9d1" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <circle cx="200" cy="200" r="182" fill="url(#noxMascotBg)" stroke="#3765d8" strokeWidth="6" />
+      <circle cx="200" cy="200" r="182" fill="url(#noxMascotBg)" stroke="#9a9ca6" strokeWidth="6" />
       {/* scattered tiny stars */}
       <circle cx="120" cy="120" r="3" fill="#ffffff" opacity="0.8" />
       <circle cx="300" cy="150" r="2.4" fill="#ffffff" opacity="0.7" />
@@ -60,7 +60,7 @@ export function Stars({ count = 22 }: { count?: number }) {
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
       {stars.map((st, i) => (
         <svg key={i} className="absolute animate-twinkle" style={{ left: st.x + "%", top: st.y + "%", animationDelay: st.d + "s" }} width={st.s} height={st.s} viewBox="0 0 24 24" fill="none">
-          <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z" fill={i % 3 === 0 ? "#a99ce7" : i % 3 === 1 ? "#3765d8" : "#ffffff"} opacity="0.85" />
+          <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z" fill={i % 3 === 0 ? "#c9a15a" : i % 3 === 1 ? "#c7c9d1" : "#ffffff"} opacity="0.85" />
         </svg>
       ))}
     </div>
@@ -71,15 +71,15 @@ export function Stars({ count = 22 }: { count?: number }) {
 export function Moon({ size = 48, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" className={className} aria-hidden>
-      <path d="M40 8 A24 24 0 1 0 40 56 A18 18 0 1 1 40 8 Z" fill="#a99ce7" />
-      <circle cx="46" cy="14" r="2" fill="#a99ce7" opacity="0.8" />
-      <circle cx="52" cy="22" r="1.3" fill="#a99ce7" opacity="0.7" />
+      <path d="M40 8 A24 24 0 1 0 40 56 A18 18 0 1 1 40 8 Z" fill="#e5e6ea" />
+      <circle cx="46" cy="14" r="2" fill="#e5e6ea" opacity="0.8" />
+      <circle cx="52" cy="22" r="1.3" fill="#e5e6ea" opacity="0.7" />
     </svg>
   );
 }
 
 // ── Sparkle (used like confetti / drifting accent) ──────────────────────
-export function Petal({ size = 16, className = "", color = "#a99ce7" }: { size?: number; className?: string; color?: string }) {
+export function Petal({ size = 16, className = "", color = "#c7c9d1" }: { size?: number; className?: string; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" className={className} aria-hidden>
       <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z" fill={color} />

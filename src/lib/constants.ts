@@ -33,18 +33,18 @@ export const STAGE_MEANING: Record<Stage, string> = {
 };
 // A brand hue per stage for cards & badges.
 export const STAGE_HUE: Record<Stage, string> = {
-  "Sighted": "#425180",
-  "Signal Sent": "#262268",
-  "In Orbit": "#023459",
-  "Aligning": "#425180",
-  "Committed": "#425180",
-  "Locked In": "#3765D8",
-  "In Motion": "#3765D8",
-  "Transmitted": "#A99CE7",
-  "Cleared for Launch": "#A99CE7",
-  "Shining": "#3765D8",
-  "Complete": "#023459",
-  "Star-Crossed": "#5C003F",
+  "Sighted": "#A6A8B2",
+  "Signal Sent": "#B9BBC4",
+  "In Orbit": "#C7C9D1",
+  "Aligning": "#CBD3E8",
+  "Committed": "#AFC4EA",
+  "Locked In": "#9DB8EA",
+  "In Motion": "#BFC8EA",
+  "Transmitted": "#D6CFF2",
+  "Cleared for Launch": "#E3DEF7",
+  "Shining": "#F0E4B8",
+  "Complete": "#E8D9A0",
+  "Star-Crossed": "#D9B98A",
 };
 // Stages that count as "posted / live".
 export const PUBLISHED_STAGES: Stage[] = ["Shining", "Complete"];

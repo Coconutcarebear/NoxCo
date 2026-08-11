@@ -111,7 +111,7 @@ function AtlasInner() {
                 <button
                   key={t}
                   onClick={() => setTags((cur) => (on ? cur.filter((x) => x.toLowerCase() !== t.toLowerCase()) : [...cur, t]))}
-                  className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${on ? "bg-dusty-deep text-white" : "bg-white/70 text-ink-soft hover:text-dusty-deep"}`}
+                  className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${on ? "bg-dusty-deep text-white" : "bg-white/5 text-ink-soft hover:text-dusty-deep"}`}
                 >
                   {t}
                 </button>

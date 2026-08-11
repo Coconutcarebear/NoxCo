@@ -42,7 +42,7 @@ export function ImageUpload({
     <div className="flex items-center gap-3">
       <div className={`relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden ${round} bg-sky/40 text-ink-soft`}>
         {value ? <img src={value} alt="" className="h-full w-full object-cover" /> : <Icons.Image size={20} />}
-        {busy && <div className="absolute inset-0 grid place-items-center bg-white/70 text-[11px] font-semibold text-ink-soft">Uploading…</div>}
+        {busy && <div className="absolute inset-0 grid place-items-center bg-white/5 text-[11px] font-semibold text-ink-soft">Uploading…</div>}
       </div>
       <div className="space-y-1">
         <div className="flex gap-2">
@@ -50,7 +50,7 @@ export function ImageUpload({
             type="button"
             onClick={() => ref.current?.click()}
             disabled={busy}
-            className="rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold text-dusty-deep transition hover:bg-white disabled:opacity-50"
+            className="rounded-full bg-white/5 px-3 py-1.5 text-xs font-semibold text-dusty-deep transition hover:bg-cream disabled:opacity-50"
           >
             {busy ? "Uploading…" : value ? `Replace ${label}` : `Upload ${label}`}
           </button>

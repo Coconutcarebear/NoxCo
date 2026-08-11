@@ -22,7 +22,7 @@ export function PageHeader({ title, sub, icon, action }: { title: string; sub: s
   );
 }
 
-export function KpiCard({ label, value, hint, hue = "#EAF4FF", icon }: { label: string; value: string; hint?: string; hue?: string; icon?: string }) {
+export function KpiCard({ label, value, hint, hue = "#C7C9D1", icon }: { label: string; value: string; hint?: string; hue?: string; icon?: string }) {
   const Cmp = icon ? (Icons as Record<string, any>)[icon] ?? Icons.Star : null;
   return (
     <Card className="p-4">
@@ -44,10 +44,10 @@ export function AlertBanner({ level, committed, budget, remaining }: { level: Al
   const c = ALERT_COPY[level];
   return (
     <Card className="overflow-hidden p-0">
-      <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between" style={{ background: `linear-gradient(100deg, ${c.hue}55, #ffffff)` }}>
+      <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between" style={{ background: `linear-gradient(100deg, ${c.hue}2a, #111114)` }}>
         <div className="flex items-center gap-3">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white shadow-cozy">
-            <Icons.Flower2 size={22} className="text-navy-deep" />
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-cream shadow-cozy">
+            <Icons.Sparkles size={22} className="text-dusty" />
           </span>
           <div>
             <div className="font-display text-lg text-ink">{c.title}</div>
@@ -55,7 +55,7 @@ export function AlertBanner({ level, committed, budget, remaining }: { level: Al
           </div>
         </div>
         <div className="text-right">
-          <div className="font-display text-2xl text-navy-deep">{compactMoney(remaining)}</div>
+          <div className="font-display text-2xl text-ink">{compactMoney(remaining)}</div>
           <div className="text-xs text-ink-soft">remaining of {compactMoney(budget)}</div>
         </div>
       </div>
@@ -71,7 +71,7 @@ export function SpendBars({ rows }: { rows: { label: string; value: number; colo
         <div key={r.label} className="flex items-center gap-3">
           <div className="w-36 shrink-0 truncate text-sm text-ink-soft">{r.label}</div>
           <div className="flex-1">
-            <BloomBar value={r.value / max} hue={r.color ?? "#8FA8D8"} height={14} />
+            <BloomBar value={r.value / max} hue={r.color ?? "#C7C9D1"} height={14} />
           </div>
           <div className="w-16 shrink-0 text-right text-sm font-semibold text-ink">{compactMoney(r.value)}</div>
         </div>

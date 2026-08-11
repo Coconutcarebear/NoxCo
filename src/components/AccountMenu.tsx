@@ -43,7 +43,7 @@ export function AccountMenu() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-40 mt-2 w-64 overflow-hidden rounded-2xl border border-white bg-white shadow-float">
+        <div className="absolute right-0 top-full z-40 mt-2 w-64 overflow-hidden rounded-2xl border border-white bg-cream shadow-float">
           <div className="flex items-center gap-3 border-b border-sky/60 px-4 py-3">
             <span className="grid h-11 w-11 place-items-center rounded-full text-2xl" style={{ background: gradientCss(me.gradient) }} aria-hidden>{avatar}</span>
             <div className="min-w-0">
@@ -60,7 +60,7 @@ export function AccountMenu() {
                 onChange={(e) => setName(e.target.value)}
                 onBlur={saveName}
                 onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
-                className="w-full rounded-lg border border-sky/70 bg-white px-2.5 py-1.5 text-sm text-ink outline-none focus:border-dusty-soft"
+                className="w-full rounded-lg border border-sky/70 bg-cream px-2.5 py-1.5 text-sm text-ink outline-none focus:border-dusty-soft"
               />
             </label>
 

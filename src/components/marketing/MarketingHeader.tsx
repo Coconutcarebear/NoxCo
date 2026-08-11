@@ -22,9 +22,9 @@ export function MarketingHeader() {
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-4 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Nox & Co" className="h-9 w-9" />
+          <img src="/logo.jpg" alt="Nox & Co" className="h-9 w-9 rounded-md" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/wordmark.svg" alt="Nox & Co" className="h-5 sm:h-6" />
+          <img src="/wordmark.jpg" alt="Nox & Co" className="h-5 sm:h-6" />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-7 sm:flex">
@@ -45,7 +45,7 @@ export function MarketingHeader() {
           })}
           <Link
             href="/app"
-            className="group flex items-center gap-1.5 rounded-full bg-gradient-to-r from-dusty to-lavender px-4 py-2 text-sm font-semibold text-navy-deep shadow-[0_8px_30px_-12px_rgba(169,156,231,0.6)] transition hover:brightness-105"
+            className="group flex items-center gap-1.5 rounded-full bg-gradient-to-r from-dusty to-lavender px-4 py-2 text-sm font-semibold text-navy-deep shadow-[0_8px_30px_-12px_rgba(199,201,209,0.5)] transition hover:brightness-105"
           >
             Client Portal
             <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />

@@ -149,7 +149,7 @@ export default function OrdersPage() {
             <Pill>{totals.total - totals.done} open</Pill>
             <button
               onClick={() => setShowDone((v) => !v)}
-              className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${showDone ? "bg-seafoam-soft text-seafoam-deep" : "bg-white/70 text-ink-soft hover:text-dusty-deep"}`}
+              className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${showDone ? "bg-seafoam-soft text-seafoam-deep" : "bg-white/5 text-ink-soft hover:text-dusty-deep"}`}
             >
               {showDone ? "Hide done" : "Show done"}
             </button>
