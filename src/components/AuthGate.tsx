@@ -33,7 +33,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
 function Splash() {
   return (
-    <div className="grid min-h-screen place-items-center" style={{ background: "radial-gradient(900px 600px at 50% 20%, rgba(199,201,209,0.10), transparent 60%), linear-gradient(180deg,#000000 0%,#0a0a0c 55%,#000000 100%)" }}>
+    <div className="grid min-h-screen place-items-center" style={{ background: "radial-gradient(900px 600px at 50% 20%, rgba(90,110,160,0.10), transparent 60%), linear-gradient(180deg,#03040a 0%,#0a0e1a 55%,#03040a 100%)" }}>
       <div className="flex flex-col items-center gap-3">
         <div className="relative h-28 w-28">
           <TwinkleCluster count={20} />

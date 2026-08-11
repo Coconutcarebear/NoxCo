@@ -49,9 +49,9 @@ const M: Record<string, Mood> = {
   // Eclipses, a corona of warm brass light around a dark moon
   "/campaigns": {
     sky: "linear-gradient(180deg,#000000 0%,#0c0a08 40%,#161210 72%,#000000 100%)",
-    orb: { kind: "moon", x: 78, y: 38, size: 118, color: "#1a1712", glow: "#c9a15a" },
+    orb: { kind: "moon", x: 78, y: 38, size: 118, color: "#0f1420", glow: "#5a6a8f" },
     stars: 0.5,
-    bloom: [{ x: 78, y: 38, size: 420, color: "rgba(201,161,90,0.14)" }],
+    bloom: [{ x: 78, y: 38, size: 420, color: "rgba(90,106,143,0.16)" }],
   },
   // Almanac, orderly, minimal
   "/almanac": {
@@ -81,7 +81,7 @@ const M: Record<string, Mood> = {
   // Night Log, warm brass-toned entries
   "/logbook": {
     sky: "linear-gradient(180deg,#000000 0%,#0b0a08 48%,#141210 100%)",
-    orb: { kind: "moon", x: 50, y: 18, size: 100, color: "#e8e2d6", glow: "#8a6a3a" },
+    orb: { kind: "moon", x: 50, y: 18, size: 100, color: "#e2e6ef", glow: "#5a6a8f" },
     stars: 0.45,
   },
   // Stargazing, scanning the dark for something worth chasing
@@ -100,7 +100,7 @@ const M: Record<string, Mood> = {
     orb: { kind: "moon", x: 28, y: 18, size: 80, color: "#eceef2", glow: "#c7c9d1" },
     stars: 1,
     bloom: [
-      { x: 66, y: 24, size: 420, color: "rgba(201,161,90,0.08)" },
+      { x: 66, y: 24, size: 420, color: "rgba(90,106,143,0.10)" },
       { x: 32, y: 16, size: 340, color: "rgba(90,106,143,0.12)" },
     ],
   },
@@ -145,7 +145,7 @@ const BASE_STARS = (() => {
     o: 0.45 + s(i, 33.1) * 0.55,
     d: s(i, 5.3) * 4,
     spark: s(i, 7.7) > 0.88,
-    hue: s(i, 15.3) > 0.82 ? "#c9a15a" : s(i, 21.1) > 0.6 ? "#c7c9d1" : "#ffffff",
+    hue: s(i, 15.3) > 0.82 ? "#7d97c9" : s(i, 21.1) > 0.6 ? "#c7c9d1" : "#ffffff",
   }));
 })();
 

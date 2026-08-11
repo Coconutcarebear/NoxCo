@@ -5,19 +5,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary — black & silver, moody and mysterious
-        navy: { DEFAULT: "#0D0D10", deep: "#000000", soft: "#3A3B42" },
+        // Primary — dark blue & silver, moody and minimal
+        navy: { DEFAULT: "#0B0F1C", deep: "#03040A", soft: "#232C42" },
         dusty: { DEFAULT: "#C7C9D1", deep: "#9A9CA6", soft: "#E8E9EE" },
         seafoam: { DEFAULT: "#4B4D57", deep: "#2A2B31", soft: "#8A8C96" },
-        // Accents — cool silver + a warm brass/gold flicker (marble veining)
+        // Accents — cool silver
         lavender: { DEFAULT: "#E5E6EA", soft: "#F5F5F7" },
         peach: { DEFAULT: "#C9A15A", soft: "#E8D9B8" },
         butter: { DEFAULT: "#D8CBA0", soft: "#F0E8D2" },
         bubblegum: { DEFAULT: "#8A6A3A", soft: "#C9A15A" },
-        // Backgrounds — near-black surfaces (cards are dark frosted glass)
-        cloud: "#0A0A0C",
-        cream: "#111114",
-        sky: "#1C1C21",
+        // Backgrounds — dark blue-black surfaces
+        cloud: "#05070E",
+        cream: "#0A0E1A",
+        sky: "#141B2E",
         // Ink — light text on dark
         ink: { DEFAULT: "#F2F2F4", soft: "#A8A9B3", faint: "#6C6D76" },
       },
@@ -39,8 +39,8 @@ const config: Config = {
           "50%": { opacity: "1", transform: "scale(1.1)" },
         },
         bob: {
-          "0%, 100%": { transform: "translateY(0) rotate(-2deg)" },
-          "50%": { transform: "translateY(-4px) rotate(2deg)" },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
         },
         drift: {
           "0%": { transform: "translateX(-10px)" },
@@ -58,27 +58,14 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        shoot: {
-          "0%":   { opacity: "0", transform: "translate(0,0) rotate(-32deg) scaleX(0.3)" },
-          "6%":   { opacity: "1", transform: "translate(20px,13px) rotate(-32deg) scaleX(1)" },
-          "22%":  { opacity: "1", transform: "translate(230px,148px) rotate(-32deg) scaleX(1)" },
-          "30%":  { opacity: "0", transform: "translate(260px,168px) rotate(-32deg) scaleX(1)" },
-          "100%": { opacity: "0", transform: "translate(260px,168px) rotate(-32deg) scaleX(1)" },
-        },
-        flow: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
       },
       animation: {
         twinkle: "twinkle 3.5s ease-in-out infinite",
-        bob: "bob 4s ease-in-out infinite",
+        bob: "bob 2.6s ease-in-out infinite",
         drift: "drift 14s ease-in-out infinite alternate",
         wave: "wave 18s linear infinite",
         rise: "rise 0.4s ease-out both",
         shimmer: "shimmer 3s linear infinite",
-        shoot: "shoot linear infinite",
-        flow: "flow 12s ease-in-out infinite",
       },
     },
   },

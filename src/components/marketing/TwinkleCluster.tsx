@@ -12,7 +12,7 @@ export function TwinkleCluster({ count = 26, className = "" }: { count?: number;
       y: r(i, 4.7) * 100,
       s: 2 + r(i, 91.3) * 4,
       d: r(i, 5.3) * 3.5,
-      hue: r(i, 15.3) > 0.85 ? "#c9a15a" : r(i, 21.1) > 0.55 ? "#c7c9d1" : "#ffffff",
+      hue: r(i, 15.3) > 0.85 ? "#7d97c9" : r(i, 21.1) > 0.55 ? "#c7c9d1" : "#ffffff",
       o: 0.4 + r(i, 33.1) * 0.6,
     }));
   }, [count]);

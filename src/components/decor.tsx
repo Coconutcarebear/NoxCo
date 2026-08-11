@@ -60,7 +60,7 @@ export function Stars({ count = 22 }: { count?: number }) {
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
       {stars.map((st, i) => (
         <svg key={i} className="absolute animate-twinkle" style={{ left: st.x + "%", top: st.y + "%", animationDelay: st.d + "s" }} width={st.s} height={st.s} viewBox="0 0 24 24" fill="none">
-          <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z" fill={i % 3 === 0 ? "#c9a15a" : i % 3 === 1 ? "#c7c9d1" : "#ffffff"} opacity="0.85" />
+          <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z" fill={i % 3 === 0 ? "#7d97c9" : i % 3 === 1 ? "#c7c9d1" : "#ffffff"} opacity="0.85" />
         </svg>
       ))}
     </div>
