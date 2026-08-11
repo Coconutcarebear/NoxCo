@@ -1,0 +1,58 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#1b1a4a"/>
+      <stop offset="55%" stop-color="#141243"/>
+      <stop offset="100%" stop-color="#08071f"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a99ce7" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#3765d8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3765d8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="starFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#a99ce7"/>
+      <stop offset="100%" stop-color="#3765d8"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="400" height="400" rx="56" fill="url(#bg)"/>
+
+  <!-- scattered tiny stars -->
+  <g fill="#ffffff">
+    <circle cx="60" cy="70" r="2"/><circle cx="120" cy="40" r="1.4"/><circle cx="330" cy="60" r="2"/>
+    <circle cx="360" cy="140" r="1.6"/><circle cx="40" cy="180" r="1.6"/><circle cx="300" cy="320" r="2"/>
+    <circle cx="70" cy="330" r="1.6"/><circle cx="200" cy="50" r="1.4"/><circle cx="350" cy="280" r="1.8"/>
+    <circle cx="30" cy="260" r="1.4"/><circle cx="230" cy="360" r="1.6"/>
+  </g>
+
+  <!-- big sparkle, upper right -->
+  <g transform="translate(272,120)">
+    <circle r="46" fill="url(#glow)"/>
+    <path d="M0,-40 L9,-9 L40,0 L9,9 L0,40 L-9,9 L-40,0 L-9,-9 Z" fill="url(#starFill)"/>
+  </g>
+
+  <!-- medium sparkle, center -->
+  <g transform="translate(168,200)">
+    <circle r="60" fill="url(#glow)"/>
+    <path d="M0,-56 L12,-12 L56,0 L12,12 L0,56 L-12,12 L-56,0 L-12,-12 Z" fill="url(#starFill)"/>
+  </g>
+
+  <!-- small sparkle, left -->
+  <g transform="translate(96,236)">
+    <circle r="30" fill="url(#glow)"/>
+    <path d="M0,-26 L6,-6 L26,0 L6,6 L0,26 L-6,6 L-26,0 L-6,-6 Z" fill="url(#starFill)"/>
+  </g>
+
+  <!-- small sparkle, lower center -->
+  <g transform="translate(210,268)">
+    <circle r="32" fill="url(#glow)"/>
+    <path d="M0,-28 L6.5,-6.5 L28,0 L6.5,6.5 L0,28 L-6.5,6.5 L-28,0 L-6.5,-6.5 Z" fill="url(#starFill)"/>
+  </g>
+
+  <!-- small sparkle, right -->
+  <g transform="translate(330,246)">
+    <circle r="26" fill="url(#glow)"/>
+    <path d="M0,-22 L5,-5 L22,0 L5,5 L0,22 L-5,5 L-22,0 L-5,-5 Z" fill="url(#starFill)"/>
+  </g>
+</svg>

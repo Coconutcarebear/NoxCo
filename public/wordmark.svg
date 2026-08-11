@@ -1,0 +1,11 @@
+<svg viewBox="0 0 520 130" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wordFill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a99ce7"/>
+      <stop offset="45%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#3765d8"/>
+      <stop offset="100%" stop-color="#a99ce7"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="88" font-family="'Cormorant Garamond','Le Jour Serif',serif" font-weight="600" font-size="92" letter-spacing="4" fill="url(#wordFill)">NOX&amp;CO</text>
+</svg>
