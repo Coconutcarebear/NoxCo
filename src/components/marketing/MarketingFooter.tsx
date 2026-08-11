@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Mail } from "lucide-react";
+import { Instagram, Music2, Mail } from "lucide-react";
 
 export function MarketingFooter() {
   return (
@@ -35,8 +35,11 @@ export function MarketingFooter() {
               <a href="mailto:hello@noxandco.com" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
                 <Mail size={14} /> hello@noxandco.com
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
-                <Instagram size={14} /> @noxandco
+              <a href="https://www.instagram.com/nox.co.agency" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
+                <Instagram size={14} /> @nox.co.agency
+              </a>
+              <a href="https://www.tiktok.com/@nox.co.agency" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
+                <Music2 size={14} /> @nox.co.agency
               </a>
             </div>
           </div>

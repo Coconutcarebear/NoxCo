@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Instagram, Clock, ArrowRight } from "lucide-react";
+import { Mail, Instagram, Music2, Clock, ArrowRight } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
 
@@ -130,8 +130,17 @@ export default function ContactPage() {
                 <Instagram size={16} className="text-lavender" />
                 <span className="text-sm font-semibold">Instagram</span>
               </div>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="mt-1.5 block text-sm text-white/60 hover:text-white">
-                @noxandco
+              <a href="https://www.instagram.com/nox.co.agency" target="_blank" rel="noreferrer" className="mt-1.5 block text-sm text-white/60 hover:text-white">
+                @nox.co.agency
+              </a>
+            </div>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <div className="flex items-center gap-2.5 text-white">
+                <Music2 size={16} className="text-lavender" />
+                <span className="text-sm font-semibold">TikTok</span>
+              </div>
+              <a href="https://www.tiktok.com/@nox.co.agency" target="_blank" rel="noreferrer" className="mt-1.5 block text-sm text-white/60 hover:text-white">
+                @nox.co.agency
               </a>
             </div>
             <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
