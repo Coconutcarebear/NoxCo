@@ -40,7 +40,7 @@ export default function ContactPage() {
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8">
             {sent ? (
               <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
-                <div className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-dusty to-lavender text-navy-deep">
+                <div className="grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-navy-deep text-lavender">
                   <Mail size={20} />
                 </div>
                 <p className="font-display text-xl text-white">Your email client should be open now.</p>

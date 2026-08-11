@@ -38,7 +38,7 @@ function Splash() {
         <div className="relative h-28 w-28">
           <TwinkleCluster count={20} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.jpg" alt="Nox & Co" className="relative h-full w-full animate-bob rounded-2xl object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]" />
+          <img src="/logo.jpg" alt="Nox & Co" className="relative h-full w-full rounded-2xl object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]" />
         </div>
         <span className="text-sm text-ink-soft">Entering orbit…</span>
       </div>

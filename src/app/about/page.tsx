@@ -28,7 +28,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-5xl px-5 py-10 sm:px-8 sm:py-14">
         <div className="grid gap-6 sm:grid-cols-2">
-          <Reveal className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition hover:-translate-y-1">
+          <Reveal className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
             <h2 className="font-display text-2xl text-white">Our story</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
               We spent years running brand campaigns on spreadsheets,
@@ -38,7 +38,7 @@ export default function AboutPage() {
               one system, full visibility from first outreach to final report.
             </p>
           </Reveal>
-          <Reveal delay={120} className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition hover:-translate-y-1">
+          <Reveal delay={120} className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
             <h2 className="font-display text-2xl text-white">Our approach</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
               Every creator relationship, contract, and deliverable lives in
@@ -58,8 +58,8 @@ export default function AboutPage() {
           </Reveal>
           <div className="mt-12 grid gap-5 sm:grid-cols-2">
             {VALUES.map((v, i) => (
-              <Reveal key={v.title} delay={i * 90} className="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1">
-                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-dusty to-lavender text-navy-deep">
+              <Reveal key={v.title} delay={i * 90} className="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-navy-deep text-lavender">
                   <v.icon size={20} />
                 </div>
                 <div>

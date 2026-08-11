@@ -1,40 +1,56 @@
 import Link from "next/link";
 import {
-  ArrowRight, Compass, Disc, Lock, Sparkles, Images, Telescope, CloudMoon,
+  ArrowRight, Compass, Disc, Lock, Telescope, CloudMoon,
+  Target, Wand2, Megaphone, TrendingUp, Share2,
 } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
 
 const SERVICES = [
   {
+    icon: Target,
+    title: "Brand Strategy",
+    copy: "Positioning, messaging, and a plan grounded in where your category is actually moving, not where it was last year.",
+  },
+  {
+    icon: Wand2,
+    title: "Creative & Content",
+    copy: "Concepts, shoots, and edits with a point of view, built to hold attention in a feed that doesn't wait for anyone.",
+  },
+  {
     icon: Compass,
-    title: "Creator Sourcing & Vetting",
-    copy: "We scout and screen creators against your category, audience, and budget, so every name on the list is already a fit, not a gamble.",
+    title: "Creator Partnerships",
+    copy: "We scout and screen creators against your category, audience, and budget, so every name on the list is already a fit.",
   },
   {
     icon: Disc,
     title: "Campaign Management",
-    copy: "One team runs outreach, negotiation, scheduling, and follow-up for every creator on a campaign, so nothing sits waiting on an email.",
+    copy: "One team runs outreach, negotiation, scheduling, and follow-up, so nothing sits waiting on an email.",
+  },
+  {
+    icon: Megaphone,
+    title: "Paid Social & In-Feed Ads",
+    copy: "Media planning and buying across paid social and in-feed placements, built to amplify what's already working.",
+  },
+  {
+    icon: TrendingUp,
+    title: "SEO & Organic Growth",
+    copy: "Technical fixes, content strategy, and link building aimed at compounding organic reach, not a one-month spike.",
+  },
+  {
+    icon: Share2,
+    title: "Social Media Management",
+    copy: "Editorial calendars, community management, and day-to-day posting, handled so your channels never go quiet.",
   },
   {
     icon: Lock,
     title: "Contracts & Compliance",
-    copy: "Agreements, W-9s, and usage rights are tracked start to finish, with clear status on what's signed and what's still outstanding.",
-  },
-  {
-    icon: Sparkles,
-    title: "Invoicing & Payments",
-    copy: "Creator fees and boost spend are logged against budget in real time, so you always know what's committed and what's left.",
-  },
-  {
-    icon: Images,
-    title: "Content Review & Approval",
-    copy: "Drafts route through one shared queue for approval before anything goes live, no more chasing screenshots over email.",
+    copy: "Agreements, W-9s, and usage rights are tracked start to finish, with clear status on what's signed and outstanding.",
   },
   {
     icon: Telescope,
     title: "Performance Reporting",
-    copy: "Reach, engagement, and earned media value are pulled into clear reports mapped back to spend, campaign by campaign.",
+    copy: "Reach, engagement, and earned media value pulled into clear reports mapped back to spend, campaign by campaign.",
   },
 ];
 
@@ -63,8 +79,8 @@ export default function ServicesPage() {
       <section className="mx-auto max-w-6xl px-5 py-6 sm:px-8 sm:py-10">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={i * 80} className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:-translate-y-1 hover:bg-white/[0.08]">
-              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-dusty to-lavender text-navy-deep">
+            <Reveal key={s.title} delay={i * 80} className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08]">
+              <div className="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-navy-deep text-lavender">
                 <s.icon size={20} />
               </div>
               <h3 className="mt-4 font-display text-lg text-white">{s.title}</h3>

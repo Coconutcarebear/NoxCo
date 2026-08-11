@@ -44,7 +44,7 @@ export default function HomePage() {
             <img
               src="/logo.jpg"
               alt="Nox & Co"
-              className="relative h-full w-full animate-bob rounded-2xl object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]"
+              className="relative h-full w-full rounded-2xl object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]"
             />
           </div>
 
@@ -106,8 +106,8 @@ export default function HomePage() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {PILLARS.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
-              <div className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:-translate-y-1 hover:bg-white/[0.08]">
-                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-dusty to-lavender text-navy-deep">
+              <div className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08]">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-navy-deep text-lavender">
                   <s.icon size={20} />
                 </div>
                 <h3 className="mt-4 font-display text-xl text-white">{s.title}</h3>
@@ -208,7 +208,7 @@ function OrbitReveal() {
             key={w}
             className="font-display text-2xl sm:text-4xl"
             style={{
-              backgroundImage: "linear-gradient(100deg,#9a9ca6,#ffffff,#c9a15a,#ffffff,#9a9ca6)",
+              backgroundImage: "linear-gradient(100deg,#8a8c96,#ffffff,#c7c9d1,#ffffff,#8a8c96)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               color: "transparent",
