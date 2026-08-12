@@ -62,6 +62,7 @@ export const NAV: NavItem[] = [
   { href: "/pipeline", label: "Star Chart", sub: "Pipeline", icon: "Compass" },
   { href: "/creators", label: "Constellation", sub: "Creators", icon: "Star" },
   { href: "/campaigns", label: "Eclipses", sub: "Campaigns", icon: "Disc" },
+  { href: "/projects", label: "Constellations", sub: "Marketing & creative", icon: "Sparkles" },
   { href: "/almanac", label: "Almanac", sub: "Calendar", icon: "CalendarDays" },
   { href: "/dockyard", label: "The Vault", sub: "Contracts", icon: "Lock" },
   { href: "/treasury", label: "Stardust", sub: "Invoices", icon: "Sparkles" },
@@ -102,6 +103,7 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/pipeline", label: "Star Chart", sub: "Pipeline", icon: "Compass" },
       { href: "/campaigns", label: "Eclipses", sub: "Campaigns", icon: "Disc" },
+      { href: "/projects", label: "Constellations", sub: "Marketing & creative", icon: "Sparkles" },
       { href: "/almanac", label: "Almanac", sub: "Calendar", icon: "CalendarDays" },
       { href: "/brief", label: "Star Briefs", sub: "Creator briefs", icon: "FileText" },
     ],
@@ -158,6 +160,31 @@ export const TODO_CATEGORIES: TodoCategory[] = [
 
 export const TODO_CATEGORY_KEYS = TODO_CATEGORIES.map((c) => c.key);
 export const TODO_PRIORITIES = ["Low", "Normal", "High"] as const;
+
+// Projects — general marketing / creative work beyond creator engagements.
+export const PROJECT_TYPES = [
+  "SEO", "Paid Social", "Social Management", "Creative & Design",
+  "Content", "Web", "Email", "PR", "Other",
+] as const;
+export const PROJECT_STATUSES = ["Planning", "In Progress", "Review", "Delivered", "On Hold"] as const;
+export const PROJECT_STATUS_HUE: Record<string, string> = {
+  "Planning": "#8A8C96",
+  "In Progress": "#5a6a8f",
+  "Review": "#C9A15A",
+  "Delivered": "#9FE0CE",
+  "On Hold": "#FFC9DE",
+};
+export const PROJECT_TYPE_ICON: Record<string, string> = {
+  "SEO": "TrendingUp",
+  "Paid Social": "Megaphone",
+  "Social Management": "Share2",
+  "Creative & Design": "Wand2",
+  "Content": "FileText",
+  "Web": "Globe",
+  "Email": "Mail",
+  "PR": "Newspaper",
+  "Other": "Sparkles",
+};
 
 // Account roles (Phase 2 enforces these in the UI; Phase 3 in the database).
 export const USER_ROLES = ["Owner", "Editor", "Viewer"] as const;

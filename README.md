@@ -69,9 +69,16 @@ This folder *is* the complete project — every file, not snippets. File map is 
 3. Click **Save and Deploy**. (It'll deploy once now; add the database keys next, then redeploy.)
 
 ### 5. Connect Supabase
+**Brand-new Supabase project (no data yet):**
 1. In Supabase, open your project → **SQL Editor → New query**.
-2. Paste the contents of **`supabase/schema.sql`** and **Run**. (Creates the tables.)
+2. Paste the contents of **`supabase/schema.sql`** and **Run**. (Creates every table, including
+   client-portal access control.)
 3. New query again → paste **`supabase/seed.sql`** → **Run**. (Loads the Nox & Co org + your user.)
+
+**Already have creators/campaigns/clients in Supabase?** Do **not** re-run `schema.sql`, it
+starts with `drop table ... cascade` and will erase your data. Instead run
+**`supabase/migrate_client_portal.sql`** once (SQL Editor → New query → paste → Run). It only
+adds new columns/tables and replaces the access policies, nothing existing is dropped.
 4. Go to **Project Settings → API** and copy the **Project URL** (bare, no trailing path) and
    the **anon public** key (not `service_role`).
 5. In Cloudflare Pages → your project → **Settings → Environment variables**, add for both
@@ -121,9 +128,13 @@ npm run dev                         # http://localhost:3000
 
 ## A few honest notes
 
-- **Security / RLS.** The CRM is set up as an *internal* tool: the database policies let the
-  anon key read and write once a user is signed in, so you can go live with minimal setup.
-  Review `schema.sql`'s policies before handing out broad access.
+- **Security / RLS.** Every table has real row-level security now. Staff accounts (Owner /
+  Editor / Viewer) keep full access; a `Client`-role account only ever reads the one company
+  it's linked to (its own campaigns, projects, engaged creators, posts). The unauthenticated
+  `anon` key has no table access at all, the public "share link" report reads go through a
+  single token-checked database function instead. New client accounts are created from the
+  **Clients** page in the app (name + budget, then "Create portal login"), the client sets
+  their own password on first visit using that same email.
 - **The public marketing pages ship with placeholder copy** — hero text, service descriptions,
   the About story, and stats are drafted in the Nox & Co voice but should be reviewed and
   personalized (real numbers, real story, real contact details) before this goes live to
@@ -151,8 +162,9 @@ nox-and-co/
 ├─ public/
 │  ├─ logo.svg · favicon.svg · wordmark.svg
 ├─ supabase/
-│  ├─ schema.sql                   # run FIRST in Supabase SQL editor
-│  └─ seed.sql                     # run SECOND — loads the Nox & Co org + your user
+│  ├─ schema.sql                   # fresh install: run FIRST in Supabase SQL editor
+│  ├─ seed.sql                     # fresh install: run SECOND — loads the Nox & Co org + your user
+│  └─ migrate_client_portal.sql    # existing database: run this ONCE instead of schema.sql
 └─ src/
    ├─ app/
    │  ├─ layout.tsx · globals.css

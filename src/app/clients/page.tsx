@@ -18,9 +18,11 @@ export default function ClientsPage() {
   const { canEdit } = usePerms();
   const companies = useStore((s) => s.companies);
   const campaigns = useStore((s) => s.campaigns);
+  const users = useStore((s) => s.users);
   const addCompany = useStore((s) => s.addCompany);
   const updateCompany = useStore((s) => s.updateCompany);
   const deleteCompany = useStore((s) => s.deleteCompany);
+  const inviteClientUser = useStore((s) => s.inviteClientUser);
 
   const [open, setOpen] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
@@ -28,6 +30,10 @@ export default function ClientsPage() {
   const [saving, setSaving] = useState(false);
   const EMPTY = { name: "", kind: "Client", color: CLIENT_HUES[0], budget: "", priority: "Normal", notes: "" };
   const [form, setForm] = useState(EMPTY);
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteName, setInviteName] = useState("");
+  const [inviting, setInviting] = useState(false);
+  const [inviteMsg, setInviteMsg] = useState<string | null>(null);
 
   const modalOpen = open || editId !== null;
   const countFor = useMemo(() => {
@@ -40,18 +46,38 @@ export default function ClientsPage() {
   function openEdit(co: (typeof companies)[number]) {
     setForm({ name: co.name, kind: co.kind || "Client", color: co.color || CLIENT_HUES[0], budget: co.budget ? String(co.budget) : "", priority: co.priority || "Normal", notes: co.notes ?? "" });
     setOpen(false); setConfirmId(null); setEditId(co.id);
+    setInviteEmail(""); setInviteName(""); setInviteMsg(null);
   }
-  function close() { setOpen(false); setEditId(null); setConfirmId(null); }
+  function close() { setOpen(false); setEditId(null); setConfirmId(null); setInviteEmail(""); setInviteName(""); setInviteMsg(null); }
 
   async function save() {
     if (!form.name.trim() || saving) return;
     setSaving(true);
     const patch = { name: form.name.trim(), kind: form.kind, color: form.color, budget: Number(form.budget) || 0, priority: form.priority, notes: form.notes || null };
-    if (editId) await updateCompany(editId, patch);
-    else await addCompany(patch);
-    setSaving(false);
-    setForm(EMPTY);
-    close();
+    if (editId) {
+      await updateCompany(editId, patch);
+      setSaving(false);
+      setForm(EMPTY);
+      close();
+    } else {
+      const created = await addCompany(patch);
+      setSaving(false);
+      setForm(EMPTY);
+      // stay open, scoped to the new company, so you can invite them to their portal next
+      if (created) { setOpen(false); setEditId(created.id); } else close();
+    }
+  }
+
+  async function sendInvite() {
+    if (!editId || !inviteEmail.trim() || inviting) return;
+    setInviting(true);
+    setInviteMsg(null);
+    const u = await inviteClientUser(editId, inviteEmail.trim(), inviteName.trim() || undefined);
+    setInviting(false);
+    if (u) {
+      setInviteEmail(""); setInviteName("");
+      setInviteMsg(`Portal access created for ${u.email}. Have them visit the login page and choose "Set your password" with this exact email.`);
+    }
   }
 
   return (
@@ -130,6 +156,35 @@ export default function ClientsPage() {
           </Field>
           <Field label="Notes"><Textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Optional" /></Field>
         </div>
+        {editId && (
+          <div className="mt-5 border-t border-white/10 pt-4">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-ink-faint">Client portal access</p>
+            <p className="mb-3 text-xs text-ink-soft">
+              Give this client a login that only ever sees {form.name || "their"} campaigns, projects, and reports, nothing else in Nox &amp; Co.
+            </p>
+            {users.filter((u) => u.role === "Client" && u.company_id === editId).length > 0 && (
+              <div className="mb-3 space-y-1.5">
+                {users.filter((u) => u.role === "Client" && u.company_id === editId).map((u) => (
+                  <div key={u.id} className="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-xs">
+                    <Icons.UserCheck size={13} className="text-seafoam-deep" />
+                    <span className="text-ink">{u.name}</span>
+                    <span className="text-ink-faint">{u.email}</span>
+                    <span className="ml-auto text-ink-faint">{u.auth_id ? "Active" : "Invited, awaiting sign-up"}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="grid grid-cols-2 gap-2">
+              <Input value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} placeholder="client@theirbrand.com" type="email" />
+              <Input value={inviteName} onChange={(e) => setInviteName(e.target.value)} placeholder="Contact name (optional)" />
+            </div>
+            <Button variant="soft" className="mt-2" onClick={sendInvite} disabled={!inviteEmail.trim() || inviting}>
+              {inviting ? "Creating…" : <><Icons.Send size={14} /> Create portal login</>}
+            </Button>
+            {inviteMsg && <p className="mt-2 text-xs leading-relaxed text-seafoam-deep">{inviteMsg}</p>}
+          </div>
+        )}
+
         <div className="mt-4 flex items-center justify-between gap-2">
           <div>
             {editId && (

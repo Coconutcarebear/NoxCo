@@ -54,13 +54,34 @@ export interface User {
   id: string;
   created_at: string;
   auth_id: string | null;
+  company_id: string | null; // set only when role = "Client", scopes their portal to one company
   name: string;
   email: string | null;
-  role: string;
+  role: string; // Owner / Editor / Viewer / Client
   color: string;
   emoji: string | null;
   gradient: string | null;
   active: boolean;
+}
+
+// General marketing / creative work that isn't tied to a creator engagement,
+// e.g. SEO, paid social, web, design, content.
+export interface Project {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  company_id: string | null;
+  name: string;
+  type: string;
+  status: string;
+  owner_id: string | null;
+  start_date: string | null;
+  due_date: string | null;
+  budget: number;
+  spent: number;
+  description: string | null;
+  notes: string | null;
+  archived: boolean;
 }
 
 // A creator PROFILE, durable, person-level facts only.
@@ -204,6 +225,7 @@ export interface Todo {
   assignee_id: string | null;
   campaign_id: string | null;
   creator_id: string | null;
+  project_id: string | null;
   notes: string | null;
 }
 
@@ -215,6 +237,7 @@ export interface Activity {
   creator_id: string | null;
   campaign_id: string | null;
   engagement_id: string | null;
+  project_id: string | null;
   text: string;
   kind: string;
 }
@@ -290,6 +313,11 @@ export const WRITABLE_ENGAGEMENT_KEYS: (keyof Engagement)[] = [
   "stage", "status_tag", "first_contact_date", "last_follow_up", "num_follow_ups",
   "last_response", "negotiation_notes", "is_annual", "planned_boost",
   "assignee_id", "archived",
+];
+
+export const WRITABLE_PROJECT_KEYS: (keyof Project)[] = [
+  "company_id", "name", "type", "status", "owner_id",
+  "start_date", "due_date", "budget", "spent", "description", "notes", "archived",
 ];
 
 // ---- Documents & Finance (per company) ----

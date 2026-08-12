@@ -21,29 +21,34 @@ export default function SharePage() {
         const token = new URLSearchParams(window.location.search).get("token");
         if (!token) { setState({ status: "error", message: "This link is missing its token." }); return; }
 
-        const { data: share } = await supabase.from("report_shares").select("*").eq("token", token).maybeSingle();
-        if (!share || share.revoked) { setState({ status: "error", message: "This report link is no longer available." }); return; }
+        // Everything is fetched through one security-definer RPC, scoped
+        // server-side to this token's company, so the anon key itself has
+        // no direct read access to any table anymore.
+        const { data: bundle, error: rpcError } = await supabase.rpc("get_share_bundle", { p_token: token });
+        if (rpcError || !bundle || (bundle as { error?: string }).error) {
+          setState({ status: "error", message: "This report link is no longer available." });
+          return;
+        }
 
-        const companyId = share.company_id as string;
-        const days = Number(share.days || 30);
+        const b = bundle as {
+          company_id: string; days: number;
+          company: { id: string; name: string } | null;
+          campaigns: { id: string; name: string; company_id: string | null }[];
+          engagements: { id: string; creator_id: string; campaign_id: string | null; company_id: string | null; stage: string }[];
+          creators: { id: string; name: string; handle: string; platform: string }[];
+          posts: Post[];
+          roi: RoiSettings | null;
+        };
 
-        const [companiesR, campaignsR, engagementsR, creatorsR, postsR, roiR] = await Promise.all([
-          supabase.from("companies").select("id,name"),
-          supabase.from("campaigns").select("id,name,company_id"),
-          supabase.from("engagements").select("id,creator_id,campaign_id,company_id,stage"),
-          supabase.from("creators").select("id,name,handle,platform"),
-          supabase.from("posts").select("*"),
-          supabase.from("roi_settings").select("*").eq("id", 1).maybeSingle(),
-        ]);
+        const companyId = b.company_id;
+        const days = Number(b.days || 30);
+        const campaigns = b.campaigns ?? [];
+        const engagements = b.engagements ?? [];
+        const creators = b.creators ?? [];
+        const posts = b.posts ?? [];
+        const roi = b.roi ?? FALLBACK_ROI;
 
-        const companies = (companiesR.data ?? []) as { id: string; name: string }[];
-        const campaigns = (campaignsR.data ?? []) as { id: string; name: string; company_id: string | null }[];
-        const engagements = (engagementsR.data ?? []) as { id: string; creator_id: string; campaign_id: string | null; company_id: string | null; stage: string }[];
-        const creators = (creatorsR.data ?? []) as { id: string; name: string; handle: string; platform: string }[];
-        const posts = (postsR.data ?? []) as Post[];
-        const roi = (roiR.data as RoiSettings) ?? FALLBACK_ROI;
-
-        const clientName = companies.find((c) => c.id === companyId)?.name ?? "Client";
+        const clientName = b.company?.name ?? "Client";
         const companyCampaignIds = new Set(campaigns.filter((c) => c.company_id === companyId).map((c) => c.id));
 
         const viewLikes: ViewLike[] = engagements

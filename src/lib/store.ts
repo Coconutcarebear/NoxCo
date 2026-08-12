@@ -10,6 +10,7 @@ import {
   type Campaign,
   type Company,
   type User,
+  type Project,
   type Prospect,
   type Activity,
   type InternalBoost,
@@ -25,24 +26,32 @@ import {
   type Stage,
   WRITABLE_CREATOR_KEYS,
   WRITABLE_ENGAGEMENT_KEYS,
+  WRITABLE_PROJECT_KEYS,
 } from "./types";
 
 // Find (or create) the roster row for a signed-in auth user.
-async function ensureProfile(authUser: AuthUser): Promise<User | null> {
+// Returns the roster row for a signed-in auth user, "unauthorized" if no
+// invite exists for them (and they're not the very first ever sign-in), or
+// null on an unrelated failure (e.g. offline).
+async function ensureProfile(authUser: AuthUser): Promise<User | "unauthorized" | null> {
   // already linked?
   const linked = await supabase.from("users").select("*").eq("auth_id", authUser.id).maybeSingle();
   if (linked.data) return linked.data as User;
 
-  // claim an existing unlinked roster row with the same email
+  // claim an existing unlinked roster row with the same email (staff- or
+  // client-invited, waiting for its first login)
   if (authUser.email) {
     const byEmail = await supabase.from("users").select("*").eq("email", authUser.email).is("auth_id", null).maybeSingle();
     if (byEmail.data) {
       const claimed = await supabase.from("users").update({ auth_id: authUser.id }).eq("id", (byEmail.data as User).id).select().single();
-      return (claimed.data as User) ?? (byEmail.data as User);
+      if (claimed.data) return claimed.data as User;
+      return "unauthorized";
     }
   }
 
-  // first real login becomes Owner; everyone else Viewer
+  // first real login ever becomes Owner (bootstraps the account). Anyone
+  // else with no matching invite row is blocked at the database (RLS), this
+  // insert simply won't succeed for them.
   const existing = await supabase.from("users").select("id", { count: "exact", head: true }).not("auth_id", "is", null);
   const isFirst = (existing.count ?? 0) === 0;
   const emoji = EMOJI_AVATARS[Math.floor(Math.random() * EMOJI_AVATARS.length)];
@@ -57,10 +66,11 @@ async function ensureProfile(authUser: AuthUser): Promise<User | null> {
     gradient: DEFAULT_GRADIENT,
     active: true,
   }).select().single();
-  return (created.data as User) ?? null;
+  if (created.data) return created.data as User;
+  return "unauthorized";
 }
 
-type Refs = { creator_id?: string | null; campaign_id?: string | null; engagement_id?: string | null };
+type Refs = { creator_id?: string | null; campaign_id?: string | null; engagement_id?: string | null; project_id?: string | null };
 
 function pick<T>(keys: (keyof T)[], patch: Partial<T>): Record<string, unknown> {
   const out: Record<string, unknown> = {};
@@ -134,6 +144,7 @@ interface ScopeInput {
   internalBoosts: InternalBoost[];
   todos: Todo[];
   prospects: Prospect[];
+  projects: Project[];
 }
 
 // Narrow every collection to one client (via campaign.company_id). null = all clients.
@@ -149,6 +160,7 @@ function computeScoped(activeCompanyId: string | null, d: ScopeInput) {
       scopedInternalBoosts: d.internalBoosts,
       scopedTodos: d.todos,
       scopedProspects: d.prospects,
+      scopedProjects: d.projects,
     };
   }
   const campIds = new Set(d.campaigns.filter((c) => c.company_id === activeCompanyId).map((c) => c.id));
@@ -166,6 +178,7 @@ function computeScoped(activeCompanyId: string | null, d: ScopeInput) {
     scopedInternalBoosts: d.internalBoosts.filter((b) => b.company_id === activeCompanyId),
     scopedTodos: d.todos.filter((t) => !t.campaign_id || campIds.has(t.campaign_id)),
     scopedProspects: d.prospects.filter((p) => !p.company_id || p.company_id === activeCompanyId),
+    scopedProjects: d.projects.filter((p) => p.company_id === activeCompanyId),
   };
 }
 
@@ -189,6 +202,7 @@ interface StoreState {
   internalBoosts: InternalBoost[];
   todos: Todo[];
   prospects: Prospect[];
+  projects: Project[];
   activity: Activity[];
   roiSettings: RoiSettings;
   complianceItems: ComplianceItem[];
@@ -210,7 +224,9 @@ interface StoreState {
   scopedInternalBoosts: InternalBoost[];
   scopedTodos: Todo[];
   scopedProspects: Prospect[];
+  scopedProjects: Project[];
   setActiveCompany: (id: string | null) => void;
+  unauthorized: boolean;
 
   recompute: () => void;
   undoStack: { label: string; run: () => Promise<void> }[];
@@ -218,6 +234,7 @@ interface StoreState {
   pushUndo: (label: string, run: () => Promise<void>) => void;
   initAuth: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<string | null>;
+  signUp: (email: string, password: string) => Promise<string | null>;
   signOut: () => Promise<void>;
   updateCurrentUser: (patch: Partial<User>) => Promise<void>;
   loadUserSettings: () => Promise<void>;
@@ -259,6 +276,12 @@ interface StoreState {
   addUser: (partial: Partial<User>) => Promise<User | null>;
   updateUser: (id: string, patch: Partial<User>) => Promise<void>;
   deleteUser: (id: string) => Promise<void>;
+  inviteClientUser: (companyId: string, email: string, name?: string) => Promise<User | null>;
+
+  // projects (general marketing / creative work)
+  addProject: (partial: Partial<Project>) => Promise<Project | null>;
+  updateProject: (id: string, patch: Partial<Project>) => Promise<void>;
+  deleteProject: (id: string) => Promise<void>;
 
   // todos
   addTodo: (partial: Partial<Todo>) => Promise<Todo | null>;
@@ -320,6 +343,7 @@ export const useStore = create<StoreState>((set, get) => ({
   internalBoosts: [],
   todos: [],
   prospects: [],
+  projects: [],
   activity: [],
   roiSettings: DEFAULT_ROI,
   complianceItems: [],
@@ -339,7 +363,9 @@ export const useStore = create<StoreState>((set, get) => ({
   scopedInternalBoosts: [],
   scopedTodos: [],
   scopedProspects: [],
+  scopedProjects: [],
   undoStack: [],
+  unauthorized: false,
 
   setActiveCompany: (id) => {
     if (typeof window !== "undefined") {
@@ -349,9 +375,9 @@ export const useStore = create<StoreState>((set, get) => ({
     get().recompute();
   },
   recompute: () => {
-    const { creators, campaigns, engagements, posts, internalBoosts, todos, prospects, activeCompanyId } = get();
+    const { creators, campaigns, engagements, posts, internalBoosts, todos, prospects, projects, activeCompanyId } = get();
     const views = buildViews(creators, campaigns, engagements);
-    const scoped = computeScoped(activeCompanyId, { campaigns, views, engagements, posts, internalBoosts, todos, prospects });
+    const scoped = computeScoped(activeCompanyId, { campaigns, views, engagements, posts, internalBoosts, todos, prospects, projects });
     set({
       views,
       activeViews: views.filter((v) => !v.archived && !v.creator.archived),
@@ -377,15 +403,23 @@ export const useStore = create<StoreState>((set, get) => ({
     const { data } = await supabase.auth.getSession();
     if (data.session) {
       const cu = await ensureProfile(data.session.user);
-      set({ session: data.session, currentUser: cu });
-      await get().fetchAll();
-      await get().loadUserSettings();
-      // restore last-selected client
-      try {
-        const saved = typeof window !== "undefined" ? localStorage.getItem("sb_active_company") : null;
-        if (saved && get().companies.some((c) => c.id === saved)) get().setActiveCompany(saved);
-      } catch {}
-      get().reconcileSpend();
+      if (cu === "unauthorized") {
+        set({ session: data.session, currentUser: null, unauthorized: true });
+      } else {
+        set({ session: data.session, currentUser: cu, unauthorized: false });
+        await get().fetchAll();
+        await get().loadUserSettings();
+        // clients always land scoped to their own company; staff restore their last pick
+        if (cu?.role === "Client" && cu.company_id) {
+          get().setActiveCompany(cu.company_id);
+        } else {
+          try {
+            const saved = typeof window !== "undefined" ? localStorage.getItem("sb_active_company") : null;
+            if (saved && get().companies.some((c) => c.id === saved)) get().setActiveCompany(saved);
+          } catch {}
+        }
+        get().reconcileSpend();
+      }
     }
     set({ authReady: true });
 
@@ -393,11 +427,16 @@ export const useStore = create<StoreState>((set, get) => ({
       if (event === "SIGNED_IN" && sess) {
         if (get().session?.user.id === sess.user.id) return; // already handled
         const cu = await ensureProfile(sess.user);
-        set({ session: sess, currentUser: cu });
+        if (cu === "unauthorized") {
+          set({ session: sess, currentUser: null, unauthorized: true });
+          return;
+        }
+        set({ session: sess, currentUser: cu, unauthorized: false });
         await get().fetchAll();
         await get().loadUserSettings();
+        if (cu?.role === "Client" && cu.company_id) get().setActiveCompany(cu.company_id);
       } else if (event === "SIGNED_OUT") {
-        set({ session: null, currentUser: null, userSettings: {} });
+        set({ session: null, currentUser: null, userSettings: {}, unauthorized: false });
       }
     });
   },
@@ -407,9 +446,14 @@ export const useStore = create<StoreState>((set, get) => ({
     return error ? error.message : null;
   },
 
+  signUp: async (email, password) => {
+    const { error } = await supabase.auth.signUp({ email: email.trim(), password });
+    return error ? error.message : null;
+  },
+
   signOut: async () => {
     await supabase.auth.signOut();
-    set({ session: null, currentUser: null, userSettings: {} });
+    set({ session: null, currentUser: null, userSettings: {}, unauthorized: false });
   },
 
   updateCurrentUser: async (patch) => {
@@ -441,7 +485,7 @@ export const useStore = create<StoreState>((set, get) => ({
     }
     set({ loading: true, error: null });
     try {
-      const [co, us, c, cam, en, po, ib, td, pr, ac, rs, ci, ex, pm, dc] = await Promise.all([
+      const [co, us, c, cam, en, po, ib, td, pr, ac, rs, ci, ex, pm, dc, pj] = await Promise.all([
         supabase.from("companies").select("*").order("name", { ascending: true }),
         supabase.from("users").select("*").order("created_at", { ascending: true }),
         supabase.from("creators").select("*").order("created_at", { ascending: true }),
@@ -457,6 +501,7 @@ export const useStore = create<StoreState>((set, get) => ({
         supabase.from("expenses").select("*").order("spent_on", { ascending: false }),
         supabase.from("payments").select("*").order("paid_date", { ascending: false }),
         supabase.from("documents").select("*").order("created_at", { ascending: false }),
+        supabase.from("projects").select("*").order("created_at", { ascending: false }),
       ]);
       if (c.error) throw c.error;
       const creators = (c.data as Creator[]) ?? [];
@@ -490,6 +535,7 @@ export const useStore = create<StoreState>((set, get) => ({
         expenses: (ex.data as Expense[]) ?? [],
         payments: (pm.data as Payment[]) ?? [],
         documents: (dc.data as Document[]) ?? [],
+        projects: (pj.data as Project[]) ?? [],
         views,
         activeViews: views.filter((v) => !v.archived && !v.creator.archived),
         loading: false,
@@ -514,6 +560,7 @@ export const useStore = create<StoreState>((set, get) => ({
       creator_id: refs.creator_id ?? null,
       campaign_id: refs.campaign_id ?? null,
       engagement_id: refs.engagement_id ?? null,
+      project_id: refs.project_id ?? null,
       text,
       kind,
     };
@@ -527,6 +574,7 @@ export const useStore = create<StoreState>((set, get) => ({
           creator_id: refs.creator_id ?? null,
           campaign_id: refs.campaign_id ?? null,
           engagement_id: refs.engagement_id ?? null,
+          project_id: refs.project_id ?? null,
           text,
           kind,
         })
@@ -857,6 +905,83 @@ export const useStore = create<StoreState>((set, get) => ({
       set({ error: error.message });
       if (prev) set({ users: [...get().users, prev] });
     }
+  },
+
+  // Staff-only: creates the pending roster row for a new client. They don't
+  // have a login yet, when they sign up with this exact email, it gets
+  // claimed automatically and they land straight in their own portal.
+  inviteClientUser: async (companyId, email, name) => {
+    const base = {
+      company_id: companyId,
+      email: email.trim(),
+      name: (name ?? "").trim() || email.split("@")[0],
+      role: "Client",
+      color: "#8FA8D8",
+      active: true,
+    };
+    const { data, error } = await supabase.from("users").insert(base).select().single();
+    if (error || !data) {
+      set({ error: error?.message ?? "Could not create portal access." });
+      return null;
+    }
+    set({ users: [...get().users, data as User] });
+    return data as User;
+  },
+
+  // ---- projects (general marketing / creative) -----------------------------
+  addProject: async (partial) => {
+    const base = {
+      company_id: partial.company_id ?? get().activeCompanyId ?? null,
+      name: (partial.name ?? "").trim() || "New project",
+      type: partial.type ?? "General",
+      status: partial.status ?? "Planning",
+      owner_id: partial.owner_id ?? null,
+      start_date: partial.start_date ?? null,
+      due_date: partial.due_date ?? null,
+      budget: Number(partial.budget ?? 0),
+      spent: Number(partial.spent ?? 0),
+      description: partial.description ?? null,
+      notes: partial.notes ?? null,
+      archived: partial.archived ?? false,
+    };
+    const { data, error } = await supabase.from("projects").insert(base).select().single();
+    if (error || !data) {
+      set({ error: error?.message ?? "Could not add project." });
+      return null;
+    }
+    set({ projects: [...get().projects, data as Project] });
+    get().recompute();
+    await get().log(`Started a new project: ${(data as Project).name}`, {}, "create");
+    return data as Project;
+  },
+
+  updateProject: async (id, patch) => {
+    const prev = get().projects.find((p) => p.id === id);
+    set({ projects: get().projects.map((p) => (p.id === id ? { ...p, ...patch } : p)) });
+    get().recompute();
+    const body = { ...pick(WRITABLE_PROJECT_KEYS, patch), updated_at: new Date().toISOString() };
+    const { data, error } = await supabase.from("projects").update(body).eq("id", id).select().single();
+    if (error) {
+      set({ error: error.message });
+      if (prev) set({ projects: get().projects.map((p) => (p.id === id ? prev : p)) });
+      get().recompute();
+      return;
+    }
+    if (data) { set({ projects: get().projects.map((p) => (p.id === id ? (data as Project) : p)) }); get().recompute(); }
+  },
+
+  deleteProject: async (id) => {
+    const prev = get().projects.find((p) => p.id === id);
+    set({ projects: get().projects.filter((p) => p.id !== id) });
+    get().recompute();
+    const { error } = await supabase.from("projects").delete().eq("id", id);
+    if (error) {
+      set({ error: error.message });
+      if (prev) set({ projects: [...get().projects, prev] });
+      get().recompute();
+      return;
+    }
+    if (prev) get().pushUndo("Delete project", async () => { await supabase.from("projects").insert(prev); await get().fetchAll(); });
   },
 
   // ---- todos --------------------------------------------------------------
