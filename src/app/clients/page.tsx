@@ -97,32 +97,28 @@ export default function ClientsPage() {
       {companies.length === 0 ? (
         <EmptyState title="No clients yet." hint={canEdit ? "Add your first client to get started." : "Ask an editor to add a client."} action={canEdit ? <Button variant="primary" onClick={openNew}><Icons.Plus size={15} /> Add client</Button> : undefined} />
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {[...companies].sort((a,b)=>(PRIO_RANK[a.priority]??1)-(PRIO_RANK[b.priority]??1) || a.name.localeCompare(b.name)).map((co) => (
-            <Card key={co.id} className="p-4">
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl text-white" style={{ background: co.color || CLIENT_HUES[0] }}>
-                  <Icons.Building2 size={18} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h2 className="truncate font-display text-lg leading-tight text-ink">{co.name}</h2>
-                    {canEdit && (
-                      <button onClick={() => openEdit(co)} aria-label="Edit client" className="ml-auto text-ink-faint transition hover:text-dusty-deep">
-                        <Icons.Pencil size={14} />
-                      </button>
-                    )}
-                  </div>
-                  <div className="mt-1 flex items-center gap-2">
-                    <Badge hue={co.kind === "In-house" ? "#9FE0CE" : "#B7C8EA"}>{co.kind || "Client"}</Badge>
-                    <span className="text-xs text-ink-faint">{countFor.get(co.id) ?? 0} eclipse{(countFor.get(co.id) ?? 0) === 1 ? "" : "s"}</span>
-                    {co.priority && co.priority !== "Normal" && <Badge hue={PRIO_HUE[co.priority] ?? "#B7C8EA"}>{co.priority}</Badge>}
-                  </div>
-                  {Number(co.budget) > 0 && <p className="mt-1.5 text-xs text-ink-soft">Budget: <b className="text-ink">{money(Number(co.budget))}</b></p>}
-                  {co.notes && <p className="mt-2 text-xs text-ink-soft">{co.notes}</p>}
+        <div className="divide-y divide-white/10 border-t border-white/10">
+          {[...companies].sort((a,b)=>(PRIO_RANK[a.priority]??1)-(PRIO_RANK[b.priority]??1) || a.name.localeCompare(b.name)).map((co, i) => (
+            <div key={co.id} className={`group flex flex-wrap items-start gap-4 py-5 sm:flex-nowrap sm:items-center ${i === 0 ? "sm:py-7" : ""}`}>
+              <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: co.color || CLIENT_HUES[0] }} />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h2 className={`font-display leading-tight text-ink ${i === 0 ? "text-2xl" : "text-lg"}`}>{co.name}</h2>
+                  <Badge hue={co.kind === "In-house" ? "#9FE0CE" : "#B7C8EA"}>{co.kind || "Client"}</Badge>
+                  {co.priority && co.priority !== "Normal" && <Badge hue={PRIO_HUE[co.priority] ?? "#B7C8EA"}>{co.priority}</Badge>}
                 </div>
+                {co.notes && <p className="mt-1.5 max-w-xl text-sm text-ink-soft">{co.notes}</p>}
               </div>
-            </Card>
+              <div className="flex shrink-0 items-center gap-6 text-sm text-ink-soft">
+                <span>{countFor.get(co.id) ?? 0} eclipse{(countFor.get(co.id) ?? 0) === 1 ? "" : "s"}</span>
+                {Number(co.budget) > 0 && <span>Budget <b className="text-ink">{money(Number(co.budget))}</b></span>}
+                {canEdit && (
+                  <button onClick={() => openEdit(co)} aria-label="Edit client" className="text-ink-faint opacity-0 transition group-hover:opacity-100 hover:text-dusty-deep">
+                    <Icons.Pencil size={15} />
+                  </button>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       )}

@@ -24,12 +24,12 @@ export default function ContactPage() {
 
   return (
     <MarketingShell>
-      <Reveal className="mx-auto max-w-4xl px-5 pb-10 pt-16 text-center sm:px-8 sm:pb-14 sm:pt-24">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-lavender">Contact</p>
-        <h1 className="mt-4 font-display text-4xl leading-[1.1] text-white sm:text-5xl">
+      <Reveal className="mx-auto max-w-2xl px-5 pb-12 pt-28 text-center sm:px-8 sm:pb-16 sm:pt-36">
+        <p className="text-xs font-medium uppercase tracking-[0.32em] text-white/40">Contact</p>
+        <h1 className="mt-7 font-display text-4xl font-medium leading-[1.15] text-white sm:text-5xl">
           Let&apos;s chart your next campaign.
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
+        <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-white/55 sm:text-lg">
           Tell us a little about your brand and what you&apos;re planning, we typically reply within one business day.
         </p>
       </Reveal>
@@ -37,7 +37,7 @@ export default function ContactPage() {
       <Reveal delay={120} className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 sm:pb-28">
         <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
           {/* form */}
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8">
+          <div className="rounded-2xl border border-white/10 p-6 sm:p-8">
             {sent ? (
               <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
                 <div className="grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-navy-deep text-lavender">
@@ -103,7 +103,7 @@ export default function ContactPage() {
                 <button
                   onClick={submit}
                   disabled={!name.trim() || !email.trim() || !message.trim()}
-                  className="flex w-full items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-dusty to-lavender py-3 text-sm font-semibold text-navy-deep transition hover:brightness-105 disabled:opacity-40"
+                  className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-dusty-deep py-3 text-sm font-semibold text-navy-deep transition hover:brightness-105 disabled:opacity-40"
                 >
                   Send message <ArrowRight size={15} />
                 </button>
@@ -114,41 +114,27 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* side info */}
-          <div className="flex flex-col gap-4">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <div className="flex items-center gap-2.5 text-white">
-                <Mail size={16} className="text-lavender" />
-                <span className="text-sm font-semibold">Email</span>
-              </div>
-              <a href="mailto:hello@noxandco.com" className="mt-1.5 block text-sm text-white/60 hover:text-white">
-                hello@noxandco.com
+          {/* side info, quiet list */}
+          <div className="divide-y divide-white/10 border-t border-white/10 lg:border-t-0">
+            {[
+              { icon: Mail, label: "Email", value: "hello@noxandco.com", href: "mailto:hello@noxandco.com" },
+              { icon: Instagram, label: "Instagram", value: "@nox.co.agency", href: "https://www.instagram.com/nox.co.agency" },
+              { icon: Music2, label: "TikTok", value: "@nox.co.agency", href: "https://www.tiktok.com/@nox.co.agency" },
+            ].map((row) => (
+              <a key={row.label} href={row.href} target={row.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="group flex items-center gap-3 py-5">
+                <row.icon size={15} className="shrink-0 text-white/40" />
+                <span className="flex-1">
+                  <span className="block text-xs uppercase tracking-[0.1em] text-white/35">{row.label}</span>
+                  <span className="block text-sm text-white/70 transition group-hover:text-white">{row.value}</span>
+                </span>
               </a>
-            </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <div className="flex items-center gap-2.5 text-white">
-                <Instagram size={16} className="text-lavender" />
-                <span className="text-sm font-semibold">Instagram</span>
-              </div>
-              <a href="https://www.instagram.com/nox.co.agency" target="_blank" rel="noreferrer" className="mt-1.5 block text-sm text-white/60 hover:text-white">
-                @nox.co.agency
-              </a>
-            </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <div className="flex items-center gap-2.5 text-white">
-                <Music2 size={16} className="text-lavender" />
-                <span className="text-sm font-semibold">TikTok</span>
-              </div>
-              <a href="https://www.tiktok.com/@nox.co.agency" target="_blank" rel="noreferrer" className="mt-1.5 block text-sm text-white/60 hover:text-white">
-                @nox.co.agency
-              </a>
-            </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <div className="flex items-center gap-2.5 text-white">
-                <Clock size={16} className="text-lavender" />
-                <span className="text-sm font-semibold">Response time</span>
-              </div>
-              <p className="mt-1.5 text-sm text-white/60">Usually within one business day.</p>
+            ))}
+            <div className="flex items-center gap-3 py-5">
+              <Clock size={15} className="shrink-0 text-white/40" />
+              <span>
+                <span className="block text-xs uppercase tracking-[0.1em] text-white/35">Response time</span>
+                <span className="block text-sm text-white/70">Usually within one business day.</span>
+              </span>
             </div>
           </div>
         </div>

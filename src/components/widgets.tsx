@@ -9,13 +9,13 @@ import { compactMoney } from "@/lib/format";
 export function PageHeader({ title, sub, icon, action }: { title: string; sub: string; icon?: string; action?: ReactNode }) {
   const Cmp = icon ? (Icons as Record<string, any>)[icon] ?? Icons.Star : null;
   return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+    <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-6">
       <div>
-        <div className="flex items-center gap-2 text-dusty-deep">
-          {Cmp && <Cmp size={20} />}
-          <span className="text-sm font-semibold uppercase tracking-wide">{sub}</span>
+        <div className="flex items-center gap-2 text-white/40">
+          {Cmp && <Cmp size={13} />}
+          <span className="text-xs font-semibold uppercase tracking-[0.22em]">{sub}</span>
         </div>
-        <h1 className="font-display text-3xl text-ink">{title}</h1>
+        <h1 className="mt-2 font-display text-4xl font-medium leading-tight text-ink">{title}</h1>
       </div>
       {action}
     </div>
@@ -25,18 +25,14 @@ export function PageHeader({ title, sub, icon, action }: { title: string; sub: s
 export function KpiCard({ label, value, hint, hue = "#C7C9D1", icon }: { label: string; value: string; hint?: string; hue?: string; icon?: string }) {
   const Cmp = icon ? (Icons as Record<string, any>)[icon] ?? Icons.Star : null;
   return (
-    <Card className="p-4">
-      <div className="flex items-start justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wide text-ink-soft">{label}</span>
-        {Cmp && (
-          <span className="grid h-7 w-7 place-items-center rounded-full" style={{ backgroundColor: hue }}>
-            <Cmp size={15} className="text-navy-deep" />
-          </span>
-        )}
+    <div className="border-l-2 py-1 pl-4" style={{ borderColor: hue }}>
+      <div className="flex items-center gap-2 text-ink-faint">
+        {Cmp && <Cmp size={13} style={{ color: hue }} />}
+        <span className="text-xs font-semibold uppercase tracking-[0.14em]">{label}</span>
       </div>
-      <div className="mt-1 font-display text-2xl text-ink">{value}</div>
-      {hint && <div className="mt-0.5 text-xs text-ink-faint">{hint}</div>}
-    </Card>
+      <div className="mt-1.5 font-display text-3xl font-medium text-ink">{value}</div>
+      {hint && <div className="mt-1 text-xs text-ink-faint">{hint}</div>}
+    </div>
   );
 }
 

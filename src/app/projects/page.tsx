@@ -95,39 +95,44 @@ export default function ProjectsPage() {
       {visible.length === 0 ? (
         <EmptyState title="No projects yet." hint={canEdit ? "Add your first project to get started." : "Ask an editor to add a project."} action={canEdit ? <Button variant="primary" onClick={openNew}><Icons.Plus size={15} /> Add project</Button> : undefined} />
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((p) => {
-            const Cmp = (Icons as Record<string, any>)[PROJECT_TYPE_ICON[p.type] ?? "Sparkles"] ?? Icons.Sparkles;
-            const owner = users.find((u) => u.id === p.owner_id);
-            return (
-              <Card key={p.id} className="p-4">
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-navy-deep text-lavender">
-                    <Cmp size={18} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <h2 className="truncate font-display text-lg leading-tight text-ink">{p.name}</h2>
-                      {canEdit && (
-                        <button onClick={() => openEdit(p)} aria-label="Edit project" className="ml-auto text-ink-faint transition hover:text-dusty-deep">
-                          <Icons.Pencil size={14} />
-                        </button>
-                      )}
+        <div className="space-y-10">
+          {PROJECT_STATUSES.filter((st) => visible.some((p) => p.status === st)).map((status) => (
+            <div key={status}>
+              <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/40">
+                {status} <span className="text-white/25">· {visible.filter((p) => p.status === status).length}</span>
+              </p>
+              <div className="divide-y divide-white/10 border-t border-white/10">
+                {visible.filter((p) => p.status === status).map((p) => {
+                  const Cmp = (Icons as Record<string, any>)[PROJECT_TYPE_ICON[p.type] ?? "Sparkles"] ?? Icons.Sparkles;
+                  const owner = users.find((u) => u.id === p.owner_id);
+                  return (
+                    <div key={p.id} className="group flex flex-wrap items-start gap-4 py-4 sm:flex-nowrap sm:items-center">
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 text-lavender">
+                        <Cmp size={15} />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h2 className="font-display text-base leading-tight text-ink">{p.name}</h2>
+                          <span className="text-xs text-ink-faint">{p.type} · {companyName(p.company_id)}</span>
+                        </div>
+                        {p.description && <p className="mt-1 max-w-xl truncate text-xs text-ink-soft">{p.description}</p>}
+                      </div>
+                      <div className="flex shrink-0 items-center gap-5 text-xs text-ink-soft">
+                        {p.due_date && <span>Due <b className="text-ink">{fmtDate(p.due_date)}</b></span>}
+                        {Number(p.budget) > 0 && <span><b className="text-ink">{money(Number(p.budget))}</b></span>}
+                        {owner && <span className="hidden sm:inline">{owner.name}</span>}
+                        {canEdit && (
+                          <button onClick={() => openEdit(p)} aria-label="Edit project" className="text-ink-faint opacity-0 transition group-hover:opacity-100 hover:text-dusty-deep">
+                            <Icons.Pencil size={14} />
+                          </button>
+                        )}
+                      </div>
                     </div>
-                    <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                      <Badge hue={PROJECT_STATUS_HUE[p.status] ?? "#8FA8D8"}>{p.status}</Badge>
-                      <span className="text-xs text-ink-faint">{p.type}</span>
-                      <span className="text-xs text-ink-faint">· {companyName(p.company_id)}</span>
-                    </div>
-                    {p.due_date && <p className="mt-1.5 text-xs text-ink-soft">Due <b className="text-ink">{fmtDate(p.due_date)}</b></p>}
-                    {Number(p.budget) > 0 && <p className="mt-1 text-xs text-ink-soft">Budget: <b className="text-ink">{money(Number(p.budget))}</b></p>}
-                    {owner && <p className="mt-1 text-xs text-ink-faint">Owner: {owner.name}</p>}
-                    {p.description && <p className="mt-2 text-xs text-ink-soft">{p.description}</p>}
-                  </div>
-                </div>
-              </Card>
-            );
-          })}
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
