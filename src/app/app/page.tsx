@@ -13,7 +13,6 @@ import { CreatorSlideOver } from "@/components/CreatorSlideOver";
 export default function HarborPage() {
   const views = useStore((s) => s.scopedActiveViews);
   const engagements = useStore((s) => s.scopedEngagements);
-  const campaigns = useStore((s) => s.scopedCampaigns);
   const companies = useStore((s) => s.companies);
   const activeCompanyId = useStore((s) => s.activeCompanyId);
   const activity = useStore((s) => s.activity);
@@ -26,19 +25,23 @@ export default function HarborPage() {
   const level = alertLevel(kpis.utilization);
   const copy = ALERT_COPY[level];
 
+  const SILVER_RAMP = ["#E5E6EA", "#C7C9D1", "#A6A8B2", "#8A8C96", "#6C6D76", "#5a6a8f"];
   const byCampaign = useMemo(() => {
     const map = new Map<string, number>();
     active.forEach((c) => map.set(c.campaign ?? "Unassigned", (map.get(c.campaign ?? "Unassigned") ?? 0) + totalSpendOf(c)));
     return Array.from(map.entries())
-      .map(([label, value]) => ({ label, value, color: campaigns.find((x) => x.name === label)?.color }))
-      .sort((a, b) => b.value - a.value);
-  }, [active, campaigns]);
+      .map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value)
+      .map((row, i) => ({ ...row, color: SILVER_RAMP[i % SILVER_RAMP.length] }));
+  }, [active]);
 
   const byPlatform = useMemo(() => {
     const map = new Map<string, number>();
     active.forEach((c) => map.set(c.platform, (map.get(c.platform) ?? 0) + totalSpendOf(c)));
-    const hues: Record<string, string> = { TikTok: "#FFC9DE", Instagram: "#CDB4F0", YouTube: "#FFD3BA", "Multi-platform": "#9FE0CE" };
-    return Array.from(map.entries()).map(([label, value]) => ({ label, value, color: hues[label] })).sort((a, b) => b.value - a.value);
+    return Array.from(map.entries())
+      .map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value)
+      .map((row, i) => ({ ...row, color: SILVER_RAMP[i % SILVER_RAMP.length] }));
   }, [active]);
 
   const awaitingApproval = active.filter((c) => c.stage === "Transmitted");
@@ -74,20 +77,20 @@ export default function HarborPage() {
         </div>
 
         <div className="flex flex-col justify-center gap-4 border-t border-white/10 pt-5 lg:col-span-2 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-          <KpiCard label="In talks" value={String(kpis.activeNegotiations)} hint="active negotiations" icon="MessageCircle" hue="#B7C8EA" />
-          <KpiCard label="Total creators" value={String(kpis.distinctCreators)} hint="under the stars" icon="Users" hue="#CDB4F0" />
-          <KpiCard label="Stars aligned" value={String(kpis.postsPublished)} hint="posts live" icon="Sparkles" hue="#9FE0CE" />
+          <KpiCard label="In talks" value={String(kpis.activeNegotiations)} hint="active negotiations" icon="MessageCircle" hue="#C7C9D1" />
+          <KpiCard label="Total creators" value={String(kpis.distinctCreators)} hint="under the stars" icon="Users" hue="#A6A8B2" />
+          <KpiCard label="Stars aligned" value={String(kpis.postsPublished)} hint="posts live" icon="Sparkles" hue="#E5E6EA" />
         </div>
       </div>
 
       {/* Secondary stat rail */}
       <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:grid-cols-3 lg:grid-cols-6">
-        <KpiCard label="Contracts out" value={String(kpis.contractsOutstanding)} hint="awaiting signature" icon="ScrollText" hue="#FFD0A0" />
-        <KpiCard label="Pending invoices" value={String(kpis.pendingInvoices)} icon="Receipt" hue="#FFC9DE" />
-        <KpiCard label="Awaiting approval" value={String(kpis.contentAwaitingApproval)} hint="queued" icon="Inbox" hue="#FFC9DE" />
-        <KpiCard label="Boost spend" value={compactMoney(kpis.boostSpend)} icon="Rocket" hue="#9FE0CE" />
-        <KpiCard label="Creator spend" value={compactMoney(kpis.creatorSpend)} icon="Star" hue="#8FA8D8" />
-        <KpiCard label="Remaining" value={compactMoney(kpis.remaining)} hint={kpis.remaining < 0 ? "over budget" : "room to grow"} icon="TrendingUp" hue="#9FE0CE" />
+        <KpiCard label="Contracts out" value={String(kpis.contractsOutstanding)} hint="awaiting signature" icon="ScrollText" hue="#8A8C96" />
+        <KpiCard label="Pending invoices" value={String(kpis.pendingInvoices)} icon="Receipt" hue="#6C6D76" />
+        <KpiCard label="Awaiting approval" value={String(kpis.contentAwaitingApproval)} hint="queued" icon="Inbox" hue="#6C6D76" />
+        <KpiCard label="Boost spend" value={compactMoney(kpis.boostSpend)} icon="Rocket" hue="#E5E6EA" />
+        <KpiCard label="Creator spend" value={compactMoney(kpis.creatorSpend)} icon="Star" hue="#5a6a8f" />
+        <KpiCard label="Remaining" value={compactMoney(kpis.remaining)} hint={kpis.remaining < 0 ? "over budget" : "room to grow"} icon="TrendingUp" hue="#E5E6EA" />
       </div>
 
       {/* Spend charts (wide) + attention rail (narrow) */}

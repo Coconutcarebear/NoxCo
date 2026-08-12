@@ -9,8 +9,8 @@ import { TagPicker } from "@/components/TagPicker";
 
 /* ---------------- palette (premium botanical, print-safe) ---------------- */
 const P = {
-  ink: "#2B3149", body: "#4E4B5E", brass: "#B98F42", bloom: "#5E9C90",
-  blush: "#D89D8E", paper: "#FBFAF4", rule: "#E7E0D0", faint: "#9A93A3",
+  ink: "#12151F", body: "#3A3D46", brass: "#6C7A99", bloom: "#5a6a8f",
+  blush: "#A6A8B2", paper: "#F4F4F6", rule: "#DCDDE2", faint: "#8A8C96",
 };
 const SERIF = "Georgia, 'Iowan Old Style', 'Times New Roman', serif";
 
@@ -48,6 +48,21 @@ const DELIVERABLE_TEMPLATES: { name: string; main: string; story: string }[] = [
   { name: "Creator Choice",
     main: "One vlog-style video. Vertical, mobile-first. Minimum 45 seconds.\n\nThis one's yours, tell the story you think fits the brand best, in your own format and voice, with the brand woven in naturally.",
     story: "One frame within 24 hours.\n\nSuggested overlay:\n• My kind of day\n\nCTA: Learn more, link in bio" },
+  { name: "Paid Social Ad Concept",
+    main: "One static or motion ad creative, sized for feed and Stories/Reels placements.\n\nLead with the hook in the first second, then the offer, then a clear CTA. Keep copy minimal, the visual should carry it.",
+    story: "One alternate crop or variant for Stories/Reels placement." },
+  { name: "SEO Content Piece",
+    main: "One long-form article targeting the agreed keyword and search intent.\n\nInclude a clear H1, scannable subheads, internal links where relevant, and a meta title/description within character limits.",
+    story: "One social pull-quote or teaser for organic promotion." },
+  { name: "Brand Photography",
+    main: "A shot list covering the agreed scenes/products, lifestyle and clean product angles both, delivered as high-res edited files.",
+    story: "A few behind-the-scenes frames for organic social use." },
+  { name: "Email Campaign Concept",
+    main: "One email concept: subject line, preview text, body narrative, and a single clear CTA. Keep the structure skimmable.",
+    story: "One companion social teaser announcing the send." },
+  { name: "Website / Landing Page Copy",
+    main: "Section-by-section copy for the agreed page: hero, supporting sections, and a closing CTA, aligned to the brand voice.",
+    story: "" },
 ];
 
 /* ---------------- types ---------------- */
@@ -191,7 +206,7 @@ export default function BriefPage() {
       `}</style>
 
       <div className="print:hidden">
-        <PageHeader title="Brief Builder" sub="Creator briefs" icon="FileText"
+        <PageHeader title="Brief Builder" sub="Campaign & content briefs" icon="FileText"
           action={
             <div className="flex flex-wrap gap-2">
               <Button variant="ghost" onClick={reset}><Icons.RotateCcw size={15} /> Reset</Button>
@@ -245,17 +260,17 @@ export default function BriefPage() {
             <FC title="The Concept">
               <Textarea rows={4} value={b.concept} onChange={(e) => set({ concept: e.target.value })} placeholder="The story you want them to tell." />
               <div className="mt-3 grid gap-3 sm:grid-cols-3">
-                <Field label="🗓 Filming"><Input value={b.filming} onChange={(e) => set({ filming: e.target.value })} placeholder="Mid-June – early July" /></Field>
-                <Field label="📍 Location"><Input value={b.location} onChange={(e) => set({ location: e.target.value })} placeholder="Chinatown, Manhattan" /></Field>
-                <Field label="🎥 Format"><Input value={b.format} onChange={(e) => set({ format: e.target.value })} /></Field>
+                <Field label="Filming"><Input value={b.filming} onChange={(e) => set({ filming: e.target.value })} placeholder="Mid-June – early July" /></Field>
+                <Field label="Location"><Input value={b.location} onChange={(e) => set({ location: e.target.value })} placeholder="Chinatown, Manhattan" /></Field>
+                <Field label="Format"><Input value={b.format} onChange={(e) => set({ format: e.target.value })} /></Field>
               </div>
             </FC>
           ) : (
             <FC title="The Event">
               <div className="grid gap-3">
-                <Field label="📅 Date & time"><Input value={b.eventDateTime} onChange={(e) => set({ eventDateTime: e.target.value })} placeholder="June 18, 2026, 7:00 pm – 10:00 pm" /></Field>
-                <Field label="📍 Location"><Input value={b.eventLocation} onChange={(e) => set({ eventLocation: e.target.value })} placeholder="123 Main St, Manhattan" /></Field>
-                <Field label="🎤 Event title"><Input value={b.eventTitle} onChange={(e) => set({ eventTitle: e.target.value })} placeholder="BRAND LAUNCH MIXER" /></Field>
+                <Field label="Date & time"><Input value={b.eventDateTime} onChange={(e) => set({ eventDateTime: e.target.value })} placeholder="June 18, 2026, 7:00 pm – 10:00 pm" /></Field>
+                <Field label="Location"><Input value={b.eventLocation} onChange={(e) => set({ eventLocation: e.target.value })} placeholder="123 Main St, Manhattan" /></Field>
+                <Field label="Event title"><Input value={b.eventTitle} onChange={(e) => set({ eventTitle: e.target.value })} placeholder="BRAND LAUNCH MIXER" /></Field>
                 <Field label="About the event"><Textarea rows={3} value={b.eventDesc} onChange={(e) => set({ eventDesc: e.target.value })} /></Field>
               </div>
             </FC>
@@ -264,7 +279,7 @@ export default function BriefPage() {
           <FC title="What We're Asking For" hint="Pick a template to autofill">
             <div className="mb-3 flex flex-wrap gap-1.5">
               {DELIVERABLE_TEMPLATES.map((t) => (
-                <button key={t.name} onClick={() => applyTemplate(t.name)} className="rounded-full bg-sky/50 px-3 py-1 text-xs font-semibold text-dusty-deep transition hover:bg-sky">{t.name}</button>
+                <button key={t.name} onClick={() => applyTemplate(t.name)} className="border border-white/10 px-2.5 py-1 text-xs font-medium text-ink-soft transition hover:border-dusty-deep hover:text-dusty-deep">{t.name}</button>
               ))}
             </div>
             <Field label="Main deliverable"><Textarea rows={6} value={b.mainDeliverable} onChange={(e) => set({ mainDeliverable: e.target.value })} placeholder="Pick a template above, or write your own…" /></Field>
@@ -329,7 +344,7 @@ export default function BriefPage() {
       {/* per-page print footer (fixed repeats on each printed page) */}
       <div className="print-footer pointer-events-none fixed inset-x-0 bottom-0 hidden" style={{ display: "none" }}>
         <div style={{ textAlign: "center", fontSize: 9, letterSpacing: "0.14em", color: P.faint, fontFamily: SERIF, padding: "8px 0" }}>
-          <span style={{ color: P.brass }}>✦</span>&nbsp; CREATOR BRIEF · {(b.title || "NOX & CO").toUpperCase()} &nbsp;<span style={{ color: P.brass }}>✦</span>
+          CREATOR BRIEF · {(b.title || "NOX & CO").toUpperCase()}
           {b.link ? <span style={{ marginLeft: 10, fontSize: 8, letterSpacing: "0.06em" }}>{b.link.replace(/^https?:\/\//, "")}</span> : null}
         </div>
       </div>
@@ -343,13 +358,13 @@ function BriefSheet({ b, timeline }: { b: Brief; timeline: Step[] }) {
   return (
     <div id="brief-sheet" className="overflow-hidden rounded-[28px] shadow-float" style={{ background: P.paper, color: P.body, fontFamily: SERIF }}>
       {/* cover */}
-      <div className="relative px-10 pt-11 pb-9" style={{ background: "linear-gradient(160deg,#F3EEE2 0%,#EFE9F3 55%,#E7EEF3 100%)" }}>
+      <div className="relative px-10 pt-11 pb-9" style={{ background: "linear-gradient(160deg,#EDEDF0 0%,#E5E6EA 55%,#DCDDE2 100%)" }}>
         <Compass />
         <div className="flex items-center gap-2 text-[11px] font-bold uppercase" style={{ letterSpacing: "0.34em", color: P.brass, fontFamily: SERIF }}>
-          <span>✦</span> Creator Brief
+          Creator Brief
         </div>
         <h1 className="mt-3 max-w-[85%] leading-[1.04]" style={{ fontFamily: "var(--font-display)", fontSize: 40, color: P.ink }}>{b.title || "Your Brief Title"}</h1>
-        {b.dateline && <p className="mt-2 text-sm" style={{ color: "#6E6780", fontStyle: "italic" }}>{b.dateline}</p>}
+        {b.dateline && <p className="mt-2 text-sm" style={{ color: P.faint, fontStyle: "italic" }}>{b.dateline}</p>}
         <Rule />
       </div>
 
@@ -358,10 +373,10 @@ function BriefSheet({ b, timeline }: { b: Brief; timeline: Step[] }) {
 
         {b.mode === "event" ? (
           <Sec n="II" title="The Event">
-            <div className="rounded-2xl px-5 py-4" style={{ background: "#F4EFE1", border: `1px solid ${P.rule}` }}>
-              {b.eventDateTime && <p className="text-sm" style={{ color: P.ink }}>📅 &nbsp;{b.eventDateTime}</p>}
-              {b.eventLocation && <p className="mt-1.5 text-sm" style={{ color: P.ink }}>📍 &nbsp;{b.eventLocation}</p>}
-              {b.eventTitle && <p className="mt-3 tracking-wide" style={{ fontFamily: "var(--font-display)", fontSize: 22, color: P.ink }}>🎤 &nbsp;{b.eventTitle}</p>}
+            <div className="rounded-2xl px-5 py-4" style={{ background: "#EAEBEF", border: `1px solid ${P.rule}` }}>
+              {b.eventDateTime && <p className="text-sm" style={{ color: P.ink }}><b>When</b> &nbsp;{b.eventDateTime}</p>}
+              {b.eventLocation && <p className="mt-1.5 text-sm" style={{ color: P.ink }}><b>Where</b> &nbsp;{b.eventLocation}</p>}
+              {b.eventTitle && <p className="mt-3 tracking-wide" style={{ fontFamily: "var(--font-display)", fontSize: 22, color: P.ink }}>{b.eventTitle}</p>}
             </div>
             {b.eventDesc && <div className="mt-3"><Prose t={b.eventDesc} /></div>}
           </Sec>
@@ -369,9 +384,9 @@ function BriefSheet({ b, timeline }: { b: Brief; timeline: Step[] }) {
           <Sec n="II" title="The Concept">
             <Prose t={b.concept} />
             <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
-              {b.filming && <Chip>🗓 {b.filming}</Chip>}
-              {b.location && <Chip>📍 {b.location}</Chip>}
-              {b.format && <Chip>🎥 {b.format}</Chip>}
+              {b.filming && <Chip>{b.filming}</Chip>}
+              {b.location && <Chip>{b.location}</Chip>}
+              {b.format && <Chip>{b.format}</Chip>}
             </div>
           </Sec>
         )}
@@ -427,7 +442,7 @@ function BriefSheet({ b, timeline }: { b: Brief; timeline: Step[] }) {
         <Sec n="X" title="Revisions"><Prose t={b.revisionsText} /></Sec>
 
         <div className="mt-7 rounded-2xl px-5 py-4 text-xs" style={{ background: "#F1ECF3", color: "#6B6079", fontStyle: "italic" }}>
-          <span style={{ color: P.brass, fontStyle: "normal", fontWeight: 700 }}>✦ A Note on This Brief, </span>{NOTE_TEXT}
+          <span style={{ color: P.brass, fontStyle: "normal", fontWeight: 700 }}>A note on this brief, </span>{NOTE_TEXT}
         </div>
         <div className="mt-6 text-center text-[10px] uppercase" style={{ letterSpacing: "0.28em", color: P.faint }}>
           {b.link ? b.link.replace(/^https?:\/\//, "") : "noxandco.com"}
@@ -446,7 +461,7 @@ function Timeline({ steps }: { steps: Step[] }) {
         const last = i === steps.length - 1;
         return (
           <div key={i} className="relative flex gap-4 pb-5 last:pb-0">
-            {!last && <span className="absolute left-[15px] top-7 bottom-0 border-l-2 border-dashed" style={{ borderColor: "#D9CFBB" }} />}
+            {!last && <span className="absolute left-[15px] top-7 bottom-0 border-l-2 border-dashed" style={{ borderColor: "#D5D6DB" }} />}
             <span className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full text-white" style={{ background: last ? P.brass : i === 0 ? P.bloom : P.ink }}>{icon(s.icon)}</span>
             <div className="flex-1 rounded-2xl px-4 py-2.5" style={{ background: "#fff", border: `1px solid ${P.rule}` }}>
               <div className="flex items-baseline justify-between gap-2">
@@ -495,7 +510,7 @@ function Sec({ n, title, children }: { n: string; title: string; children: React
   );
 }
 function Rule() {
-  return <div className="mt-5 flex items-center gap-3" style={{ color: P.brass }}><span className="h-px flex-1" style={{ background: "#D9CFBB" }} /><span className="text-xs">✦ · ✦</span><span className="h-px flex-1" style={{ background: "#D9CFBB" }} /></div>;
+  return <div className="mt-5 flex items-center gap-3" style={{ color: P.brass }}><span className="h-px flex-1" style={{ background: "#D5D6DB" }} /></div>;
 }
 function Chip({ children }: { children: React.ReactNode }) {
   return <span className="rounded-full px-3 py-1" style={{ background: "#EFE9DA", color: "#6E6455" }}>{children}</span>;
@@ -503,21 +518,21 @@ function Chip({ children }: { children: React.ReactNode }) {
 function Prose({ t, list }: { t: string; list?: boolean }) {
   if (!t?.trim()) return <span style={{ color: "#BDB6C6" }}>-</span>;
   const lines = t.split("\n").filter((l) => l.trim() !== "");
-  if (list) return <ul className="space-y-1.5">{lines.map((l, i) => <li key={i} className="flex gap-2"><span style={{ color: P.brass }}>✦</span><span>{l.replace(/^[•\-\s]+/, "")}</span></li>)}</ul>;
+  if (list) return <ul className="space-y-1.5">{lines.map((l, i) => <li key={i} className="flex gap-2"><span style={{ color: P.brass }}>–</span><span>{l.replace(/^[•\-\s]+/, "")}</span></li>)}</ul>;
   return <>{lines.map((l, i) => {
-    if (l.trim().startsWith("•")) return <p key={i} className="mb-1 flex gap-2 pl-1"><span style={{ color: P.bloom }}>◆</span><span>{l.replace(/^[•\s]+/, "")}</span></p>;
+    if (l.trim().startsWith("•")) return <p key={i} className="mb-1 flex gap-2 pl-1"><span style={{ color: P.bloom }}>–</span><span>{l.replace(/^[•\s]+/, "")}</span></p>;
     return <p key={i} className="mb-2 last:mb-0">{l}</p>;
   })}</>;
 }
 function Compass() {
   return (
-    <svg width="72" height="72" viewBox="0 0 72 72" className="absolute right-8 top-8 opacity-70" aria-hidden>
-      <circle cx="36" cy="36" r="30" fill="none" stroke="#C9B78C" strokeWidth="1.4" />
-      {[0, 72, 144, 216, 288].map((deg) => (
-        <ellipse key={deg} cx="36" cy="20" rx="6.5" ry="10" fill="#B98F42" opacity="0.55" transform={`rotate(${deg} 36 36)`} />
-      ))}
-      <circle cx="36" cy="36" r="6" fill="#5E9C90" opacity="0.85" />
-      <circle cx="36" cy="36" r="2.2" fill="#2B3149" />
+    <svg width="72" height="72" viewBox="0 0 72 72" className="absolute right-8 top-8 opacity-60" aria-hidden>
+      <circle cx="36" cy="36" r="30" fill="none" stroke="#C7C9D1" strokeWidth="1" />
+      <path
+        d="M36 14 C37.5 30 39 33 52 36 C39 39 37.5 42 36 58 C34.5 42 33 39 20 36 C33 33 34.5 30 36 14 Z"
+        fill="#8A8C96"
+      />
+      <circle cx="36" cy="36" r="2" fill="#12151F" />
     </svg>
   );
 }

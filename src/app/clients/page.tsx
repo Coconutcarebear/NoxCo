@@ -9,10 +9,10 @@ import { PageHeader } from "@/components/widgets";
 import { money } from "@/lib/format";
 
 const PRIORITIES = ["High", "Normal", "Low"];
-const PRIO_HUE: Record<string,string> = { High: "#FFC9DE", Normal: "#B7C8EA", Low: "#C7D0E0" };
+const PRIO_HUE: Record<string,string> = { High: "#E5E6EA", Normal: "#A6A8B2", Low: "#6C6D76" };
 const PRIO_RANK: Record<string,number> = { High: 0, Normal: 1, Low: 2 };
 
-const CLIENT_HUES = ["#8FA8D8", "#9FE0CE", "#CDB4F0", "#FDE68A", "#FFC9DE", "#FFD0A0", "#A9D2F4", "#F0A9C4"];
+const CLIENT_HUES = ["#C7C9D1", "#B3B5BE", "#9A9CA6", "#8A8C96", "#6C6D76", "#5a6a8f", "#E5E6EA", "#A2A4AE"];
 
 export default function ClientsPage() {
   const { canEdit } = usePerms();
@@ -104,8 +104,8 @@ export default function ClientsPage() {
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className={`font-display leading-tight text-ink ${i === 0 ? "text-2xl" : "text-lg"}`}>{co.name}</h2>
-                  <Badge hue={co.kind === "In-house" ? "#9FE0CE" : "#B7C8EA"}>{co.kind || "Client"}</Badge>
-                  {co.priority && co.priority !== "Normal" && <Badge hue={PRIO_HUE[co.priority] ?? "#B7C8EA"}>{co.priority}</Badge>}
+                  <Badge hue={co.kind === "In-house" ? "#E5E6EA" : "#A6A8B2"}>{co.kind || "Client"}</Badge>
+                  {co.priority && co.priority !== "Normal" && <Badge hue={PRIO_HUE[co.priority] ?? "#A6A8B2"}>{co.priority}</Badge>}
                 </div>
                 {co.notes && <p className="mt-1.5 max-w-xl text-sm text-ink-soft">{co.notes}</p>}
               </div>

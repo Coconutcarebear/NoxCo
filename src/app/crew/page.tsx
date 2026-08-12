@@ -4,7 +4,7 @@ import { useState } from "react";
 import * as Icons from "lucide-react";
 import { useStore } from "@/lib/store";
 import { usePerms } from "@/lib/perms";
-import { USER_ROLES, gradientCss } from "@/lib/constants";
+import { USER_ROLES } from "@/lib/constants";
 import { Card, Button, Badge, Field, Input, Select, Modal, EmptyState } from "@/components/ui";
 import { PageHeader } from "@/components/widgets";
 
@@ -39,7 +39,7 @@ export default function CrewPage() {
     setOpen(false);
   }
 
-  const roleHue: Record<string, string> = { Owner: "#FDE68A", Editor: "#B7C8EA", Viewer: "#C7D0E0" };
+  const roleHue: Record<string, string> = { Owner: "#E5E6EA", Editor: "#B3B5BE", Viewer: "#8A8C96" };
 
   return (
     <div>
@@ -84,7 +84,9 @@ export default function CrewPage() {
                     <tr key={u.id} className="border-t border-sky/80">
                       <td className="px-4 py-2.5">
                         <div className="flex items-center gap-2.5">
-                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-lg" style={{ background: gradientCss(u.gradient) }} aria-hidden>{u.emoji || "🙂"}</span>
+                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 bg-navy-deep text-lavender" aria-hidden>
+                            {(() => { const Cmp = (Icons as Record<string, any>)[u.emoji || "Star"] ?? Icons.Star; return <Cmp size={16} />; })()}
+                          </span>
                           <div className="min-w-0">
                             <input
                               defaultValue={u.name}
@@ -96,7 +98,7 @@ export default function CrewPage() {
                         </div>
                       </td>
                       <td className="px-3 py-2.5">
-                        {u.auth_id ? <Badge hue="#9FE0CE">Linked</Badge> : <span className="text-xs text-ink-faint">Not linked</span>}
+                        {u.auth_id ? <Badge hue="#C7C9D1">Linked</Badge> : <span className="text-xs text-ink-faint">Not linked</span>}
                       </td>
                       <td className="px-3 py-2.5">
                         <Select

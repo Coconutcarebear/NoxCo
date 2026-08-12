@@ -33,18 +33,18 @@ export const STAGE_MEANING: Record<Stage, string> = {
 };
 // A brand hue per stage for cards & badges.
 export const STAGE_HUE: Record<Stage, string> = {
-  "Sighted": "#A6A8B2",
-  "Signal Sent": "#B9BBC4",
-  "In Orbit": "#C7C9D1",
-  "Aligning": "#CBD3E8",
-  "Committed": "#AFC4EA",
-  "Locked In": "#9DB8EA",
-  "In Motion": "#BFC8EA",
-  "Transmitted": "#D6CFF2",
-  "Cleared for Launch": "#E3DEF7",
-  "Shining": "#F0E4B8",
-  "Complete": "#E8D9A0",
-  "Star-Crossed": "#D9B98A",
+  "Sighted": "#9A9CA6",
+  "Signal Sent": "#A6A8B2",
+  "In Orbit": "#B3B5BE",
+  "Aligning": "#C0C2CA",
+  "Committed": "#CCCED5",
+  "Locked In": "#D9DADF",
+  "In Motion": "#C7C9D1",
+  "Transmitted": "#B9BBC4",
+  "Cleared for Launch": "#ACAEB8",
+  "Shining": "#E5E6EA",
+  "Complete": "#F2F2F4",
+  "Star-Crossed": "#6C6D76",
 };
 // Stages that count as "posted / live".
 export const PUBLISHED_STAGES: Stage[] = ["Shining", "Complete"];
@@ -146,16 +146,16 @@ export type TodoCategory = {
 
 // Workflow stages for the Orders (to-do) board. Edit / reorder freely, // the page renders one section per entry, in this order.
 export const TODO_CATEGORIES: TodoCategory[] = [
-  { key: "Outreach",   label: "Outreach",   hue: "#B7C8EA", icon: "Send",          hint: "First contact & follow-ups" },
-  { key: "Briefing",   label: "Briefing",   hue: "#A9D2F4", icon: "FileText",      hint: "Briefs sent & concepts approved" },
-  { key: "Contracts",  label: "Contracts",  hue: "#CDB4F0", icon: "ScrollText",    hint: "Agreements out & signed" },
-  { key: "Filming",    label: "Filming",    hue: "#9FE0CE", icon: "Clapperboard",  hint: "Shoots scheduled & shot" },
-  { key: "Edits",      label: "Edits",      hue: "#FDE68A", icon: "Scissors",      hint: "Drafts reviewed & approved" },
-  { key: "Posting",    label: "Posting",    hue: "#FFD0A0", icon: "Rocket",        hint: "Content scheduled & live" },
-  { key: "Boosting",   label: "Boosting",   hue: "#F0A9C4", icon: "Megaphone",     hint: "Paid amplification set up" },
-  { key: "Billing",    label: "Billing",    hue: "#FFC9DE", icon: "Coins",         hint: "Invoices in & paid" },
-  { key: "Reporting",  label: "Reporting",  hue: "#A9D2F4", icon: "LineChart",     hint: "Recaps & performance wrap-ups" },
-  { key: "General",    label: "General",    hue: "#C7D0E0", icon: "ListChecks",    hint: "Anything else" },
+  { key: "Outreach",   label: "Outreach",   hue: "#C7C9D1", icon: "Send",          hint: "First contact & follow-ups" },
+  { key: "Briefing",   label: "Briefing",   hue: "#B9BBC4", icon: "FileText",      hint: "Briefs sent & concepts approved" },
+  { key: "Contracts",  label: "Contracts",  hue: "#AEB0B9", icon: "ScrollText",    hint: "Agreements out & signed" },
+  { key: "Filming",    label: "Filming",    hue: "#A2A4AE", icon: "Clapperboard",  hint: "Shoots scheduled & shot" },
+  { key: "Edits",      label: "Edits",      hue: "#9698A2", icon: "Scissors",      hint: "Drafts reviewed & approved" },
+  { key: "Posting",    label: "Posting",    hue: "#E5E6EA", icon: "Rocket",        hint: "Content scheduled & live" },
+  { key: "Boosting",   label: "Boosting",   hue: "#5a6a8f", icon: "Megaphone",     hint: "Paid amplification set up" },
+  { key: "Billing",    label: "Billing",    hue: "#8A8C96", icon: "Coins",         hint: "Invoices in & paid" },
+  { key: "Reporting",  label: "Reporting",  hue: "#C7C9D1", icon: "LineChart",     hint: "Recaps & performance wrap-ups" },
+  { key: "General",    label: "General",    hue: "#6C6D76", icon: "ListChecks",    hint: "Anything else" },
 ];
 
 export const TODO_CATEGORY_KEYS = TODO_CATEGORIES.map((c) => c.key);
@@ -170,9 +170,9 @@ export const PROJECT_STATUSES = ["Planning", "In Progress", "Review", "Delivered
 export const PROJECT_STATUS_HUE: Record<string, string> = {
   "Planning": "#8A8C96",
   "In Progress": "#5a6a8f",
-  "Review": "#C9A15A",
-  "Delivered": "#9FE0CE",
-  "On Hold": "#FFC9DE",
+  "Review": "#C7C9D1",
+  "Delivered": "#F2F2F4",
+  "On Hold": "#6C6D76",
 };
 export const PROJECT_TYPE_ICON: Record<string, string> = {
   "SEO": "TrendingUp",
@@ -207,12 +207,16 @@ export function gradientCss(key: string | null | undefined): string {
   return (GRADIENTS.find((g) => g.key === key) ?? GRADIENTS.find((g) => g.key === DEFAULT_GRADIENT)!).css;
 }
 
-// Cute emoji avatars people can pick for their account.
-export const EMOJI_AVATARS = [
-  "🐨", "🦊", "🐸", "🐙", "🦄", "🐧", "🐢", "🦋", "🐳", "🦕",
-  "🌸", "🌈", "⭐", "🍡", "🍄", "🌷", "🪼", "🐝", "🦉", "🦈",
-  "🐰", "🐼", "🦔", "🦭", "🌊", "🔮", "🍒", "🌻", "🐡", "👾",
+// Silver icon avatars people can pick for their account, black background,
+// silver symbol, no color, no emoji. Stored in the same `emoji` column as
+// a lucide icon name.
+export const AVATAR_ICONS = [
+  "Star", "Sparkles", "Sparkle", "Moon", "MoonStar", "Sun", "Sunrise", "Sunset",
+  "CloudMoon", "Telescope", "Compass", "Rocket", "Orbit", "Satellite", "Globe",
+  "Wand2", "Zap", "Gem", "Snowflake", "Flame", "Feather", "Wind", "Anchor", "Cloud",
 ];
+// Backwards-compatible alias.
+export const EMOJI_AVATARS = AVATAR_ICONS;
 
 // Rough share of a creator's followers who view a given story, used to
 // pre-estimate organic story views from follower count. Override per entry.

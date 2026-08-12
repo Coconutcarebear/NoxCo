@@ -85,19 +85,19 @@ export function AppShell({ children }: { children: ReactNode }) {
                 const isOpen = openGroup === group.label;
                 return (
                   <div key={group.label} className="relative">
-                    <button
+    <button
                       onClick={() => setOpenGroup(isOpen ? null : group.label)}
                       className={clsx(
-                        "flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition",
+                        "flex items-center gap-1.5 px-3 py-2 text-sm font-medium uppercase tracking-[0.08em] transition",
                         hasActive ? "text-white" : "text-ink-soft hover:text-white",
                         isOpen && "bg-white/5"
                       )}
                     >
                       {group.label}
-                      <Icons.ChevronDown size={13} className={clsx("transition-transform text-ink-faint", isOpen && "rotate-180")} />
+                      <Icons.ChevronDown size={12} className={clsx("transition-transform text-ink-faint", isOpen && "rotate-180")} />
                     </button>
                     {isOpen && (
-                      <div className="absolute left-0 top-full z-40 mt-2 w-64 overflow-hidden rounded-2xl border border-white/10 bg-cream shadow-float">
+                      <div className="absolute left-0 top-full z-40 mt-2 w-64 border border-white/10 bg-cream shadow-float">
                         {group.items.map((item) => {
                           const active = pathname === item.href;
                           return (
@@ -105,15 +105,12 @@ export function AppShell({ children }: { children: ReactNode }) {
                               key={item.href}
                               href={item.href}
                               className={clsx(
-                                "flex items-center gap-3 px-4 py-2.5 text-sm transition",
+                                "flex items-center justify-between gap-3 border-b border-white/5 px-4 py-2.5 text-sm transition last:border-b-0",
                                 active ? "bg-white/5 text-white" : "text-ink-soft hover:bg-white/5 hover:text-ink"
                               )}
                             >
-                              <span className="text-dusty-deep"><NavIcon name={item.icon} size={16} /></span>
-                              <span className="flex-1 min-w-0">
-                                <span className="block truncate font-semibold leading-tight">{item.label}</span>
-                                <span className="block truncate text-[11px] text-ink-faint">{item.sub}</span>
-                              </span>
+                              <span className="truncate font-medium leading-tight">{item.label}</span>
+                              <span className="shrink-0 text-[11px] text-ink-faint">{item.sub}</span>
                             </Link>
                           );
                         })}
@@ -249,7 +246,7 @@ function GlobalSearch() {
     : [];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-cream shadow-float">
+    <div className="overflow-hidden border border-white/10 bg-cream shadow-float">
       <div className="relative">
         <Icons.Search size={15} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-faint" />
         <input

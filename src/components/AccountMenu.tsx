@@ -3,7 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import * as Icons from "lucide-react";
 import { useStore } from "@/lib/store";
-import { EMOJI_AVATARS, GRADIENTS, gradientCss } from "@/lib/constants";
+import { AVATAR_ICONS } from "@/lib/constants";
+
+function AvatarIcon({ name, size = 16 }: { name?: string | null; size?: number }) {
+  const Cmp = (Icons as Record<string, any>)[name || "Star"] ?? Icons.Star;
+  return <Cmp size={size} />;
+}
 
 export function AccountMenu() {
   const me = useStore((s) => s.currentUser);
@@ -23,7 +28,6 @@ export function AccountMenu() {
   }, []);
 
   if (!me) return null;
-  const avatar = me.emoji || "🙂";
 
   function saveName() {
     const v = name.trim();
@@ -34,18 +38,19 @@ export function AccountMenu() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="grid h-9 w-9 place-items-center rounded-full text-lg shadow-pill transition hover:brightness-105"
-        style={{ background: gradientCss(me.gradient) }}
+        className="grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-navy-deep text-lavender transition hover:border-white/30"
         aria-label="Your account"
         title={me.name}
       >
-        <span aria-hidden>{avatar}</span>
+        <AvatarIcon name={me.emoji} size={16} />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-40 mt-2 w-64 overflow-hidden rounded-2xl border border-white bg-cream shadow-float">
-          <div className="flex items-center gap-3 border-b border-sky/60 px-4 py-3">
-            <span className="grid h-11 w-11 place-items-center rounded-full text-2xl" style={{ background: gradientCss(me.gradient) }} aria-hidden>{avatar}</span>
+        <div className="absolute right-0 top-full z-40 mt-2 w-64 border border-white/10 bg-cream shadow-float">
+          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+            <span className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-navy-deep text-lavender" aria-hidden>
+              <AvatarIcon name={me.emoji} size={20} />
+            </span>
             <div className="min-w-0">
               <p className="truncate font-semibold text-ink">{me.name}</p>
               <p className="text-[11px] text-ink-faint">{me.role}{me.email ? ` · ${me.email}` : ""}</p>
@@ -60,38 +65,23 @@ export function AccountMenu() {
                 onChange={(e) => setName(e.target.value)}
                 onBlur={saveName}
                 onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
-                className="w-full rounded-lg border border-sky/70 bg-cream px-2.5 py-1.5 text-sm text-ink outline-none focus:border-dusty-soft"
+                className="w-full rounded-lg border border-white/15 bg-navy-deep px-2.5 py-1.5 text-sm text-ink outline-none focus:border-dusty-soft"
               />
             </label>
 
             <div>
               <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Avatar</span>
-              <div className="grid grid-cols-8 gap-1">
-                {EMOJI_AVATARS.map((e) => (
+              <div className="grid grid-cols-6 gap-1.5">
+                {AVATAR_ICONS.map((icon) => (
                   <button
-                    key={e}
-                    onClick={() => updateCurrentUser({ emoji: e })}
-                    className={`grid h-7 w-7 place-items-center rounded-lg text-lg transition hover:bg-sky ${me.emoji === e ? "bg-sky ring-2 ring-dusty-deep" : ""}`}
-                    aria-label={`Use ${e}`}
+                    key={icon}
+                    onClick={() => updateCurrentUser({ emoji: icon })}
+                    className={`grid h-8 w-8 place-items-center rounded-lg border transition ${me.emoji === icon ? "border-dusty-deep bg-white/10 text-white" : "border-white/10 bg-navy-deep text-lavender hover:border-white/25"}`}
+                    aria-label={`Use ${icon}`}
+                    title={icon}
                   >
-                    <span aria-hidden>{e}</span>
+                    <AvatarIcon name={icon} size={14} />
                   </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Color</span>
-              <div className="grid grid-cols-10 gap-1">
-                {GRADIENTS.map((g) => (
-                  <button
-                    key={g.key}
-                    onClick={() => updateCurrentUser({ gradient: g.key })}
-                    title={g.label}
-                    aria-label={g.label}
-                    className={`h-6 w-6 rounded-full transition hover:scale-110 ${me.gradient === g.key ? "ring-2 ring-dusty-deep ring-offset-1" : ""}`}
-                    style={{ background: g.css }}
-                  />
                 ))}
               </div>
             </div>
@@ -99,7 +89,7 @@ export function AccountMenu() {
 
           <button
             onClick={() => signOut()}
-            className="flex w-full items-center gap-2 border-t border-sky/60 px-4 py-2.5 text-sm font-semibold text-ink-soft transition hover:bg-sky/40 hover:text-bubblegum"
+            className="flex w-full items-center gap-2 border-t border-white/10 px-4 py-2.5 text-sm font-semibold text-ink-soft transition hover:bg-white/5 hover:text-bubblegum"
           >
             <Icons.LogOut size={15} /> Sign out
           </button>

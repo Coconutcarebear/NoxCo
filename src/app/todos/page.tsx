@@ -4,13 +4,12 @@ import { useMemo, useState } from "react";
 import * as Icons from "lucide-react";
 import { useStore } from "@/lib/store";
 import { fmtDate } from "@/lib/format";
-import { Card, Button, Badge, Pill, Field, Input, Textarea, Select, BloomBar, Modal } from "@/components/ui";
+import { Button, Badge, Field, Input, Textarea, Select, Modal } from "@/components/ui";
 import { PageHeader } from "@/components/widgets";
 import { usePerms } from "@/lib/perms";
 import { TODO_CATEGORIES, TODO_CATEGORY_KEYS, TODO_PRIORITIES } from "@/lib/constants";
 import type { Todo } from "@/lib/types";
 
-const Ic = (name: string) => (Icons as unknown as Record<string, React.ComponentType<{ size?: number }>>)[name] ?? Icons.ListChecks;
 const today = () => new Date().toISOString().slice(0, 10);
 
 type Form = {
@@ -43,6 +42,7 @@ export default function OrdersPage() {
 
   const [showDone, setShowDone] = useState(false);
   const [campFilter, setCampFilter] = useState("all");
+  const [catFilter, setCatFilter] = useState("all");
   const [quick, setQuick] = useState<Record<string, string>>({});
   const [open, setOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -50,17 +50,17 @@ export default function OrdersPage() {
   const [form, setForm] = useState<Form>(BLANK);
 
   const campName = (id: string | null) => campaigns.find((c) => c.id === id)?.name ?? null;
-  const campColor = (id: string | null) => campaigns.find((c) => c.id === id)?.color ?? "#C7D0E0";
+  const campColor = (id: string | null) => campaigns.find((c) => c.id === id)?.color ?? "#8A8C96";
   const creatorName = (id: string | null) => creators.find((c) => c.id === id)?.name ?? null;
   const userName = (id: string | null) => users.find((u) => u.id === id)?.name ?? null;
-  const userColor = (id: string | null) => users.find((u) => u.id === id)?.color ?? "#CDB4F0";
 
   // filter by campaign, then bucket by category (unknown categories fall into General)
   const buckets = useMemo(() => {
     const filtered = todos.filter((t) => {
-      if (campFilter === "all") return true;
-      if (campFilter === "none") return !t.campaign_id;
-      return t.campaign_id === campFilter;
+      if (campFilter !== "all") {
+        if (campFilter === "none" ? !!t.campaign_id : t.campaign_id !== campFilter) return false;
+      }
+      return true;
     });
     const map: Record<string, Todo[]> = {};
     for (const key of TODO_CATEGORY_KEYS) map[key] = [];
@@ -84,6 +84,8 @@ export default function OrdersPage() {
     const all = Object.values(buckets).flat();
     return { done: all.filter((t) => t.done).length, total: all.length };
   }, [buckets]);
+
+  const visibleCategories = TODO_CATEGORIES.filter((cat) => catFilter === "all" || cat.key === catFilter);
 
   function quickAdd(category: string) {
     const title = (quick[category] ?? "").trim();
@@ -141,131 +143,132 @@ export default function OrdersPage() {
   return (
     <div>
       <PageHeader
-        title="Orders"
+        title="Night Watch"
         sub="To-dos"
         icon="ListChecks"
-        action={
-          <div className="flex flex-wrap items-center gap-2">
-            <Pill>{totals.total - totals.done} open</Pill>
-            <button
-              onClick={() => setShowDone((v) => !v)}
-              className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${showDone ? "bg-seafoam-soft text-seafoam-deep" : "bg-white/5 text-ink-soft hover:text-dusty-deep"}`}
-            >
-              {showDone ? "Hide done" : "Show done"}
-            </button>
-            {canEdit && <Button variant="primary" onClick={() => openNew()}><Icons.Plus size={15} /> Add task</Button>}
-          </div>
-        }
+        action={canEdit ? <Button variant="primary" onClick={() => openNew()}><Icons.Plus size={15} /> Add task</Button> : undefined}
       />
 
-      <Card className="mb-5">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <div className="min-w-[200px] flex-1">
-            <div className="mb-1 flex items-center justify-between text-sm text-ink-soft">
-              <span>Overall progress</span>
-              <span className="font-semibold text-seafoam-deep">{totals.done}/{totals.total} done</span>
-            </div>
-            <BloomBar value={totals.total ? totals.done / totals.total : 0} hue="#9FE0CE" height={12} />
+      {/* Progress + filters, quiet row, no card box */}
+      <div className="mb-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <div className="min-w-[220px] flex-1">
+          <div className="mb-1.5 flex items-center justify-between text-xs text-white/40">
+            <span className="uppercase tracking-[0.14em]">Progress</span>
+            <span className="text-white/60">{totals.done}/{totals.total} done</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Eclipse</span>
-            <div className="w-52">
-              <Select value={campFilter} onChange={(e) => setCampFilter(e.target.value)}>
-                <option value="all">All eclipses</option>
-                <option value="none">No eclipse</option>
-                {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-              </Select>
-            </div>
+          <div className="h-1 w-full overflow-hidden rounded-full bg-white/10">
+            <div className="h-full bg-dusty" style={{ width: `${totals.total ? (totals.done / totals.total) * 100 : 0}%` }} />
           </div>
         </div>
-      </Card>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        {TODO_CATEGORIES.map((cat) => {
+        <div className="flex items-center gap-2">
+          <span className="text-xs uppercase tracking-[0.1em] text-white/40">Eclipse</span>
+          <div className="w-44">
+            <Select value={campFilter} onChange={(e) => setCampFilter(e.target.value)}>
+              <option value="all">All eclipses</option>
+              <option value="none">No eclipse</option>
+              {campaigns.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </Select>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setShowDone((v) => !v)}
+          className={`text-xs font-medium transition ${showDone ? "text-white" : "text-white/40 hover:text-white"}`}
+        >
+          {showDone ? "Hide done" : "Show done"}
+        </button>
+      </div>
+
+      {/* Category filter, flat text tabs, no rounding, no icons */}
+      <div className="mb-8 flex flex-wrap gap-x-5 gap-y-2 border-b border-white/10 pb-4 text-sm">
+        <button
+          onClick={() => setCatFilter("all")}
+          className={`border-b-2 pb-1 transition ${catFilter === "all" ? "border-dusty text-white" : "border-transparent text-white/40 hover:text-white"}`}
+        >
+          All
+        </button>
+        {TODO_CATEGORIES.map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => setCatFilter(cat.key)}
+            className={`border-b-2 pb-1 transition ${catFilter === cat.key ? "border-dusty text-white" : "border-transparent text-white/40 hover:text-white"}`}
+          >
+            {cat.label} <span className="text-white/25">{buckets[cat.key]?.length ?? 0}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="space-y-10">
+        {visibleCategories.map((cat) => {
           const items = buckets[cat.key] ?? [];
           const doneCount = items.filter((t) => t.done).length;
           const visible = showDone ? items : items.filter((t) => !t.done);
-          const CatIcon = Ic(cat.icon);
+          if (catFilter === "all" && items.length === 0) return null;
           return (
-            <Card key={cat.key} className="p-0">
-              <div className="border-b border-sky/60 p-4" style={{ background: `linear-gradient(120deg, ${cat.hue}33, transparent)` }}>
-                <div className="flex items-center gap-2.5">
-                  <span className="grid h-9 w-9 place-items-center rounded-xl" style={{ background: `${cat.hue}66` }}><CatIcon size={17} /></span>
-                  <div className="min-w-0">
-                    <h2 className="font-display text-lg leading-tight text-ink">{cat.label}</h2>
-                    <p className="text-[11px] text-ink-faint">{cat.hint}</p>
-                  </div>
-                  <span className="ml-auto text-xs text-ink-soft">{doneCount}/{items.length}</span>
-                </div>
-                {items.length > 0 && <div className="mt-3"><BloomBar value={doneCount / items.length} hue={cat.hue} height={6} /></div>}
+            <div key={cat.key}>
+              <div className="mb-3 flex items-center gap-3">
+                <h2 className="font-display text-lg text-white">{cat.label}</h2>
+                <span className="text-xs text-white/30">{cat.hint}</span>
+                <span className="ml-auto text-xs text-white/30">{doneCount}/{items.length}</span>
               </div>
 
-              <ul className="divide-y divide-sky/50 px-2">
-                {visible.length === 0 ? (
-                  <li className="px-2 py-3 text-center text-xs text-ink-faint">{items.length === 0 ? "Nothing here yet." : "All done, nice."}</li>
-                ) : (
-                  visible.map((t) => {
+              {visible.length === 0 ? (
+                <p className="border-t border-white/10 py-4 text-xs text-white/30">{items.length === 0 ? "Nothing here yet." : "All done."}</p>
+              ) : (
+                <ul className="divide-y divide-white/10 border-t border-white/10">
+                  {visible.map((t) => {
                     const overdue = !t.done && !!t.due_date && t.due_date < today();
                     return (
-                      <li key={t.id} className="group flex items-start gap-3 px-2 py-2.5">
+                      <li key={t.id} className="group flex items-start gap-3 py-3">
                         <button
                           onClick={() => canEdit && toggleTodo(t.id)}
                           aria-label={t.done ? "Mark not done" : "Mark done"}
-                          className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border transition ${t.done ? "border-seafoam-deep bg-seafoam-deep text-white" : "border-ink-faint/50 hover:border-dusty-deep"}`}
+                          className={`mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full border transition ${t.done ? "border-dusty bg-dusty text-navy-deep" : "border-white/25 hover:border-white/60"}`}
                         >
-                          {t.done && <Icons.Check size={13} />}
+                          {t.done && <Icons.Check size={11} />}
                         </button>
                         <div className="min-w-0 flex-1">
                           <button onClick={() => canEdit && openEdit(t)} className="block text-left">
-                            <span className={`text-sm ${t.done ? "text-ink-faint line-through" : "text-ink"}`}>{t.title}</span>
+                            <span className={`text-sm ${t.done ? "text-white/30 line-through" : "text-white/85"}`}>{t.title}</span>
                           </button>
-                          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px]">
-                            {t.due_date && (
-                              <span className={`rounded-full px-2 py-0.5 ${overdue ? "bg-bubblegum/20 text-bubblegum" : "bg-sky/50 text-dusty-deep"}`}>
-                                {overdue ? "Due " : ""}{fmtDate(t.due_date)}
-                              </span>
-                            )}
-                            {t.priority === "High" && <span className="rounded-full bg-bubblegum/20 px-2 py-0.5 font-semibold text-bubblegum">High</span>}
-                            {t.priority === "Low" && <span className="rounded-full bg-ink-faint/15 px-2 py-0.5 text-ink-soft">Low</span>}
+                          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-white/35">
+                            {t.due_date && <span className={overdue ? "font-semibold text-bubblegum" : ""}>{overdue ? "Due " : ""}{fmtDate(t.due_date)}</span>}
+                            {t.priority === "High" && <span className="font-semibold text-bubblegum">High priority</span>}
                             {t.campaign_id && <Badge hue={campColor(t.campaign_id)}>{campName(t.campaign_id)}</Badge>}
-                            {t.creator_id && <span className="text-ink-faint">★ {creatorName(t.creator_id)}</span>}
-                            {t.assignee_id && (
-                              <span className="inline-flex items-center gap-1 text-ink-faint">
-                                <span className="h-2 w-2 rounded-full" style={{ background: userColor(t.assignee_id) }} />
-                                {userName(t.assignee_id)}
-                              </span>
-                            )}
+                            {t.creator_id && <span>{creatorName(t.creator_id)}</span>}
+                            {t.assignee_id && <span>{userName(t.assignee_id)}</span>}
                           </div>
                         </div>
                         <button
                           onClick={() => canEdit && deleteTodo(t.id)}
                           aria-label="Delete task"
-                          className="mt-0.5 shrink-0 text-ink-faint opacity-0 transition hover:text-bubblegum group-hover:opacity-100"
+                          className="mt-0.5 shrink-0 text-white/20 opacity-0 transition hover:text-bubblegum group-hover:opacity-100"
                         >
-                          <Icons.X size={15} />
+                          <Icons.X size={14} />
                         </button>
                       </li>
                     );
-                  })
-                )}
-              </ul>
+                  })}
+                </ul>
+              )}
 
               {canEdit && (
-              <div className="flex items-center gap-2 border-t border-sky/60 px-4 py-2.5">
-                <Icons.Plus size={15} className="shrink-0 text-ink-faint" />
-                <input
-                  value={quick[cat.key] ?? ""}
-                  onChange={(e) => setQuick((q) => ({ ...q, [cat.key]: e.target.value }))}
-                  onKeyDown={(e) => { if (e.key === "Enter") quickAdd(cat.key); }}
-                  placeholder="Add a task…"
-                  className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-faint"
-                />
-                {(quick[cat.key] ?? "").trim() && (
-                  <button onClick={() => quickAdd(cat.key)} className="shrink-0 text-xs font-semibold text-dusty-deep hover:underline">Add</button>
-                )}
-              </div>
+                <div className="mt-2 flex items-center gap-2 border-t border-white/10 pt-2.5">
+                  <Icons.Plus size={13} className="shrink-0 text-white/25" />
+                  <input
+                    value={quick[cat.key] ?? ""}
+                    onChange={(e) => setQuick((q) => ({ ...q, [cat.key]: e.target.value }))}
+                    onKeyDown={(e) => { if (e.key === "Enter") quickAdd(cat.key); }}
+                    placeholder="Add a task…"
+                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/25"
+                  />
+                  {(quick[cat.key] ?? "").trim() && (
+                    <button onClick={() => quickAdd(cat.key)} className="shrink-0 text-xs font-semibold text-dusty hover:text-white">Add</button>
+                  )}
+                </div>
               )}
-            </Card>
+            </div>
           );
         })}
       </div>
