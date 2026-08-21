@@ -47,8 +47,8 @@ export function OrbitField() {
   return (
     <div
       ref={wrapRef}
-      className="pointer-events-none absolute left-1/2 top-1/2 -z-[1]"
-      style={{ transform: "translate(-50%, -50%)", opacity: 0.9 }}
+      className="pointer-events-none absolute left-1/2 top-1/2"
+      style={{ transform: "translate(-50%, -50%)", opacity: 0.9, zIndex: -1 }}
       aria-hidden
     >
       <svg width="560" height="560" viewBox="0 0 520 520">
