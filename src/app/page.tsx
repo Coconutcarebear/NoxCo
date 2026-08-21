@@ -22,6 +22,12 @@ const STEPS = [
   { n: "04", title: "Shining", copy: "Results land in one place: reach, coverage, and what to do next." },
 ];
 
+const DIFFERENCE = [
+  { n: "01", title: "Foundation first", copy: "Brand story, messaging, and positioning, settled before a single channel gets touched." },
+  { n: "02", title: "Relationships second", copy: "Press contacts and creator partnerships built on fit, not a rented list." },
+  { n: "03", title: "Amplification third", copy: "Paid, social, and search layered on top of a story that's already working." },
+];
+
 const STATS = [
   { value: "180+", label: "Campaigns launched" },
   { value: "3.4x", label: "Average EMV return" },
@@ -115,6 +121,32 @@ export default function HomePage() {
               <p className="mt-2 text-sm leading-relaxed text-white/50">{s.copy}</p>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* The Nox & Co. difference */}
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal className="mx-auto max-w-xl text-center">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/40">The Nox &amp; Co difference</p>
+            <h2 className="mt-4 font-display text-3xl font-medium text-white sm:text-4xl">
+              Foundation. Relationships. Amplification.
+            </h2>
+          </Reveal>
+          <div className="mt-16 grid gap-10 sm:grid-cols-3">
+            {DIFFERENCE.map((d, i) => (
+              <Reveal key={d.n} delay={i * 90}>
+                <div className="font-display text-sm text-white/25">{d.n}</div>
+                <h3 className="mt-2 font-display text-lg text-white">{d.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/50">{d.copy}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={280} className="mx-auto mt-14 max-w-xl text-center">
+            <p className="font-display text-base italic text-white/40">
+              We build the strategy, create the connections, and give you the tools to keep growing.
+            </p>
+          </Reveal>
         </div>
       </section>
 

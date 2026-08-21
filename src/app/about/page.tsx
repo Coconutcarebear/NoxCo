@@ -51,6 +51,35 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Built by marketers, not just agencies */}
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 sm:py-28">
+          <Reveal className="mx-auto max-w-2xl">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/40">Track record</p>
+            <h2 className="mt-4 font-display text-3xl font-medium text-white sm:text-4xl">
+              Built by marketers, not just agencies.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-white/55 sm:text-base">
+              Our founders have launched 180+ campaigns spanning creator
+              marketing, PR, paid media, digital strategy, and brand
+              development, across:
+            </p>
+          </Reveal>
+          <Reveal delay={100} className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 border-y border-white/10 py-6">
+            {["Entertainment", "CPG", "QSR", "DTC", "B2B", "TMT", "PaaS", "Real Estate", "Fintech + Crypto"].map((w, i) => (
+              <span key={w} className="flex items-center gap-4">
+                {i > 0 && <span className="text-white/20">·</span>}
+                <span className="font-display text-sm uppercase tracking-[0.14em] text-white/50">{w}</span>
+              </span>
+            ))}
+          </Reveal>
+          <Reveal delay={160} className="mt-10">
+            <span className="font-display text-3xl text-white/80 sm:text-4xl">3.4x</span>
+            <span className="ml-2 text-xs uppercase tracking-[0.1em] text-white/35">average EMV return</span>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Values, quiet list, no cards */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
