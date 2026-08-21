@@ -1,23 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Target, Wand2, Rocket, Star, Flame } from "lucide-react";
+import { ArrowRight, Target, Wand2, Megaphone, Star, Flame } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
 
 const PILLARS = [
   { icon: Target, title: "Strategy", copy: "Sharp positioning and a plan built around what actually moves your audience, not a template." },
   { icon: Wand2, title: "Creative", copy: "Concepts and content direction with a point of view, built to stop the scroll and hold attention." },
-  { icon: Rocket, title: "Campaigns", copy: "Every moving part, outreach, contracts, timelines, and budget, run from one system, end to end." },
+  { icon: Megaphone, title: "PR & Influencer", copy: "Press outreach and media relationships, paired with the creator voices who carry your story into the feed." },
   { icon: Star, title: "Creators", copy: "Voices vetted against your brand, not just their follower count. Fit first, reach second." },
-  { icon: Flame, title: "Culture", copy: "Work that reads the room, tied to what's actually happening, not six months behind it." },
+  { icon: Flame, title: "Culture", copy: "We understand the communities that move first, the passionate, tightly-knit audiences whose word decides what breaks out next, and we speak to them like insiders, not tourists." },
 ];
 
 const STEPS = [
-  { n: "01", title: "Sighted", copy: "We find where your brand fits in the culture, and who can carry it." },
-  { n: "02", title: "Aligned", copy: "Strategy, creative, and creators, locked to one plan and one timeline." },
-  { n: "03", title: "In Motion", copy: "Campaigns run, content ships, nothing waits on a stalled email thread." },
-  { n: "04", title: "Shining", copy: "Results land in one place: reach, ROI, and what to do next." },
+  { n: "01", title: "Sighted", copy: "We sit down with your founder or team to learn who you really are: your story, your voice, what you actually stand for." },
+  { n: "02", title: "Aligned", copy: "We build the plan: your PR and influencer angle, plus a marketing strategy mapped to one timeline." },
+  { n: "03", title: "In Motion", copy: "Press, content, and creator campaigns run at once, nothing waits on a stalled email thread." },
+  { n: "04", title: "Shining", copy: "Results land in one place: reach, coverage, and what to do next." },
 ];
 
 const STATS = [
@@ -26,7 +26,7 @@ const STATS = [
   { value: "97%", label: "Contracts on time" },
 ];
 
-const ORBIT_WORDS = ["Strategy", "Creative", "Campaigns", "Creators", "Culture"];
+const ORBIT_WORDS = ["Strategy", "Creative", "PR & Influencer", "Creators", "Culture"];
 
 export default function HomePage() {
   return (
@@ -40,9 +40,9 @@ export default function HomePage() {
           Nox &amp; Co gives brands gravity.
         </h1>
         <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-white/55 sm:text-lg">
-          We bring strategy, creative, campaigns, creators, and culture
-          into one orbit, creating momentum that commands attention and
-          leaves a lasting mark.
+          We bring strategy, creative, PR &amp; influencer, creators, and
+          culture into one orbit, creating momentum that commands attention
+          and leaves a lasting mark.
         </p>
         <p className="mx-auto mt-5 max-w-xl font-display text-base italic text-white/35">
           No more star-crossed campaigns.
@@ -118,7 +118,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
           <Reveal className="mx-auto max-w-xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/40">How it works</p>
-            <h2 className="mt-4 font-display text-3xl font-medium text-white sm:text-4xl">Four stages, no surprises.</h2>
+            <h2 className="mt-4 font-display text-3xl font-medium text-white sm:text-4xl">Four stages, one story.</h2>
           </Reveal>
           <div className="mt-16 grid gap-10 sm:grid-cols-4">
             {STEPS.map((s, i) => (

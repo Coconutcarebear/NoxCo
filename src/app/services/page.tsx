@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   ArrowRight, Compass, Disc, Lock, Telescope,
-  Target, Wand2, Megaphone, TrendingUp, Share2,
+  Target, Wand2, Megaphone, TrendingUp, Share2, Newspaper,
 } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
@@ -11,6 +11,11 @@ const SERVICES = [
     icon: Target,
     title: "Brand Strategy",
     copy: "Positioning, messaging, and a plan grounded in where your category is actually moving, not where it was last year.",
+  },
+  {
+    icon: Newspaper,
+    title: "Public Relations & Press",
+    copy: "Media relationships and press outreach that put your brand in front of the outlets and communities that matter, not a wire blast into the void.",
   },
   {
     icon: Wand2,
@@ -55,10 +60,10 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { step: "Discovery", copy: "We learn your brand, audience, and goals for the campaign." },
-  { step: "Sourcing", copy: "We build a shortlist of creators who genuinely fit." },
-  { step: "Launch", copy: "Contracts, briefs, and content move through one shared timeline." },
-  { step: "Report", copy: "You get clean performance data, not a pile of screenshots." },
+  { step: "Discovery", copy: "We meet your founder or team and learn your brand: story, audience, and goals." },
+  { step: "Strategy", copy: "We build the plan: your PR and influencer angle, plus a shortlist of creators who fit." },
+  { step: "Launch", copy: "Contracts, briefs, press, and content all move through one shared timeline." },
+  { step: "Report", copy: "You get clean performance data, reach and coverage, not a pile of screenshots." },
 ];
 
 export default function ServicesPage() {
@@ -70,9 +75,9 @@ export default function ServicesPage() {
           Full-service brand marketing.
         </h1>
         <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-white/55 sm:text-lg">
-          From the first creator search to the final report, Nox &amp; Co
-          handles the parts of a campaign that usually fall through the
-          cracks.
+          From the first conversation with your founder to the final report,
+          Nox &amp; Co runs the PR &amp; influencer, creative, and campaign side
+          of your brand from one system.
         </p>
       </section>
 
