@@ -5,6 +5,7 @@ import { ArrowRight, Target, Wand2, Megaphone, Star, Flame } from "lucide-react"
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
 import { OrbitField } from "@/components/marketing/OrbitField";
+import { GlitchReveal } from "@/components/marketing/GlitchReveal";
 
 const PILLARS = [
   { icon: Target, title: "Strategy", copy: "Sharp positioning and a plan built around what actually moves your audience, not a template." },
@@ -47,7 +48,7 @@ export default function HomePage() {
           and leaves a lasting mark.
         </p>
         <p className="mx-auto mt-5 max-w-xl font-display text-base italic text-white/35">
-          No more star-crossed campaigns.
+          No more glitchy outcomes or star-crossed campaigns.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
@@ -80,17 +81,19 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Signature strip — quiet, static, editorial */}
+      {/* Signature strip — flickers once on first scroll, then locks in clean and still */}
       <Reveal>
         <div className="mx-auto max-w-4xl px-5 py-10 sm:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 border-y border-white/10 py-6">
-            {ORBIT_WORDS.map((w, i) => (
-              <span key={w} className="flex items-center gap-5">
-                {i > 0 && <span className="text-white/20">✦</span>}
-                <span className="font-display text-sm uppercase tracking-[0.22em] text-white/45">{w}</span>
-              </span>
-            ))}
-          </div>
+          <GlitchReveal className="border-y border-white/10 py-6">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+              {ORBIT_WORDS.map((w, i) => (
+                <span key={w} className="flex items-center gap-5">
+                  {i > 0 && <span className="text-white/20">✦</span>}
+                  <span className="font-display text-sm uppercase tracking-[0.22em] text-white/45">{w}</span>
+                </span>
+              ))}
+            </div>
+          </GlitchReveal>
         </div>
       </Reveal>
 

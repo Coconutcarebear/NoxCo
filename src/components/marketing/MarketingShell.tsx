@@ -37,7 +37,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
 
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-navy-deep font-body text-white">
+    <div className="relative isolate min-h-screen overflow-hidden bg-navy-deep font-body text-white">
       {/* deep blue-black sky, brushed with faint silver */}
       <div
         className="pointer-events-none fixed inset-0 -z-20"

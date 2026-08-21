@@ -84,6 +84,57 @@ h1, h2, h3, h4, .font-display {
   animation: shimmer 2.2s linear infinite;
 }
 
+
+/* Glitch-then-resolve: a brief signal-desync flicker that scroll-triggers once,
+   then locks into a perfectly clean, still state. Used to visually back up the
+   "no glitchy outcomes" line, contrast is the point, chaos resolves to calm. */
+.glitch-wrap { position: relative; }
+.glitch-wrap.glitching { animation: glitchShake 0.55s steps(12, end) 1; }
+@keyframes glitchShake {
+  0%, 100% { transform: translateX(0); }
+  8%  { transform: translateX(-3px) skewX(-2deg); }
+  16% { transform: translateX(3px) skewX(2deg); }
+  24% { transform: translateX(-2px); }
+  32% { transform: translateX(2px) skewX(-1deg); }
+  40% { transform: translateX(-1px); }
+  55% { transform: translateX(1px); }
+  70% { transform: translateX(0); }
+}
+.glitch-bar {
+  position: absolute;
+  left: -4%;
+  width: 108%;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+.glitch-wrap.glitching .glitch-bar { animation: glitchBar 0.55s steps(1, end) 1; }
+.glitch-bar.b1 { top: 8%; height: 18%; background: rgba(125, 151, 201, 0.55); animation-delay: 0ms; }
+.glitch-bar.b2 { top: 46%; height: 12%; background: rgba(229, 230, 234, 0.5); animation-delay: 60ms; }
+.glitch-bar.b3 { top: 68%; height: 20%; background: rgba(125, 151, 201, 0.4); animation-delay: 140ms; }
+@keyframes glitchBar {
+  0% { opacity: 0; transform: translateX(0); }
+  10% { opacity: 0.9; transform: translateX(-6%); }
+  22% { opacity: 0; transform: translateX(4%); }
+  36% { opacity: 0.7; transform: translateX(-3%); }
+  48% { opacity: 0; }
+  100% { opacity: 0; }
+}
+.glitch-noise {
+  position: absolute;
+  inset: -20% -6%;
+  pointer-events: none;
+  opacity: 0;
+  background-image: repeating-linear-gradient(0deg, rgba(242,242,244,0.5) 0px, rgba(242,242,244,0.5) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: overlay;
+}
+.glitch-wrap.glitching .glitch-noise { animation: glitchNoise 0.55s steps(2, end) 1; }
+@keyframes glitchNoise {
+  0%, 100% { opacity: 0; }
+  15%, 35%, 55% { opacity: 0.35; }
+  25%, 45%, 65% { opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
