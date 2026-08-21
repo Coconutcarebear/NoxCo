@@ -58,6 +58,14 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "spin-reverse": {
+          "0%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
       },
       animation: {
         twinkle: "twinkle 3.5s ease-in-out infinite",
@@ -66,6 +74,8 @@ const config: Config = {
         wave: "wave 18s linear infinite",
         rise: "rise 0.4s ease-out both",
         shimmer: "shimmer 3s linear infinite",
+        "spin-slow": "spin-slow 90s linear infinite",
+        "spin-slower": "spin-reverse 130s linear infinite",
       },
     },
   },

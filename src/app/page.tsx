@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Target, Wand2, Megaphone, Star, Flame } from "lucide-react";
 import { MarketingShell } from "@/components/marketing/MarketingShell";
 import { Reveal } from "@/components/marketing/Reveal";
+import { OrbitField } from "@/components/marketing/OrbitField";
 
 const PILLARS = [
   { icon: Target, title: "Strategy", copy: "Sharp positioning and a plan built around what actually moves your audience, not a template." },
@@ -33,6 +34,7 @@ export default function HomePage() {
     <MarketingShell>
       {/* Hero — quiet, spacious, typography-led */}
       <section className="relative mx-auto max-w-3xl px-5 pb-20 pt-28 text-center sm:px-8 sm:pb-28 sm:pt-36">
+        <OrbitField />
         <p className="text-xs font-medium uppercase tracking-[0.32em] text-white/40">
           Brand marketing
         </p>

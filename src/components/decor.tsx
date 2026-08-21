@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 const INK = "#F2F2F4";
 
@@ -51,13 +51,33 @@ export function StarFlower({ size = 28, className = "" }: { size?: number; class
 
 // ── Twinkling starfield ──────────────────────────────────────────────────
 interface StarPt { x: number; y: number; s: number; d: number; }
-export function Stars({ count = 22 }: { count?: number }) {
+export function Stars({ count = 22, parallax = false }: { count?: number; parallax?: boolean }) {
   const stars = useMemo<StarPt[]>(() => {
     const r = (i: number) => { const v = Math.sin(i * 999.13) * 10000; return v - Math.floor(v); };
     return Array.from({ length: count }, (_, i) => ({ x: r(i) * 100, y: r(i + 100) * 100, s: 4 + r(i + 200) * 8, d: r(i + 300) * 4 }));
   }, [count]);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Optional faint scroll parallax so the sky reads as having real depth
+  // instead of sitting flat behind the page. Self-contained: transforms
+  // this element directly (not an ancestor), so it can't hijack the
+  // containing block of anything else on the page.
+  useEffect(() => {
+    if (!parallax) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const onScroll = () => {
+      raf = requestAnimationFrame(() => {
+        if (ref.current) ref.current.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
+  }, [parallax]);
+
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
+    <div ref={ref} className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
       {stars.map((st, i) => (
         <svg key={i} className="absolute animate-twinkle" style={{ left: st.x + "%", top: st.y + "%", animationDelay: st.d + "s" }} width={st.s} height={st.s} viewBox="0 0 24 24" fill="none">
           <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z" fill={i % 3 === 0 ? "#7d97c9" : i % 3 === 1 ? "#c7c9d1" : "#ffffff"} opacity="0.85" />

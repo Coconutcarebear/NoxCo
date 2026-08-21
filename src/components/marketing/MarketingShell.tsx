@@ -35,6 +35,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
     };
   }, []);
 
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-navy-deep font-body text-white">
       {/* deep blue-black sky, brushed with faint silver */}
@@ -49,7 +50,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
       />
       {/* cursor-tracking ambient glow */}
       <div ref={glowRef} className="pointer-events-none fixed inset-0 -z-10 transition-opacity" />
-      <Stars count={20} />
+      <Stars count={20} parallax />
       <MarketingHeader />
       {children}
       <MarketingFooter />
