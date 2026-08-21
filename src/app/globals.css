@@ -109,9 +109,12 @@ h1, h2, h3, h4, .font-display {
   mix-blend-mode: screen;
 }
 .glitch-wrap.glitching .glitch-bar { animation: glitchBar 0.55s steps(1, end) 1; }
-.glitch-bar.b1 { top: 8%; height: 18%; background: rgba(125, 151, 201, 0.55); animation-delay: 0ms; }
-.glitch-bar.b2 { top: 46%; height: 12%; background: rgba(229, 230, 234, 0.5); animation-delay: 60ms; }
-.glitch-bar.b3 { top: 68%; height: 20%; background: rgba(125, 151, 201, 0.4); animation-delay: 140ms; }
+/* Fixed px offsets, not percentages: this wrapper's own height is
+   content-driven (auto), and percentage top/height on an absolutely
+   positioned child resolves to nothing against an auto-height ancestor. */
+.glitch-bar.b1 { top: 10px; height: 12px; background: rgba(125, 151, 201, 0.6); animation-delay: 0ms; }
+.glitch-bar.b2 { top: 34px; height: 9px; background: rgba(229, 230, 234, 0.55); animation-delay: 60ms; }
+.glitch-bar.b3 { top: 52px; height: 14px; background: rgba(125, 151, 201, 0.45); animation-delay: 140ms; }
 @keyframes glitchBar {
   0% { opacity: 0; transform: translateX(0); }
   10% { opacity: 0.9; transform: translateX(-6%); }
@@ -122,7 +125,10 @@ h1, h2, h3, h4, .font-display {
 }
 .glitch-noise {
   position: absolute;
-  inset: -20% -6%;
+  top: -10px;
+  bottom: -10px;
+  left: -6%;
+  right: -6%;
   pointer-events: none;
   opacity: 0;
   background-image: repeating-linear-gradient(0deg, rgba(242,242,244,0.5) 0px, rgba(242,242,244,0.5) 1px, transparent 1px, transparent 3px);

@@ -37,7 +37,7 @@ export default function HomePage() {
       <section className="relative mx-auto max-w-3xl px-5 pb-20 pt-28 text-center sm:px-8 sm:pb-28 sm:pt-36">
         <OrbitField />
         <p className="text-xs font-medium uppercase tracking-[0.32em] text-white/40">
-          Brand marketing
+          Boutique PR and Influencer Agency
         </p>
         <h1 className="mt-7 font-display text-4xl font-medium leading-[1.15] text-white sm:text-6xl">
           Nox &amp; Co gives brands gravity.
@@ -48,7 +48,7 @@ export default function HomePage() {
           and leaves a lasting mark.
         </p>
         <p className="mx-auto mt-5 max-w-xl font-display text-base italic text-white/35">
-          No more glitchy outcomes or star-crossed campaigns.
+          No more star-crossed campaigns.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
