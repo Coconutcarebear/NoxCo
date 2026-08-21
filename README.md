@@ -78,7 +78,10 @@ This folder *is* the complete project — every file, not snippets. File map is 
 **Already have creators/campaigns/clients in Supabase?** Do **not** re-run `schema.sql`, it
 starts with `drop table ... cascade` and will erase your data. Instead run
 **`supabase/migrate_client_portal.sql`** once (SQL Editor → New query → paste → Run). It only
-adds new columns/tables and replaces the access policies, nothing existing is dropped.
+adds new columns/tables and replaces the access policies, nothing existing is dropped. This
+file is safe (and sometimes necessary) to re-run more than once — every statement is
+idempotent, so re-running it after pulling a newer build just picks up whatever changed
+(new columns, new storage buckets, etc.) without touching your existing data.
 4. Go to **Project Settings → API** and copy the **Project URL** (bare, no trailing path) and
    the **anon public** key (not `service_role`).
 5. In Cloudflare Pages → your project → **Settings → Environment variables**, add for both

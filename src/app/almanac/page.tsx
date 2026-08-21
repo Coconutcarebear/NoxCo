@@ -14,7 +14,7 @@ const MONTHS = [
   "July", "August", "September", "October", "November", "December",
 ];
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const INTERNAL_HUE = "#CDB4F0";
+const INTERNAL_HUE = "#5a6a8f";
 const pad = (n: number) => (n < 10 ? "0" + n : "" + n);
 
 type IBForm = {
@@ -43,7 +43,7 @@ export default function AlmanacPage() {
 
   const active = views;
   const campColor = (name: string | null) =>
-    campaigns.find((c) => c.name === name)?.color ?? "#B7C8EA";
+    campaigns.find((c) => c.name === name)?.color ?? "#8A8C96";
   const campNameById = (id: string | null) =>
     id ? campaigns.find((c) => c.id === id)?.name ?? null : null;
 

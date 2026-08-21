@@ -376,6 +376,7 @@ create table public.roi_settings (
   per_k_views numeric not null default 12,
   per_engagement numeric not null default 0.18,
   sentiment_weight numeric not null default 0.1,
+  platform_rates jsonb not null default '{}'::jsonb,
   updated_at timestamptz not null default now(),
   constraint roi_settings_singleton check (id = 1)
 );
@@ -647,6 +648,59 @@ end;
 $$;
 
 grant execute on function public.get_share_bundle(text) to anon, authenticated;
+
+-- ----------------------------------------------------------------------------
+-- Storage buckets — media uploads (video thumbnails, avatars, logos) and
+-- private documents (ACH forms, tax docs, creator paperwork).
+--
+-- "media" is public: files are served via getPublicUrl() with no auth check,
+-- used anywhere an image needs to render directly in an <img> tag (creator
+-- avatars, campaign art, post/video thumbnails). Only staff can upload,
+-- replace, or delete; reading is open since these are non-sensitive assets
+-- already shown on public share links / client-facing reports.
+--
+-- "secure-docs" and "creator-docs" are private: files are only reachable via
+-- short-lived signed URLs generated from an authenticated staff session, and
+-- only staff can read/write/delete objects in them at all.
+-- ----------------------------------------------------------------------------
+insert into storage.buckets (id, name, public)
+values ('media', 'media', true)
+on conflict (id) do update set public = true;
+
+insert into storage.buckets (id, name, public)
+values ('secure-docs', 'secure-docs', false)
+on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+values ('creator-docs', 'creator-docs', false)
+on conflict (id) do nothing;
+
+drop policy if exists "media_public_read"   on storage.objects;
+drop policy if exists "media_staff_insert"  on storage.objects;
+drop policy if exists "media_staff_update"  on storage.objects;
+drop policy if exists "media_staff_delete"  on storage.objects;
+drop policy if exists "secure_docs_staff_all"  on storage.objects;
+drop policy if exists "creator_docs_staff_all" on storage.objects;
+
+create policy "media_public_read" on storage.objects
+  for select to public using (bucket_id = 'media');
+create policy "media_staff_insert" on storage.objects
+  for insert to authenticated with check (bucket_id = 'media' and public.is_staff());
+create policy "media_staff_update" on storage.objects
+  for update to authenticated using (bucket_id = 'media' and public.is_staff());
+create policy "media_staff_delete" on storage.objects
+  for delete to authenticated using (bucket_id = 'media' and public.is_staff());
+
+create policy "secure_docs_staff_all" on storage.objects
+  for all to authenticated
+  using (bucket_id = 'secure-docs' and public.is_staff())
+  with check (bucket_id = 'secure-docs' and public.is_staff());
+
+create policy "creator_docs_staff_all" on storage.objects
+  for all to authenticated
+  using (bucket_id = 'creator-docs' and public.is_staff())
+  with check (bucket_id = 'creator-docs' and public.is_staff());
+
 
 -- ============================================================================
 -- Done. What changed:

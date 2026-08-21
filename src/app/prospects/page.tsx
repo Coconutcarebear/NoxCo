@@ -51,7 +51,7 @@ export default function SeedScoutPage() {
                   <div className="font-display text-base text-ink">{p.handle}</div>
                   <Pill className="mt-1">{p.platform}</Pill>
                 </div>
-                <Badge hue="#FDE68A">{p.estimated_rate ? money(p.estimated_rate) : "rate TBD"}</Badge>
+                <Badge hue="#8A8C96">{p.estimated_rate ? money(p.estimated_rate) : "rate TBD"}</Badge>
               </div>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-soft">
                 {p.followers != null && <span><b className="text-ink">{num(p.followers)}</b> followers</span>}

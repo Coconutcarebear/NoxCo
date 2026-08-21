@@ -9,7 +9,7 @@ import { Card, Badge, Pill, Button, EmptyState } from "@/components/ui";
 import { PageHeader, KpiCard } from "@/components/widgets";
 import { CreatorSlideOver } from "@/components/CreatorSlideOver";
 
-const HUE: Record<string, string> = { "Not Sent": "#B7C8EA", Sent: "#FDE68A", Signed: "#9FE0CE" };
+const HUE: Record<string, string> = { "Not Sent": "#6C6D76", Sent: "#8A8C96", Signed: "#E5E6EA" };
 
 export default function DockyardPage() {
   const views = useStore((s) => s.scopedActiveViews);
@@ -29,10 +29,10 @@ export default function DockyardPage() {
       <PageHeader title="The Vault" sub="Contracts" icon="ScrollText" />
 
       <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <KpiCard label="Awaiting signature" value={String(sent)} icon="PenLine" hue="#FEF3C7" />
-        <KpiCard label="Signed & onboard" value={String(signed)} icon="CheckCheck" hue="#C9F0E6" />
-        <KpiCard label="Not yet sent" value={String(notSent)} icon="FileClock" hue="#B7C8EA" />
-        <KpiCard label="Signed value" value={money(signedValue)} icon="ShieldCheck" hue="#E4D6F7" />
+        <KpiCard label="Awaiting signature" value={String(sent)} icon="PenLine" hue="#8A8C96" />
+        <KpiCard label="Signed & onboard" value={String(signed)} icon="CheckCheck" hue="#E5E6EA" />
+        <KpiCard label="Not yet sent" value={String(notSent)} icon="FileClock" hue="#6C6D76" />
+        <KpiCard label="Signed value" value={money(signedValue)} icon="ShieldCheck" hue="#C7C9D1" />
       </div>
 
       <div className="mb-3 flex flex-wrap gap-2">

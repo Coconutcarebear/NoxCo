@@ -83,7 +83,7 @@ export default function BloomForecastPage() {
           {H2_FORECAST.map((m) => (
             <div key={m.month} className="flex items-center gap-3">
               <div className="w-24 shrink-0 text-sm font-semibold text-ink">{m.month}</div>
-              <div className="flex-1"><BloomBar value={m.spend / maxMonth} hue="#8FA8D8" height={14} /></div>
+              <div className="flex-1"><BloomBar value={m.spend / maxMonth} hue="#8A8C96" height={14} /></div>
               <div className="w-24 shrink-0 text-right text-sm text-ink-soft">{m.creators} stars</div>
               <div className="w-20 shrink-0 text-right text-sm font-semibold text-ink">{compactMoney(m.spend)}</div>
             </div>
@@ -95,7 +95,7 @@ export default function BloomForecastPage() {
         <MiniStat label="Committed now" value={money(kpis.committed)} />
         <MiniStat label="Planned H2" value={money(plannedH2 * (h2Mult / 100))} />
         <MiniStat label="Projected" value={money(projected)} />
-        <MiniStat label={remaining < 0 ? "Over budget" : "Room to grow"} value={money(Math.abs(remaining))} accent={remaining < 0 ? "#FFC9DE" : "#9FE0CE"} />
+        <MiniStat label={remaining < 0 ? "Over budget" : "Room to grow"} value={money(Math.abs(remaining))} accent={remaining < 0 ? "#6C6D76" : "#E5E6EA"} />
       </div>
     </div>
   );

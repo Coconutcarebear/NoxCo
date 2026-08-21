@@ -310,11 +310,11 @@ export default function LogbookPage() {
 
       {/* KPIs */}
       <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-        <KpiCard label="Posts logged" value={String(posts.length)} icon="FileText" hue="#DCE6FB" />
-        <KpiCard label="Spend" value={money(totals.cost)} hint="fees + boosting" icon="Coins" hue="#FEF3C7" />
-        <KpiCard label="Adjusted EMV" value={money(totals.emv)} hint="sentiment-blended" icon="Sparkles" hue="#E4D6F7" />
-        <KpiCard label="Blended ROI" value={totals.roi === null ? "-" : ((totals.roi >= 0 ? "+" : "") + (totals.roi * 100).toFixed(0) + "%")} hint="adj. EMV vs spend" icon="TrendingUp" hue="#C9F0E6" />
-        <KpiCard label="Net sentiment" value={fmtSent(totals.sentiment)} hint="weighted by tier" icon="Smile" hue="#F6DCEB" />
+        <KpiCard label="Posts logged" value={String(posts.length)} icon="FileText" hue="#C7C9D1" />
+        <KpiCard label="Spend" value={money(totals.cost)} hint="fees + boosting" icon="Coins" hue="#8A8C96" />
+        <KpiCard label="Adjusted EMV" value={money(totals.emv)} hint="sentiment-blended" icon="Sparkles" hue="#B3B5BE" />
+        <KpiCard label="Blended ROI" value={totals.roi === null ? "-" : ((totals.roi >= 0 ? "+" : "") + (totals.roi * 100).toFixed(0) + "%")} hint="adj. EMV vs spend" icon="TrendingUp" hue="#E5E6EA" />
+        <KpiCard label="Net sentiment" value={fmtSent(totals.sentiment)} hint="weighted by tier" icon="Smile" hue="#A2A4AE" />
       </div>
 
       {/* Editable rates (Owner only) */}

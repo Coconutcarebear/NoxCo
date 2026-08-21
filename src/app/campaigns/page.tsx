@@ -11,7 +11,7 @@ import { PageHeader } from "@/components/widgets";
 import { STAGE_HUE } from "@/lib/constants";
 import { CreatorSlideOver } from "@/components/CreatorSlideOver";
 
-const HUES = ["#B7C8EA", "#CDB4F0", "#9FE0CE", "#FDE68A", "#FFC9DE", "#FFD0A0", "#A9D2F4", "#F0A9C4"];
+const HUES = ["#C7C9D1", "#B3B5BE", "#9A9CA6", "#8A8C96", "#6C6D76", "#5a6a8f", "#E5E6EA", "#A2A4AE"];
 
 export default function BouquetsPage() {
   const active = useStore((s) => s.scopedActiveViews);
@@ -147,7 +147,7 @@ export default function BouquetsPage() {
             const isOpen = expanded === cam.id;
             return (
               <Card key={cam.id} className="overflow-hidden p-0">
-                <div className="p-5" style={{ background: `linear-gradient(120deg, ${cam.color}33, #111114)` }}>
+                <div className="p-5" style={{ background: `linear-gradient(120deg, ${cam.color}22, #0a0e1a)` }}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="h-3.5 w-3.5 rounded-full" style={{ backgroundColor: cam.color }} />
@@ -176,7 +176,7 @@ export default function BouquetsPage() {
                       <span>{money(spent)} of {money(cam.fy_budget_allocation)}</span>
                       <span className={over ? "font-semibold text-bubblegum" : "text-seafoam-deep"}>{(util * 100).toFixed(0)}%</span>
                     </div>
-                    <BloomBar value={util} hue={over ? "#FFC9DE" : cam.color} height={12} />
+                    <BloomBar value={util} hue={over ? "#6C6D76" : cam.color} height={12} />
                   </div>
 
                   <div className="mt-4 grid grid-cols-3 gap-2 text-center">

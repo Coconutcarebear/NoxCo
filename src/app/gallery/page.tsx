@@ -42,7 +42,7 @@ export default function StarGalleryPage() {
             const PIcon = (Icons as Record<string, any>)[PLATFORM_ICON[c.platform]] ?? Icons.Globe;
             return (
               <button key={c.id} onClick={() => setOpenId(c.id)} className="constellation overflow-hidden rounded-4xl border border-white bg-cream text-left shadow-cozy transition hover:shadow-float">
-                <div className="relative flex h-32 items-center justify-center" style={{ background: `linear-gradient(135deg, ${STAGE_HUE[c.stage]}, #111114)` }}>
+                <div className="relative flex h-32 items-center justify-center" style={{ background: `linear-gradient(135deg, ${STAGE_HUE[c.stage]}22, #0a0e1a)` }}>
                   {c.profile_image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={c.profile_image} alt="" className="h-full w-full object-cover" />

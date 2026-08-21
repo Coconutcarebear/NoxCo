@@ -10,8 +10,8 @@ import { PageHeader, KpiCard } from "@/components/widgets";
 import { CreatorSlideOver } from "@/components/CreatorSlideOver";
 
 const HUE: Record<string, string> = {
-  "Not Received": "#B7C8EA", Received: "#FDE68A", "Submitted To Billing": "#FFD3BA",
-  Processing: "#E4D6F7", Paid: "#9FE0CE",
+  "Not Received": "#6C6D76", Received: "#8A8C96", "Submitted To Billing": "#9A9CA6",
+  Processing: "#B3B5BE", Paid: "#E5E6EA",
 };
 
 export default function TreasuryPage() {
@@ -57,7 +57,7 @@ export default function TreasuryPage() {
           </div>
         </div>
         <div className="mt-3">
-          <BloomBar value={kpis.utilization} hue={kpis.remaining < 0 ? "#FFC9DE" : "#8FA8D8"} height={12} />
+          <BloomBar value={kpis.utilization} hue={kpis.remaining < 0 ? "#6C6D76" : "#5a6a8f"} height={12} />
         </div>
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-ink-soft">
           <span>Creator fees: <b className="text-ink">{money(kpis.creatorSpend)}</b></span>
@@ -67,11 +67,11 @@ export default function TreasuryPage() {
       </Card>
 
       <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-        <KpiCard label="Outstanding" value={String(outstanding.length)} hint="invoices to clear" icon="Hourglass" hue="#FFE7D8" />
-        <KpiCard label="Amount outstanding" value={money(outAmt)} icon="Receipt" hue="#FEF3C7" />
-        <KpiCard label="Paid in full" value={String(paid.length)} hint="journeys complete" icon="BadgeCheck" hue="#C9F0E6" />
-        <KpiCard label="Amount paid" value={money(paidAmt)} icon="PiggyBank" hue="#E4D6F7" />
-        <KpiCard label="Internal boosting" value={money(kpis.internalSpend)} hint="your own socials" icon="Megaphone" hue="#E4D6F7" />
+        <KpiCard label="Outstanding" value={String(outstanding.length)} hint="invoices to clear" icon="Hourglass" hue="#8A8C96" />
+        <KpiCard label="Amount outstanding" value={money(outAmt)} icon="Receipt" hue="#B3B5BE" />
+        <KpiCard label="Paid in full" value={String(paid.length)} hint="journeys complete" icon="BadgeCheck" hue="#E5E6EA" />
+        <KpiCard label="Amount paid" value={money(paidAmt)} icon="PiggyBank" hue="#C7C9D1" />
+        <KpiCard label="Internal boosting" value={money(kpis.internalSpend)} hint="your own socials" icon="Megaphone" hue="#5a6a8f" />
       </div>
 
       <div className="mb-3 flex flex-wrap gap-2">

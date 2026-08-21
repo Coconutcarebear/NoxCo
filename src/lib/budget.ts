@@ -16,9 +16,9 @@ export function tierFor(totalSpend: number | null | undefined): Tier {
 }
 
 export const TIER_HUE: Record<Tier, string> = {
-  Support: "#B7C8EA",
-  Mid: "#CDB4F0",
-  Premium: "#FDE68A",
+  Support: "#8A8C96",
+  Mid: "#B3B5BE",
+  Premium: "#E5E6EA",
 };
 
 // Spend on this journey = creator fee + boost spend.
@@ -105,17 +105,17 @@ export const ALERT_COPY: Record<AlertLevel, { title: string; line: string; hue: 
   under: {
     title: "Shining bright, under budget",
     line: "Plenty of open sky ahead. You're well within budget.",
-    hue: "#9FE0CE",
+    hue: "#C7C9D1",
   },
   approaching: {
     title: "Approaching the budget line",
     line: "The sky's filling up fast. Keep an eye on new bookings before committing more spend.",
-    hue: "#FDE68A",
+    hue: "#8A8C96",
   },
   over: {
     title: "Projected over budget",
     line: "Overcast, committed spend has crossed the budget. Trim or reallocate.",
-    hue: "#FFC9DE",
+    hue: "#5a6a8f",
   },
 };
 

@@ -8,7 +8,7 @@ import { Card, Pill, EmptyState } from "@/components/ui";
 import { PageHeader, SpendBars } from "@/components/widgets";
 import { CreatorSlideOver } from "@/components/CreatorSlideOver";
 
-const PLATFORM_HUE: Record<string, string> = { TikTok: "#FF9FC4", Instagram: "#C9A9F5", YouTube: "#FFB48A", "Multi-platform": "#8FE0C6" };
+const PLATFORM_HUE: Record<string, string> = { TikTok: "#B3B5BE", Instagram: "#8A8C96", YouTube: "#6C6D76", "Multi-platform": "#5a6a8f" };
 
 export default function ObservatoryPage() {
   const views = useStore((s) => s.scopedActiveViews);
@@ -51,15 +51,15 @@ export default function ObservatoryPage() {
       <PageHeader title="Observatory" sub="Analytics" icon="Telescope" action={<Pill>{active.length} stars charted</Pill>} />
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat label="Stars charted" value={num(stats.count)} hue="#CDB4F0" />
-        <Stat label="Total spend" value={compactMoney(stats.spend)} hue="#9FE0CE" />
-        <Stat label="Avg engagement" value={pct(stats.avgEng, 1)} hue="#FDE68A" />
-        <Stat label="Combined reach" value={num(stats.reach)} hue="#A9D2F4" />
+        <Stat label="Stars charted" value={num(stats.count)} hue="#C7C9D1" />
+        <Stat label="Total spend" value={compactMoney(stats.spend)} hue="#E5E6EA" />
+        <Stat label="Avg engagement" value={pct(stats.avgEng, 1)} hue="#8A8C96" />
+        <Stat label="Combined reach" value={num(stats.reach)} hue="#B3B5BE" />
       </div>
 
       <div
         className="overflow-hidden rounded-3xl border border-white/10 p-5 text-white shadow-float"
-        style={{ background: "radial-gradient(120% 140% at 20% 0%, #2a2f5e 0%, #1c2145 45%, #131635 100%)" }}
+        style={{ background: "radial-gradient(120% 140% at 20% 0%, #232C42 0%, #141B2E 45%, #0B0F1C 100%)" }}
       >
         <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
           <h2 className="font-display text-lg">Paid-media constellation</h2>
@@ -164,7 +164,7 @@ function Scatter({ creators, onPick }: { creators: any[]; onPick: (id: string) =
             cx={x(Number(c.creator_fee ?? 0))}
             cy={y(Number(c.boost_spend ?? 0))}
             r={r(c.followers)}
-            fill={PLATFORM_HUE[c.platform] ?? "#8FA8D8"}
+            fill={PLATFORM_HUE[c.platform] ?? "#8A8C96"}
             filter="url(#glow)"
             className="cursor-pointer transition-opacity hover:opacity-100"
             opacity="0.85"
